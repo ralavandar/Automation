@@ -1,0 +1,252 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <Body>
+    <ReportItems>
+      <Textbox Name="textbox1">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>Mortgage QForm Data</Value>
+                <Style>
+                  <FontFamily>Times New Roman</FontFamily>
+                  <FontSize>18pt</FontSize>
+                  <Color>#365838</Color>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>textbox1</rd:DefaultName>
+        <Height>0.33in</Height>
+        <Width>5in</Width>
+        <Style>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="QFormID">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=Sum(Fields!QFormID.Value, "QFormID")</Value>
+                <Style />
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>QFormID</rd:DefaultName>
+        <Top>0.39944in</Top>
+        <Left>0.11458in</Left>
+        <Height>0.25in</Height>
+        <Width>1in</Width>
+        <ZIndex>1</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+    </ReportItems>
+    <Height>7.31292in</Height>
+    <Style />
+  </Body>
+  <Width>13.08208in</Width>
+  <Page>
+    <LeftMargin>1in</LeftMargin>
+    <RightMargin>1in</RightMargin>
+    <TopMargin>1in</TopMargin>
+    <BottomMargin>1in</BottomMargin>
+    <Style />
+  </Page>
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="LXDB">
+      <DataSourceReference>LXDB</DataSourceReference>
+      <rd:SecurityType>None</rd:SecurityType>
+      <rd:DataSourceID>34f518b4-1412-4612-af79-7d3753f4e694</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="QFormID">
+      <Query>
+        <DataSourceName>LXDB</DataSourceName>
+        <QueryParameters>
+          <QueryParameter Name="@QformUID">
+            <Value>=Parameters!QformUID.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <CommandText>SELECT QFormID FROM tQForm with(nolock) WHERE QFormUID = @QformUID</CommandText>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+      </Query>
+      <Fields>
+        <Field Name="QFormID">
+          <DataField>QFormID</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="BasicQfData">
+      <Query>
+        <DataSourceName>LXDB</DataSourceName>
+        <QueryParameters>
+          <QueryParameter Name="@QFormID">
+            <Value>=Parameters!QFormID.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <CommandText>SELECT qf.QFormID, qf.AmountRequested, qf.ProductTypeLookup, qf.QFormSubtypeSpecificationID, LEFT(qft.Description,60) AS 'QFormType.Description', 
+		LEFT(qfst.Description,40) AS 'QFormSubType.Description', qf.ESourceID, qf.CreditedESourceID, qfa. AffiliateCode, qf.MarketplaceEChannelID,
+		qf.ICodeID, qf.InsertDateTime, qf.IsScrubbed, qf.QFormUID
+FROM tQForm qf with(nolock)
+	JOIN tQFormSubtypeSpecification qfsts ON qf.QFormSubtypeSpecificationID = qfsts.QFormSubtypeSpecificationID
+	JOIN tQFormTypeLookup qft ON qfsts.QFormTypeLookup = qft.ID
+	JOIN tQFormSubtypeLookup qfst ON qfsts.QFormSubtypeLookup = qfst.ID
+	LEFT JOIN tQFormAffiliate qfa ON qf.QFormID = qfa.QFormID
+WHERE qf.QFormID = @QFormID </CommandText>
+      </Query>
+      <Fields>
+        <Field Name="QFormID">
+          <DataField>QFormID</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="AmountRequested">
+          <DataField>AmountRequested</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="ProductTypeLookup">
+          <DataField>ProductTypeLookup</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="QFormSubtypeSpecificationID">
+          <DataField>QFormSubtypeSpecificationID</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="QFormType_Description">
+          <DataField>QFormType.Description</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="QFormSubType_Description">
+          <DataField>QFormSubType.Description</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ESourceID">
+          <DataField>ESourceID</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="CreditedESourceID">
+          <DataField>CreditedESourceID</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="AffiliateCode">
+          <DataField>AffiliateCode</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="MarketplaceEChannelID">
+          <DataField>MarketplaceEChannelID</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="ICodeID">
+          <DataField>ICodeID</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="InsertDateTime">
+          <DataField>InsertDateTime</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="IsScrubbed">
+          <DataField>IsScrubbed</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="QFormUID">
+          <DataField>QFormUID</DataField>
+          <rd:TypeName>System.Guid</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="AdditionalQfData">
+      <Query>
+        <DataSourceName>LXDB</DataSourceName>
+        <QueryParameters>
+          <QueryParameter Name="@QFormID">
+            <Value>=Parameters!QFormID.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <CommandText>SELECT mp.FoundHome, mp.HaveAgent, mp.FirstTimeHomeBuyer, mr.TotalCashoutAmount, qfl.RecycleExpirationDateTime,
+	rem.IsCurrentLoanVA, wi.IPAddress, wi.WebPageName
+FROM tQFormLoan qfl with(nolock)
+	LEFT JOIN tQFormMortgagePurchase mp with(nolock) ON qfl.QFormID = mp.QFormID
+	LEFT JOIN tQFormMortgageRefinance mr with(nolock) ON qfl.QFormID = mr.QFormID
+	LEFT JOIN tRealEstateMortgage rem with(nolock) ON mr.RealEstateMortgageID = rem.RealEstateMortgageID
+	LEFT JOIN tQFormWebInfo wi with(nolock) ON qfl.QFormID = wi.QFormID
+WHERE qfl.QFormID = @QFormID</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="FoundHome">
+          <DataField>FoundHome</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="HaveAgent">
+          <DataField>HaveAgent</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="FirstTimeHomeBuyer">
+          <DataField>FirstTimeHomeBuyer</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="TotalCashoutAmount">
+          <DataField>TotalCashoutAmount</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="RecycleExpirationDateTime">
+          <DataField>RecycleExpirationDateTime</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="IsCurrentLoanVA">
+          <DataField>IsCurrentLoanVA</DataField>
+          <rd:TypeName>System.Boolean</rd:TypeName>
+        </Field>
+        <Field Name="IPAddress">
+          <DataField>IPAddress</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="WebPageName">
+          <DataField>WebPageName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+  </DataSets>
+  <ReportParameters>
+    <ReportParameter Name="QFormID">
+      <DataType>String</DataType>
+      <Hidden>true</Hidden>
+      <ValidValues>
+        <DataSetReference>
+          <DataSetName>QFormID</DataSetName>
+          <ValueField>QFormID</ValueField>
+        </DataSetReference>
+      </ValidValues>
+    </ReportParameter>
+    <ReportParameter Name="QformUID">
+      <DataType>String</DataType>
+      <Prompt>QformUID</Prompt>
+    </ReportParameter>
+  </ReportParameters>
+  <Language>en-US</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>5df90ff1-6dd3-4473-b1a4-914aeb98563f</rd:ReportID>
+</Report>

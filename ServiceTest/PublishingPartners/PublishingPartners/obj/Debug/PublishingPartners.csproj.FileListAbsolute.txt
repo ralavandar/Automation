@@ -1,0 +1,29 @@
+c:\users\ssharma\documents\visual studio 2012\Projects\PublishingPartners\PublishingPartners\obj\Debug\PublishingPartners.csprojResolveAssemblyReference.cache
+c:\users\ssharma\documents\visual studio 2012\Projects\PublishingPartners\PublishingPartners\bin\Debug\PublishingPartners.dll.config
+c:\users\ssharma\documents\visual studio 2012\Projects\PublishingPartners\PublishingPartners\bin\Debug\PublishingPartners.dll
+c:\users\ssharma\documents\visual studio 2012\Projects\PublishingPartners\PublishingPartners\bin\Debug\PublishingPartners.pdb
+c:\users\ssharma\documents\visual studio 2012\Projects\PublishingPartners\PublishingPartners\bin\Debug\ConfigurationSettings.dll
+c:\users\ssharma\documents\visual studio 2012\Projects\PublishingPartners\PublishingPartners\bin\Debug\nunit.framework.dll
+c:\users\ssharma\documents\visual studio 2012\Projects\PublishingPartners\PublishingPartners\bin\Debug\ServiceTestEngine.dll
+c:\users\ssharma\documents\visual studio 2012\Projects\PublishingPartners\PublishingPartners\bin\Debug\Newtonsoft.Json.dll
+c:\users\ssharma\documents\visual studio 2012\Projects\PublishingPartners\PublishingPartners\bin\Debug\ConfigurationSettings.pdb
+c:\users\ssharma\documents\visual studio 2012\Projects\PublishingPartners\PublishingPartners\bin\Debug\nunit.framework.xml
+c:\users\ssharma\documents\visual studio 2012\Projects\PublishingPartners\PublishingPartners\bin\Debug\ServiceTestEngine.pdb
+c:\users\ssharma\documents\visual studio 2012\Projects\PublishingPartners\PublishingPartners\obj\Debug\PublishingPartners.dll
+c:\users\ssharma\documents\visual studio 2012\Projects\PublishingPartners\PublishingPartners\obj\Debug\PublishingPartners.pdb
+C:\Users\ssharma\documents\visual studio 2012\Projects\PublishingPartners\PublishingPartners\bin\Debug\Ionic.Zip.dll
+C:\Users\ssharma\documents\visual studio 2012\Projects\PublishingPartners\PublishingPartners\bin\Debug\Selenium.WebDriverBackedSelenium.dll
+C:\Users\ssharma\documents\visual studio 2012\Projects\PublishingPartners\PublishingPartners\bin\Debug\ThoughtWorks.Selenium.Core.dll
+C:\Users\ssharma\documents\visual studio 2012\Projects\PublishingPartners\PublishingPartners\bin\Debug\WebDriver.dll
+C:\Users\ssharma\documents\visual studio 2012\Projects\PublishingPartners\PublishingPartners\bin\Debug\WebDriver.Support.dll
+C:\ServiceTest\Saurabh\PublishingPartners\PublishingPartners\bin\Debug\PublishingPartners.dll.config
+C:\ServiceTest\Saurabh\PublishingPartners\PublishingPartners\bin\Debug\PublishingPartners.dll
+C:\ServiceTest\Saurabh\PublishingPartners\PublishingPartners\bin\Debug\PublishingPartners.pdb
+C:\ServiceTest\Saurabh\PublishingPartners\PublishingPartners\bin\Debug\nunit.framework.dll
+C:\ServiceTest\Saurabh\PublishingPartners\PublishingPartners\bin\Debug\ServiceTestEngine.dll
+C:\ServiceTest\Saurabh\PublishingPartners\PublishingPartners\bin\Debug\ConfigurationSettings.pdb
+C:\ServiceTest\Saurabh\PublishingPartners\PublishingPartners\bin\Debug\nunit.framework.xml
+C:\ServiceTest\Saurabh\PublishingPartners\PublishingPartners\bin\Debug\ServiceTestEngine.pdb
+C:\ServiceTest\Saurabh\PublishingPartners\PublishingPartners\obj\Debug\PublishingPartners.csprojResolveAssemblyReference.cache
+C:\ServiceTest\Saurabh\PublishingPartners\PublishingPartners\obj\Debug\PublishingPartners.dll
+C:\ServiceTest\Saurabh\PublishingPartners\PublishingPartners\obj\Debug\PublishingPartners.pdb

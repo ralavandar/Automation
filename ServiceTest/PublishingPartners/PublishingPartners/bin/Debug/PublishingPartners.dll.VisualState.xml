@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<VisualState xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ShowCheckBoxes="true">
+  <TopNode>[0-1013]C:\ServiceTest\Saurabh\PublishingPartners\PublishingPartners\bin\Debug\PublishingPartners.dll</TopNode>
+  <SelectedNode>[0-1004]PublishingPartners.ServerTest.RefinanceConventional</SelectedNode>
+  <ExcludeCategories>false</ExcludeCategories>
+  <Nodes>
+    <Node UniqueName="[0-1013]C:\ServiceTest\Saurabh\PublishingPartners\PublishingPartners\bin\Debug\PublishingPartners.dll" Expanded="true" />
+    <Node UniqueName="[0-1014]PublishingPartners" Expanded="true" />
+    <Node UniqueName="[0-1002]PublishingPartners.ServerTest" Expanded="true" />
+    <Node UniqueName="[0-1003]PublishingPartners.ServerTest.PurchaseConventional" Checked="true" />
+    <Node UniqueName="[0-1009]PublishingPartners.ServerTest.PurchaseFHAEligible" Checked="true" />
+    <Node UniqueName="[0-1007]PublishingPartners.ServerTest.PurchaseJumbo" Checked="true" />
+    <Node UniqueName="[0-1011]PublishingPartners.ServerTest.PurchaseVAEligible" Checked="true" />
+    <Node UniqueName="[0-1010]PublishingPartners.ServerTest.RefinanceFHAEligible" Checked="true" />
+    <Node UniqueName="[0-1008]PublishingPartners.ServerTest.RefinanceJumbo" Checked="true" />
+    <Node UniqueName="[0-1006]PublishingPartners.ServerTest.RefinanceSecondPlusCashout" Checked="true" />
+    <Node UniqueName="[0-1012]PublishingPartners.ServerTest.RefinanceVAEligible" Checked="true" />
+  </Nodes>
+</VisualState>

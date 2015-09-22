@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!--This file represents the results of running a test suite-->
+<test-results name="C:\ServiceTest\Saurabh\PublishingPartners\PublishingPartners\bin\Debug\PublishingPartners.dll" total="10" errors="0" failures="2" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2014-04-09" time="07:27:11">
+  <environment nunit-version="2.6.3.13283" clr-version="2.0.50727.5477" os-version="Microsoft Windows NT 6.1.7601 Service Pack 1" platform="Win32NT" cwd="C:\Program Files (x86)\NUnit 2.6.3\bin" machine-name="SSHARMA-VM" user="SSHARMA" user-domain="DS1" />
+  <culture-info current-culture="en-US" current-uiculture="en-US" />
+  <test-suite type="Assembly" name="C:\ServiceTest\Saurabh\PublishingPartners\PublishingPartners\bin\Debug\PublishingPartners.dll" executed="True" result="Failure" success="False" time="17.911" asserts="0">
+    <results>
+      <test-suite type="Namespace" name="PublishingPartners" executed="True" result="Failure" success="False" time="17.886" asserts="0">
+        <results>
+          <test-suite type="TestFixture" name="ServerTest" executed="True" result="Failure" success="False" time="17.882" asserts="0">
+            <results>
+              <test-case name="PublishingPartners.ServerTest.PurchaseConventional" executed="True" result="Success" success="True" time="2.822" asserts="0" />
+              <test-case name="PublishingPartners.ServerTest.PurchaseConventionalWithPMI" executed="True" result="Failure" success="False" time="1.647" asserts="0">
+                <failure>
+                  <message><![CDATA[The test case execution Failed!]]></message>
+                  <stack-trace><![CDATA[at PublishingPartners.Reporter.ReportFinalResults() in c:\ServiceTest\Saurabh\PublishingPartners\PublishingPartners\Reporter.cs:line 81
+at PublishingPartners.ServerTest.PurchaseConventionalWithPMI() in c:\ServiceTest\Saurabh\PublishingPartners\PublishingPartners\Tests\ServerTest.cs:line 213
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case name="PublishingPartners.ServerTest.PurchaseFHAEligible" executed="True" result="Success" success="True" time="1.487" asserts="0" />
+              <test-case name="PublishingPartners.ServerTest.PurchaseJumbo" executed="True" result="Success" success="True" time="1.417" asserts="0" />
+              <test-case name="PublishingPartners.ServerTest.PurchaseVAEligible" executed="True" result="Success" success="True" time="1.593" asserts="0" />
+              <test-case name="PublishingPartners.ServerTest.RefinanceConventional" executed="True" result="Success" success="True" time="1.667" asserts="0" />
+              <test-case name="PublishingPartners.ServerTest.RefinanceFHAEligible" executed="True" result="Success" success="True" time="1.623" asserts="0" />
+              <test-case name="PublishingPartners.ServerTest.RefinanceJumbo" executed="True" result="Success" success="True" time="1.573" asserts="0" />
+              <test-case name="PublishingPartners.ServerTest.RefinanceSecondPlusCashout" executed="True" result="Failure" success="False" time="1.587" asserts="0">
+                <failure>
+                  <message><![CDATA[The test case execution Failed!]]></message>
+                  <stack-trace><![CDATA[at PublishingPartners.Reporter.ReportFinalResults() in c:\ServiceTest\Saurabh\PublishingPartners\PublishingPartners\Reporter.cs:line 81
+at PublishingPartners.ServerTest.RefinanceSecondPlusCashout() in c:\ServiceTest\Saurabh\PublishingPartners\PublishingPartners\Tests\ServerTest.cs:line 275
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case name="PublishingPartners.ServerTest.RefinanceVAEligible" executed="True" result="Success" success="True" time="1.659" asserts="0" />
+            </results>
+          </test-suite>
+        </results>
+      </test-suite>
+    </results>
+  </test-suite>
+</test-results>

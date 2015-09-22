@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{1F34A1E7-4C1A-4F92-B23D-9610979AD9DF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TestAutomation</RootNamespace>
+    <AssemblyName>TestAutomation</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="nunit.framework, Version=2.6.4.14350, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Program Files (x86)\NUnit 2.6.4\bin\framework\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Selenium.WebDriverBackedSelenium, Version=2.28.0.0, Culture=neutral, PublicKeyToken=1c2bd1631853048f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\Selenium.WebDriverBackedSelenium.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\lib\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="ThoughtWorks.Selenium.Core, Version=2.28.0.0, Culture=neutral, PublicKeyToken=1c2bd1631853048f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\ThoughtWorks.Selenium.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="WebDriver, Version=2.28.0.0, Culture=neutral, PublicKeyToken=1c2bd1631853048f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\WebDriver.dll</HintPath>
+    </Reference>
+    <Reference Include="WebDriver.Support, Version=2.28.0.0, Culture=neutral, PublicKeyToken=1c2bd1631853048f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\WebDriver.Support.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Common\TestAutomationStoredProcedures.cs" />
+    <Compile Include="Common\IFormField.cs" />
+    <Compile Include="Common\Validation.cs" />
+    <Compile Include="Common\Common.cs" />
+    <Compile Include="Common\DataSheet.cs" />
+    <Compile Include="Common\UrlCreator.cs" />
+    <Compile Include="Lending\p2Page.cs" />
+    <Compile Include="Lending\m2Page.cs" />
+    <Compile Include="Lending\MCSignUp.cs" />
+    <Compile Include="Lending\mcAutoPurchasePage.cs" />
+    <Compile Include="Lending\mcAutoRefiPage.cs" />
+    <Compile Include="Lending\mcPersonalLoanPage.cs" />
+    <Compile Include="Lending\mcPurchasePage.cs" />
+    <Compile Include="Lending\mcRefiPage.cs" />
+    <Compile Include="Lending\mcStudentRefiPage.cs" />
+    <Compile Include="Lending\reverse2Page.cs" />
+    <Compile Include="Lending\mortgage2Page.cs" />
+    <Compile Include="Lending\heaPage.cs" />
+    <Compile Include="Lending\studentRefiPage.cs" />
+    <Compile Include="TestCases\p2Tests.cs" />
+    <Compile Include="TestCases\m2Tests.cs" />
+    <Compile Include="TestCases\Dev_mortgage2Tests.cs" />
+    <Compile Include="TestCases\mcAutoPurchaseTests.cs" />
+    <Compile Include="TestCases\mcAutoRefiTests.cs" />
+    <Compile Include="TestCases\mcPersonalLoanTests.cs" />
+    <Compile Include="TestCases\mcPurchaseTests.cs" />
+    <Compile Include="TestCases\mcRefiTests.cs" />
+    <Compile Include="TestCases\MCSignupTests.cs" />
+    <Compile Include="TestCases\mcStudentRefiTests.cs" />
+    <Compile Include="TestCases\reverse2Tests.cs" />
+    <Compile Include="TestCases\mortgage2Tests.cs" />
+    <Compile Include="TestCases\PartnerQFs.cs" />
+    <Compile Include="TestCases\heaTests.cs" />
+    <Compile Include="TestCases\studentRefiTests.cs" />
+    <Compile Include="TestCases\MCUpsellSignupOffers.cs" />
+    <Compile Include="TestCases\MCUpsellSignup.cs" />
+    <Compile Include="zzArchive\auPage.cs" />
+    <Compile Include="Lending\prequalPage.cs" />
+    <Compile Include="Lending\personalLoanPage.cs" />
+    <Compile Include="Lending\FossaField.cs" />
+    <Compile Include="Lending\FossaPageBase.cs" />
+    <Compile Include="zzArchive\gsguyPage.cs" />
+    <Compile Include="Lending\morttreePage.cs" />
+    <Compile Include="MyDevTests\LoanExplorerTests.cs" />
+    <Compile Include="TestCases\CJWidgetTests.cs" />
+    <Compile Include="TestCases\prequalTests.cs" />
+    <Compile Include="TestCases\personalLoanTests.cs" />
+    <Compile Include="zzArchive\gsguyTests.cs" />
+    <Compile Include="TestCases\LoanEvaluationTests.cs" />
+    <Compile Include="TestCases\prepopTests.cs" />
+    <Compile Include="TestCases\morttreeTests.cs" />
+    <Compile Include="zzArchive\ccreturnPage.cs" />
+    <Compile Include="zzArchive\ccreturnTests.cs" />
+    <Compile Include="zzArchive\gsmortgageTests.cs" />
+    <Compile Include="zzArchive\gsmortgageVariationTests.cs" />
+    <Compile Include="Lending\autoPage.cs" />
+    <Compile Include="Lending\ltHomepage.cs" />
+    <Compile Include="TestCases\homepageTests.cs" />
+    <Compile Include="TestCases\ProdTests_Forms_Auto.cs" />
+    <Compile Include="zzArchive\mortgagePage.cs" />
+    <Compile Include="zzArchive\homeequityPage.cs" />
+    <Compile Include="zzArchive\ltreturnPage.cs" />
+    <Compile Include="TestCases\ProdTests_Forms_Mortgage.cs" />
+    <Compile Include="MyDevTests\CanopyTests.cs" />
+    <Compile Include="TestCases\autoTests.cs" />
+    <Compile Include="zzArchive\mortgageVariationTests.cs" />
+    <Compile Include="zzArchive\mortgageTests.cs" />
+    <Compile Include="zzArchive\homeequityTests.cs" />
+    <Compile Include="zzArchive\ltreturnTests.cs" />
+    <Compile Include="zzArchive\ltchangeTests.cs" />
+    <Compile Include="zzArchive\ltchangePage.cs" />
+    <Compile Include="Common\PageBase.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Common\SeleniumTestBase.cs" />
+    <Compile Include="zzArchive\wizardPage.cs" />
+    <Compile Include="zzArchive\wizardTests.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

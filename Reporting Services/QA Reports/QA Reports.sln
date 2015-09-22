@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{F14B399A-7131-4C87-9E4B-1186C45EF12D}") = "QA Reports", "QA Reports\QA Reports.rptproj", "{DC1B6513-2F6F-4F7E-B78C-A0B821B3A8DC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Default = Debug|Default
+		DebugLocal|Default = DebugLocal|Default
+		Release|Default = Release|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DC1B6513-2F6F-4F7E-B78C-A0B821B3A8DC}.Debug|Default.ActiveCfg = Debug
+		{DC1B6513-2F6F-4F7E-B78C-A0B821B3A8DC}.Debug|Default.Build.0 = Debug
+		{DC1B6513-2F6F-4F7E-B78C-A0B821B3A8DC}.Debug|Default.Deploy.0 = Debug
+		{DC1B6513-2F6F-4F7E-B78C-A0B821B3A8DC}.DebugLocal|Default.ActiveCfg = DebugLocal
+		{DC1B6513-2F6F-4F7E-B78C-A0B821B3A8DC}.DebugLocal|Default.Build.0 = DebugLocal
+		{DC1B6513-2F6F-4F7E-B78C-A0B821B3A8DC}.Release|Default.ActiveCfg = Release
+		{DC1B6513-2F6F-4F7E-B78C-A0B821B3A8DC}.Release|Default.Build.0 = Release
+		{DC1B6513-2F6F-4F7E-B78C-A0B821B3A8DC}.Release|Default.Deploy.0 = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

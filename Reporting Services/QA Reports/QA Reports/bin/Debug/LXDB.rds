@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RptDataSource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="LXDB">
+  <ConnectionProperties>
+    <Extension>SQL</Extension>
+    <ConnectString>Data Source=10.24.100.61,1499;Initial Catalog=Lendx</ConnectString>
+    <IntegratedSecurity>true</IntegratedSecurity>
+    <Prompt>Specify a user name and password for data source QALendx</Prompt>
+  </ConnectionProperties>
+  <DataSourceID>a2869248-0e20-4301-b8d0-70ee48a90c59</DataSourceID>
+</RptDataSource>
