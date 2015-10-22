@@ -36,7 +36,7 @@ namespace TestAutomation.LendingTree.mc
         {
             get
             {
-                Int32 numSteps = 8;
+                Int32 numSteps = 9;
 
                 //If Highest Degree is Masters or Doctorate then step added
                 if ((testData["BorrowerHighestDegree"].Equals("Masters", StringComparison.OrdinalIgnoreCase)
@@ -102,7 +102,13 @@ namespace TestAutomation.LendingTree.mc
                                       new FossaField(Wait, "Wait"));
                 stepNum = stepNum + 1;
 
-                // Borrower S.S.N
+                //Specify Citizenship Status
+                Steps[stepNum] = Step(
+                                      new FossaField(SelectByText, "citizenship-status", "Citizenship"),
+                                      new FossaField(Wait, "Wait"));
+                stepNum = stepNum + 1;
+
+                // Borrower SSN
                 Steps[stepNum] = Step(
                                       new FossaField(Fill, "social-security-one", "BorrowerSsn1"),
                                       new FossaField(Fill, "social-security-two", "BorrowerSsn2"),

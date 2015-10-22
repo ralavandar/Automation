@@ -142,7 +142,7 @@ namespace TestAutomation.LendingTree.tlm
                 // Email
                 Steps[12] = Step(
                                 new FossaField(DeselectAfter(Fill), "email", "EmailAddress"),
-                                new FossaField(Wait, "Wait"));
+                                new FossaField(Wait5Sec, "Wait"));
                 // Password
                 Steps[13] = Step(
                                 new FossaField(Fill, "password", "Password"),
@@ -156,9 +156,7 @@ namespace TestAutomation.LendingTree.tlm
                         break;
                     default:
                         Steps[14] = Step(
-                                new FossaField(Fill, "social-security", "BorrowerSsn1"),
-                                new FossaField(Append, "social-security", "BorrowerSsn2"),
-                                new FossaField(Append, "social-security", "BorrowerSsn3"),
+                                new FossaField(Fill, "social-security-four", "BorrowerSsn3"),
                                 new FossaField(Wait, "Wait"));
                         break;
                 }
@@ -170,6 +168,10 @@ namespace TestAutomation.LendingTree.tlm
                                 new FossaField(Fill, "last-name", "BorrowerLastName"),
                                 new FossaField(Fill, "street1", "BorrowerStreetAddress"),
                                 new FossaField(Fill, "zip-code-input", "BorrowerZipCode"),
+                                // The following is an 'xpath' hack b/c there are two identical 'social-security' elements on the oops page
+                                new FossaField(Fill, By.XPath("//input[@id='social-security'][2]"), "BorrowerSsn1"),
+                                new FossaField(Append, By.XPath("//input[@id='social-security'][2]"), "BorrowerSsn2"),
+                                new FossaField(Append, By.XPath("//input[@id='social-security'][2]"), "BorrowerSsn3"),
                                 new FossaField(Wait, "Wait"));
                 }
 

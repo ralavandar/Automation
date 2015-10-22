@@ -32,7 +32,7 @@ namespace TestAutomation.LendingTree.tla
         {
             get
             {
-                Int32 numSteps = 13;
+                Int32 numSteps = 14;
 
                 //If Highest Degree is Masters or Doctorate then step added
                 if ((testData["BorrowerHighestDegree"].Equals("Masters", StringComparison.OrdinalIgnoreCase)
@@ -96,6 +96,12 @@ namespace TestAutomation.LendingTree.tla
                 //Specify Borrower Annual Pre-Tax Income
                 Steps[stepNum] = Step(
                                       new FossaField(SelectByText, "annual-income", "BorrowerPreTaxIncome"),
+                                      new FossaField(Wait, "Wait"));
+                stepNum = stepNum + 1;
+
+                //Specify Citizenship Status
+                Steps[stepNum] = Step(
+                                      new FossaField(SelectByText, "citizenship-status", "Citizenship"),
                                       new FossaField(Wait, "Wait"));
                 stepNum = stepNum + 1;
 

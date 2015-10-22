@@ -382,6 +382,8 @@ namespace TestAutomation.LendingTree.tlm
                 // Address
                 Steps[stepNum] = Step(
                                 new FossaField(Fill, "street1", "BorrowerStreetAddress"),
+                                new FossaField(Wait, "Wait"),
+                                new FossaField(ClickElement, By.ClassName("form-header")),
                                 new FossaField(Fill, "zip-code-input", "BorrowerZipCode"),
                                 new FossaField(Wait, "Wait"));
                 stepNum = stepNum + 1;
@@ -398,9 +400,7 @@ namespace TestAutomation.LendingTree.tlm
                 // Home Phone
                 Steps[stepNum] = Step(
                                 new FossaField(Fill, "home-phone", "BorrowerHomePhone1"),
-                                //new FossaField(Wait, "Wait"),
                                 new FossaField(Append, "home-phone", "BorrowerHomePhone2"),
-                                //new FossaField(Wait, "Wait"),
                                 new FossaField(Append, "home-phone", "BorrowerHomePhone3"),
                                 new FossaField(Wait, "Wait"));
                 stepNum = stepNum + 1;

@@ -128,9 +128,7 @@ namespace TestAutomation.LendingTree.tla
                                  new FossaField(Wait, "Wait"),
                                  new FossaField(ClickButton, "next"));
 
-                Steps[13] = Step(new FossaField(Fill, "social-security-one", "BorrowerSsn1"),
-                                 new FossaField(Fill, "social-security-two", "BorrowerSsn2"),
-                                 new FossaField(Fill, "social-security-three", "BorrowerSsn3"),
+                Steps[13] = Step(new FossaField(Fill, "social-security-four", "BorrowerSsn3"),
                                  new FossaField(Wait, "Wait"),
                                  new FossaField(ClickButton, "next"),
                                  new FossaField(WaitForOops, "Wait"));
