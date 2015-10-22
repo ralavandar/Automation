@@ -86,7 +86,7 @@ namespace TestAutomation.LendingTree.tla
         {
             Validation.IsTrue(VerifytQFormRecord(hea.strQFormUID));
 
-           hea.VerifyRedirectToMyLendingTree(testData);
+            hea.VerifyRedirectToMyLtExpress(testData);
         }
     }
 }
@@ -146,7 +146,7 @@ namespace TestAutomation.LendingTree.ProdTests_Forms_Other
         {
             Validation.IsTrue(VerifytQFormRecord(homeequityLoan.strQFormUID));
 
-            homeequityLoan.VerifyRedirectToMyLendingTree(testData);
+            homeequityLoan.VerifyRedirectToMyLtExpress(testData);
         }
     }
 }

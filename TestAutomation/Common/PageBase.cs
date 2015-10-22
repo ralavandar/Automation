@@ -269,7 +269,7 @@ namespace TestAutomation
         {
             sliderHandle.SendKeys(Keys.ArrowRight);
             // Need to slow it down here so that the slider controls and related text have time to update after moving the handle
-            System.Threading.Thread.Sleep(50);
+            System.Threading.Thread.Sleep(100);
         }
 
         /// <summary>

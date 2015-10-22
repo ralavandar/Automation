@@ -59,7 +59,7 @@ namespace TestAutomation.LendingTree.mc
             Assert.IsTrue(VerifytQFormRecord(mcAutoRefi.strQFormUID));
 
             // Verify redirect to My LendingTree
-            mcAutoRefi.VerifyRedirectToMyLendingTree(testData);
+            mcAutoRefi.VerifyRedirectToMyLtExpress(testData);
         }
 
     }
