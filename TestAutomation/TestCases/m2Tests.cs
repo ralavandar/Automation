@@ -39,6 +39,7 @@ namespace TestAutomation.LendingTree.tlm
         [TearDown]
         public void TeardownTest()
         {
+            //Tearing down
             driver.Quit();
             Common.ReportFinalResults();
         }
