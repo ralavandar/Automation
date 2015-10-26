@@ -105,7 +105,7 @@ namespace TestAutomation.LendingTree.tlm
             // Fill out and submit a QF
             m2.FillOutValidQF();
 
-            FinishTestDHC();
+            FinishTest();
         }
 
         [Test]
@@ -114,7 +114,7 @@ namespace TestAutomation.LendingTree.tlm
             // Fill out and submit a QF
             m2.FillOutValidQF();
 
-            FinishTestDHC();
+            FinishTest();
         }
 
         [Test]
@@ -123,7 +123,7 @@ namespace TestAutomation.LendingTree.tlm
             // Fill out and submit a QF
             m2.FillOutValidQF();
 
-            FinishTestDHC();
+            FinishTest();
         }
 
         private void FinishTest()
@@ -132,17 +132,7 @@ namespace TestAutomation.LendingTree.tlm
             Validation.IsTrue(VerifytQFormRecord(m2.strQFormUID));
 
             // Verify redirect to My LendingTree
-            m2.VerifyRedirectToMyLendingTree(testData);
-        }
-
-        private void FinishTestDHC()
-        {
-            // Check for the QForm in the DB
-            Validation.IsTrue(VerifytQFormRecord(m2.strQFormUID));
-
-            // Verify redirect to My LendingTree
-            m2.BypassCrossSells();
-            m2.VerifyRedirectToMyLendingTreeDHC(testData);
+            m2.VerifyRedirectToMyLtExpress(testData);
         }
     }
 }

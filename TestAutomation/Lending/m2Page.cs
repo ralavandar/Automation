@@ -31,7 +31,7 @@ namespace TestAutomation.LendingTree.tlm
         {
             get 
             {
-                // The minimum number of steps for a purchase scenario is 19, Refi is 20
+                // The minimum number of steps for a purchase scenario is 20, Refi is 21
                 // Initialize the array to one larger than we need, since we don't use index 0.
                 Int32 numSteps = 20;
                 if (testData["LoanType"].ToUpper() == "REFINANCE")
@@ -45,6 +45,17 @@ namespace TestAutomation.LendingTree.tlm
                     // Add a step for refi military va loan if applicable
                     if (testData["MilitaryServiceYesNo"] == "Y")
                         numSteps++;
+                }
+
+                // Add steps for purchase current realtor and realtor consult
+                if (testData["LoanType"].ToUpper() == "PURCHASE")
+                {
+                    if (testData["CurrentREAgentYesNo"].ToUpper() == "Y")
+                        // Current RE Agent
+                        numSteps++;
+                    else
+                        // Current RE Agent and Realtor Consult
+                        numSteps = numSteps + 2;
                 }
 
                 // Add two steps for home services opt-in questions if applicable
@@ -148,6 +159,15 @@ namespace TestAutomation.LendingTree.tlm
 
                 if (testData["LoanType"].ToUpper() == "PURCHASE")
                 {
+                    Steps[stepNum] = Step(
+                                new FossaField(Fill, By.Id("property-geo-search"), "PropertyCity"),
+                                new FossaField(Append, By.Id("property-geo-search"), "PropertyState"),
+                                new FossaField(Wait, "Wait"),
+                                new FossaField(ClickElement, By.ClassName("dropdown-menu")),
+                                new FossaField(Wait, "Wait"),
+                                new FossaField(GetAngularQFormUID, "m2"));
+                    stepNum = stepNum + 1;
+                    // Found home
                     switch (testData["FoundNewHomeYesNo"])
                     {
                         case "N":
@@ -162,49 +182,122 @@ namespace TestAutomation.LendingTree.tlm
                             break;
                     }
                     stepNum = stepNum + 1;
+                    // Current real estate agent
+                    switch (testData["CurrentREAgentYesNo"])
+                    {
+                        case "N":
+                            Steps[stepNum] = Step(
+                                new FossaField(AutoAdvance(ClickElement), By.CssSelector("label[for=current-realestate-agent-no]")),
+                                new FossaField(Wait, "Wait"));
+                            break;
+                        case "Y":
+                            Steps[stepNum] = Step(
+                                new FossaField(AutoAdvance(ClickElement), By.CssSelector("label[for=current-realestate-agent-yes]")),
+                                new FossaField(Wait, "Wait"));
+                            break;
+                    }
+                    stepNum = stepNum + 1;
 
+                    // Real estate agent consult (only if CurrentREAgentYesNo = No) 
+                    if (testData["CurrentREAgentYesNo"].ToUpper() == "N")
+                    {
+                        switch (testData["RealtorConsultYesNo"])
+                        {
+                            case "N":
+                                Steps[stepNum] = Step(
+                                    new FossaField(AutoAdvance(ClickElement), By.CssSelector("label[for=realtor-optin-no]")),
+                                    new FossaField(Wait, "Wait"));
+                                break;
+                            case "Y":
+                                Steps[stepNum] = Step(
+                                    new FossaField(AutoAdvance(ClickElement), By.CssSelector("label[for=realtor-optin-yes]")),
+                                    new FossaField(Wait, "Wait"));
+                                break;
+                        }
+                        stepNum = stepNum + 1;
+                    }
+
+                    // Purchase Price
                     Steps[stepNum] = Step(
                                 new FossaField(SelectSliderValueByText, testData["PurchasePrice"]),
                                 new FossaField(Wait, "Wait"));
-                                //new FossaField(ClickButton, "next"));
                     stepNum = stepNum + 1;
-
+                    // Purchase Down Payment
                     Steps[stepNum] = Step(
                                 new FossaField(SelectSliderValueByText, testData["PurchaseDownPayment"]),
                                 new FossaField(Wait, "Wait"));
-                                //new FossaField(ClickButton, "next"));
                     stepNum = stepNum + 1;
-                    
-                    Steps[stepNum] = Step(
-                                new FossaField(Fill, By.Id("property-geo-search"), "PropertyCity"),
-                                new FossaField(Append, By.Id("property-geo-search"), "PropertyState"),
-                                new FossaField(Wait, "Wait"),
-                                new FossaField(ClickElement, By.ClassName("dropdown-menu")),
-                                new FossaField(Wait, "Wait"),
-                                new FossaField(GetAngularQFormUID, "m2"));
-                    stepNum = stepNum + 1;
+
+                    // Home Services Opt-in
+                    // TODO: handle HomeServicesCategory drop-down and add data field to db!
+                    switch (testData["HomeServicesOptInYesNo"])
+                    {
+                        case "N":
+                            Steps[stepNum] = Step(
+                                    new FossaField(AutoAdvance(ClickElement), By.CssSelector("label[for=home-services-optin-no]")),
+                                    new FossaField(Wait, "Wait"));
+                            stepNum = stepNum + 1;
+                            break;
+                        default:
+                            Steps[stepNum] = Step(
+                                    new FossaField(AutoAdvance(ClickElement), By.CssSelector("label[for=home-services-optin-yes]")),
+                                    new FossaField(Wait, "Wait"));
+                            stepNum = stepNum + 1;
+                            Steps[stepNum] = Step(
+                                    new FossaField(SelectByValue, "home-services-category", "0"),
+                                    new FossaField(Wait, "Wait"));
+                            stepNum = stepNum + 1;
+                            Steps[stepNum] = Step(
+                                    new FossaField(AutoAdvance(ClickElement), By.CssSelector("label[for=home-services-schedule-flexible]")),
+                                    new FossaField(Wait, "Wait"));
+                            stepNum = stepNum + 1;
+                            break;
+                    }
                 }
 
                 if (testData["LoanType"].ToUpper() == "REFINANCE")
                 {
                     Steps[stepNum] = Step(
+                                new FossaField(Fill, "property-zip-code-input", "PropertyZipCode"),
+                                new FossaField(Wait, "Wait"),
+                                new FossaField(GetAngularQFormUID, "m2"));
+                    stepNum = stepNum + 1;
+
+                    Steps[stepNum] = Step(
                                 new FossaField(SelectSliderValueByText, testData["RefiPropertyValue"]),
                                 new FossaField(Wait, "Wait"));
-                                //new FossaField(ClickButton, "next"));
                     stepNum = stepNum + 1;
 
                     Steps[stepNum] = Step(
                                 new FossaField(SelectSliderValueByText, testData["FirstMortgageBalance"]),
                                 new FossaField(Wait, "Wait"));
-                                //new FossaField(ClickButton, "next"));
                     stepNum = stepNum + 1;
 
-                    Steps[stepNum] = Step(
-                                new FossaField(Fill, "property-zip-code-input", "PropertyZipCode"),
-                                new FossaField(Wait, "Wait"),
-                                new FossaField(GetAngularQFormUID, "m2"));
-                                //new FossaField(ClickButton, "next"));
-                    stepNum = stepNum + 1;
+                    // Home Services Opt-in
+                    // TODO: handle HomeServicesCategory drop-down and add data field to db!
+                    switch (testData["HomeServicesOptInYesNo"])
+                    {
+                        case "N":
+                            Steps[stepNum] = Step(
+                                    new FossaField(AutoAdvance(ClickElement), By.CssSelector("label[for=home-services-optin-no]")),
+                                    new FossaField(Wait, "Wait"));
+                            stepNum = stepNum + 1;
+                            break;
+                        default:
+                            Steps[stepNum] = Step(
+                                    new FossaField(AutoAdvance(ClickElement), By.CssSelector("label[for=home-services-optin-yes]")),
+                                    new FossaField(Wait, "Wait"));
+                            stepNum = stepNum + 1;
+                            Steps[stepNum] = Step(
+                                    new FossaField(SelectByValue, "home-services-category", "0"),
+                                    new FossaField(Wait, "Wait"));
+                            stepNum = stepNum + 1;
+                            Steps[stepNum] = Step(
+                                    new FossaField(AutoAdvance(ClickElement), By.CssSelector("label[for=home-services-schedule-flexible]")),
+                                    new FossaField(Wait, "Wait"));
+                            stepNum = stepNum + 1;
+                            break;
+                    }
 
                     // 2nd mortgage
                     switch (testData["SecondMortgageYesNo"].ToUpper())
@@ -235,81 +328,6 @@ namespace TestAutomation.LendingTree.tlm
                             new FossaField(Wait, "Wait"));
                             //new FossaField(ClickButton, "next"));
                     stepNum = stepNum + 1;
-                }
-
-                // Home Services Opt-in
-                // TODO: handle HomeServicesCategory drop-down and add data field to db!
-                switch (testData["HomeServicesOptInYesNo"])
-                {
-                    case "N":
-                        Steps[stepNum] = Step(
-                                new FossaField(AutoAdvance(ClickElement), By.CssSelector("label[for=home-services-optin-no]")),
-                                new FossaField(Wait, "Wait"));
-                        stepNum = stepNum + 1;
-                        break;
-                    default:
-                        Steps[stepNum] = Step(
-                                new FossaField(AutoAdvance(ClickElement), By.CssSelector("label[for=home-services-optin-yes]")),
-                                new FossaField(Wait, "Wait"));
-                        stepNum = stepNum + 1;
-                        Steps[stepNum] = Step(
-                                new FossaField(SelectByValue, "home-services-category", "0"),
-                                new FossaField(Wait, "Wait"));
-                        stepNum = stepNum + 1;
-                        Steps[stepNum] = Step(
-                                new FossaField(AutoAdvance(ClickElement), By.CssSelector("label[for=home-services-schedule-flexible]")),
-                                new FossaField(Wait, "Wait"));
-                        stepNum = stepNum + 1;
-                        break;
-                }
-
-                // Bankruptcy / Foreclosure
-                if (testData["ForeclosureHistory"] == "N" && testData["BankruptcyYesNo"] == "N")
-                {
-                    Steps[stepNum] = Step(
-                            new FossaField(AutoAdvance(ClickElement), By.CssSelector("label[for=bankruptcy-or-foreclosure-no]")));
-                    stepNum = stepNum + 1;
-                }
-                else if (testData["ForeclosureHistory"] == "N" && testData["BankruptcyYesNo"] == "Y")
-                {
-                    Steps[stepNum] = Step(
-                            new FossaField(AutoAdvance(ClickElement), By.CssSelector("label[for=bankruptcy-or-foreclosure-bankruptcy]")));
-                    stepNum = stepNum + 1;
-                    Steps[stepNum] = Step(
-                            new FossaField(SelectSliderValueByText, testData["BankruptcyHistory"]),
-                            new FossaField(Wait, "Wait"));
-                    stepNum = stepNum + 1;
-                }
-                else if (testData["ForeclosureHistory"] != "N" && testData["BankruptcyYesNo"] == "N")
-                {
-                    Steps[stepNum] = Step(
-                            new FossaField(AutoAdvance(ClickElement), By.CssSelector("label[for=bankruptcy-or-foreclosure-foreclosure]")));
-                    stepNum = stepNum + 1;
-                    Steps[stepNum] = Step(
-                            new FossaField(SelectSliderValueByText, testData["ForeclosureHistory"]),
-                            new FossaField(Wait, "Wait"));
-                    stepNum = stepNum + 1;
-                }
-                else if (testData["ForeclosureHistory"] != "N" && testData["BankruptcyYesNo"] == "Y")
-                {
-                    Steps[stepNum] = Step(
-                            new FossaField(AutoAdvance(ClickElement), By.CssSelector("label[for=bankruptcy-or-foreclosure-both]")));
-                    stepNum = stepNum + 1;
-                    Steps[stepNum] = Step(
-                            new FossaField(SelectSliderValueByText, testData["BankruptcyHistory"]),
-                            new FossaField(Wait, "Wait"));
-
-                    stepNum = stepNum + 1;
-                    Steps[stepNum] = Step(
-                            new FossaField(SelectSliderValueByText, testData["ForeclosureHistory"]),
-                            new FossaField(Wait, "Wait"));
-                    stepNum = stepNum + 1;
-                }
-                else
-                {
-                    // Report invalid test data
-                    Common.ReportEvent(Common.ERROR, "The values provided for 'ForeclosureHistory' and/or 'BankruptcyYesNo' are not valid. " +
-                        "Please check the test case data and try again.");
                 }
 
                 // Credit profile
@@ -373,12 +391,55 @@ namespace TestAutomation.LendingTree.tlm
                         break;
                 }
 
-                // Name
-                Steps[stepNum] = Step(
-                                new FossaField(Fill, "first-name", "BorrowerFirstName"),
-                                new FossaField(Fill, "last-name", "BorrowerLastName"),
-                                new FossaField(Wait, "Wait"));
-                stepNum = stepNum + 1;
+                // Bankruptcy / Foreclosure
+                if (testData["ForeclosureHistory"] == "N" && testData["BankruptcyYesNo"] == "N")
+                {
+                    Steps[stepNum] = Step(
+                            new FossaField(AutoAdvance(ClickElement), By.CssSelector("label[for=bankruptcy-or-foreclosure-no]")));
+                    stepNum = stepNum + 1;
+                }
+                else if (testData["ForeclosureHistory"] == "N" && testData["BankruptcyYesNo"] == "Y")
+                {
+                    Steps[stepNum] = Step(
+                            new FossaField(AutoAdvance(ClickElement), By.CssSelector("label[for=bankruptcy-or-foreclosure-bankruptcy]")));
+                    stepNum = stepNum + 1;
+                    Steps[stepNum] = Step(
+                            new FossaField(SelectSliderValueByText, testData["BankruptcyHistory"]),
+                            new FossaField(Wait, "Wait"));
+                    stepNum = stepNum + 1;
+                }
+                else if (testData["ForeclosureHistory"] != "N" && testData["BankruptcyYesNo"] == "N")
+                {
+                    Steps[stepNum] = Step(
+                            new FossaField(AutoAdvance(ClickElement), By.CssSelector("label[for=bankruptcy-or-foreclosure-foreclosure]")));
+                    stepNum = stepNum + 1;
+                    Steps[stepNum] = Step(
+                            new FossaField(SelectSliderValueByText, testData["ForeclosureHistory"]),
+                            new FossaField(Wait, "Wait"));
+                    stepNum = stepNum + 1;
+                }
+                else if (testData["ForeclosureHistory"] != "N" && testData["BankruptcyYesNo"] == "Y")
+                {
+                    Steps[stepNum] = Step(
+                            new FossaField(AutoAdvance(ClickElement), By.CssSelector("label[for=bankruptcy-or-foreclosure-both]")));
+                    stepNum = stepNum + 1;
+                    Steps[stepNum] = Step(
+                            new FossaField(SelectSliderValueByText, testData["BankruptcyHistory"]),
+                            new FossaField(Wait, "Wait"));
+
+                    stepNum = stepNum + 1;
+                    Steps[stepNum] = Step(
+                            new FossaField(SelectSliderValueByText, testData["ForeclosureHistory"]),
+                            new FossaField(Wait, "Wait"));
+                    stepNum = stepNum + 1;
+                }
+                else
+                {
+                    // Report invalid test data
+                    Common.ReportEvent(Common.ERROR, "The values provided for 'ForeclosureHistory' and/or 'BankruptcyYesNo' are not valid. " +
+                        "Please check the test case data and try again.");
+                }
+
                 // Address
                 Steps[stepNum] = Step(
                                 new FossaField(Fill, "street1", "BorrowerStreetAddress"),
@@ -387,13 +448,16 @@ namespace TestAutomation.LendingTree.tlm
                                 new FossaField(Fill, "zip-code-input", "BorrowerZipCode"),
                                 new FossaField(Wait, "Wait"));
                 stepNum = stepNum + 1;
-                // Email
+                // Name
                 Steps[stepNum] = Step(
-                                new FossaField(DeselectAfter(Fill), "email", "EmailAddress"),
+                                new FossaField(Fill, "first-name", "BorrowerFirstName"),
+                                new FossaField(Fill, "last-name", "BorrowerLastName"),
                                 new FossaField(Wait, "Wait"));
                 stepNum = stepNum + 1;
-                // Password
+                // Email and Password
                 Steps[stepNum] = Step(
+                                new FossaField(DeselectAfter(Fill), "email", "EmailAddress"),
+                                new FossaField(Wait, "Wait"),
                                 new FossaField(Fill, "password", "Password"),
                                 new FossaField(Wait, "Wait"));
                 stepNum = stepNum + 1;
@@ -419,6 +483,17 @@ namespace TestAutomation.LendingTree.tlm
                                 new FossaField(Wait, "Wait"));
                         break;
                 }
+                stepNum = stepNum + 1;
+
+                // Handle "Who do you bank with?" step
+                // Skip = <a class="skip-step ng-scope" skip-step="">Skip this step</a>
+                // or 
+                // Click checkbox "None of the above": 
+                //    <label for="bank-wellsfargo">Wells Fargo</label>    
+                //    <label for="bank-other">None of the above</label>
+                Steps[stepNum] = Step(
+                    new FossaField(ClickElement, By.CssSelector("label[for=bank-other]")),
+                    new FossaField(Wait, "Wait"));
                 stepNum = stepNum + 1;
 
                 // Handle the following steps together based on SSN, Targus check pass/fail, and Credit pull pass/fail
