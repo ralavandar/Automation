@@ -167,8 +167,10 @@ namespace TestAutomation.LendingTree
         /// <param name="testData"></param>
         public void VerifyRedirectToMyLtExpress(Dictionary<string, string> testData)
         {
+            System.Threading.Thread.Sleep(5000);
+
             // Check for redirect to mc.aspx / offers page
-            if (IsElementDisplayed(By.ClassName("user-icon"), 30))    // element inside nav bar at very top of MyLendingTree page
+            if (IsElementDisplayed(By.ClassName("user-icon"), 25))    // element inside nav bar at very top of MyLendingTree page
             {
                 // Specific checks on MyLendingTree
                 System.Threading.Thread.Sleep(1000);

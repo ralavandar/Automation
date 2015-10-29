@@ -23,7 +23,6 @@ namespace TestAutomation.LendingTree.mc
         {
             Common.InitializeTestResults();
             GetTestData(strTableName, TestContext.CurrentContext.Test.Name);
-            //Console.WriteLine("Before Initialize");     
             InitializeTestData();
             //Code to remove text from last intitute attended
             string strLastIns = testData["LastInstitutionAttended"];

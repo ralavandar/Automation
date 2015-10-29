@@ -76,10 +76,10 @@ namespace TestAutomation.LendingTree.tlm
             IFormField[][] steps = m2.ValidQFSteps;
 
             m2.StartForm();
-            m2.PerformSteps(steps, 1, 21);
+            m2.PerformSteps(steps, 1, 20);
 
-            m2.PrepareStep(22, true);
-            m2.FillOutStep(steps[22]);
+            m2.PrepareStep(21, true);
+            m2.FillOutStep(steps[21]);
             m2.ConcludeStep();
 
             // Verify error message on Phone field
@@ -90,11 +90,11 @@ namespace TestAutomation.LendingTree.tlm
             testData["BorrowerSsn1"] = "980";
             testData["BorrowerSsn2"] = strRandom.Substring(0, 2);
             testData["BorrowerSsn3"] = strRandom.Substring(2, 4);
-            m2.FillOutStep(steps[22]);
+            m2.FillOutStep(steps[21]);
             m2.ConcludeStep();
 
             // Targus/Credit oops steps and 'What's Next' step
-            m2.PerformSteps(steps, 23, 25);
+            m2.PerformSteps(steps, 22, 25);
 
             FinishTest();
         }
