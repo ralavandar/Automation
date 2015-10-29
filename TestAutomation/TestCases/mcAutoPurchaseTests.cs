@@ -23,7 +23,6 @@ namespace TestAutomation.LendingTree.mc
         {
             Common.InitializeTestResults();
             GetTestData(strTableName, TestContext.CurrentContext.Test.Name);
-            Console.WriteLine("Before Initialize");
             InitializeTestData();
             driver = StartBrowser(testData["BrowserType"]);
             mcAutoPurchase = new mcAutoPurchasePage(driver, testData);
@@ -46,16 +45,6 @@ namespace TestAutomation.LendingTree.mc
 
             FinishTest();
         }
-
-        [Test]
-        public void Prod_mc_auto_purchase_New()
-        {
-            // Fill out and submit a QF
-            mcAutoPurchase.FillOutValidQF();
-
-            FinishTest();
-        }
-
 
         [TearDown]
         public void TeardownTest()

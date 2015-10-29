@@ -22,7 +22,6 @@ namespace TestAutomation.LendingTree.mc
         {
             Common.InitializeTestResults();
             GetTestData(strTableName, TestContext.CurrentContext.Test.Name);
-            Console.WriteLine("Before Initialize");
             InitializeTestData();
             driver = StartBrowser(testData["BrowserType"]);
             mcAutoRefi = new mcAutoRefiPage(driver, testData);
@@ -30,15 +29,6 @@ namespace TestAutomation.LendingTree.mc
 
         [Test]
         public void mc_auto_refi_01_Refinance()
-        {
-            // Fill out and submit a QF
-            mcAutoRefi.FillOutValidQF();
-
-            FinishTest();
-        }
-
-        [Test]
-        public void Prod_mc_auto_refi()
         {
             // Fill out and submit a QF
             mcAutoRefi.FillOutValidQF();
@@ -61,6 +51,5 @@ namespace TestAutomation.LendingTree.mc
             // Verify redirect to My LendingTree
             mcAutoRefi.VerifyRedirectToMyLtExpress(testData);
         }
-
     }
 }

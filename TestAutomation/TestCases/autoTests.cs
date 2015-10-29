@@ -44,7 +44,7 @@ namespace TestAutomation.LendingTree.tl
             Assert.IsTrue(VerifytQFormRecord(auto.strQFormUID));
 
             // Verify redirect to My LendingTree
-            auto.VerifyRedirectToMyLendingTree(testData);
+            auto.VerifyRedirectToMyLtExpress(testData);
         }       
 
         [Test]

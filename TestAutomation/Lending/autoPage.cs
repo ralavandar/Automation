@@ -730,6 +730,63 @@ namespace TestAutomation.LendingTree.tl
             }
         }
 
+        /// <summary>
+        /// Verifies redirect to MyLendingTree Express page
+        /// </summary>
+        /// <param name="testData"></param>
+        public void VerifyRedirectToMyLtExpress(Dictionary<string, string> testData)
+        {
+            System.Threading.Thread.Sleep(5000);
+
+            // Check for redirect to mc.aspx / offers page
+            if (IsElementDisplayed(By.ClassName("user-icon"), 25))    // element inside nav bar at very top of MyLendingTree page
+            {
+                // Specific checks on MyLendingTree
+                System.Threading.Thread.Sleep(1000);
+
+                try
+                {
+                    Assert.IsTrue(driver.Url.Contains("/express-offers"));
+
+                    Common.ReportEvent(Common.PASS, String.Format
+                        ("The TestString contains the expected value.  Expected: '/express-offers'.  TestString: \"{0}\".",
+                           driver.Url));
+                }
+                catch (AssertionException)
+                {
+                    Common.ReportEvent(Common.FAIL, String.Format
+                        ("The TestString does not contain the expected value.  Expected: '/express-offers'.  TestString: \"{0}\".",
+                            driver.Url));
+                }
+
+                try
+                {
+                    Assert.IsTrue(driver.Url.Contains("&guid=" + strQFormUID));
+
+                    Common.ReportEvent(Common.PASS, String.Format
+                        ("The TestString contains the expected value.  Expected: '&guid=<QFormUID>'.  TestString: \"{0}\".",
+                           driver.Url));
+                }
+                catch (AssertionException)
+                {
+                    Common.ReportEvent(Common.FAIL, String.Format
+                        ("The TestString does not contain the expected value.  Expected: '&guid=<QFormUID>'.  TestString: \"{0}\".",
+                            driver.Url));
+                }
+
+                // Validate page header/nav contains text <firstname> + " " + <lastname>
+                Validation.StringContains(testData["BorrowerFirstName"] + " " + testData["BorrowerLastName"],
+                    driver.FindElement(By.ClassName("user-icon")).FindElement(By.TagName("a")).Text);
+            }
+            else
+            {
+                Common.ReportEvent(Common.FAIL, "The redirect to My LendingTree did not display within 30 seconds. "
+                    + "Expecting an element with ClassName 'user-icon'.");
+                RecordScreenshot("MyLendingTreeException");
+                Assert.Fail();
+            }
+        }
+
         public void BypassAutoCrossSells()
         {
             // Check for Processing Dialog display
