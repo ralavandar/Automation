@@ -43,6 +43,7 @@
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\lib\System.Web.Helpers.dll</HintPath>
     </Reference>
@@ -71,6 +72,7 @@
     <Compile Include="Common\Common.cs" />
     <Compile Include="Common\DataSheet.cs" />
     <Compile Include="Common\UrlCreator.cs" />
+    <Compile Include="Lending\BackDoorFormSubmit.cs" />
     <Compile Include="Lending\p2Page.cs" />
     <Compile Include="Lending\m2Page.cs" />
     <Compile Include="Lending\MCSignUp.cs" />
@@ -84,6 +86,7 @@
     <Compile Include="Lending\mortgage2Page.cs" />
     <Compile Include="Lending\heaPage.cs" />
     <Compile Include="Lending\studentRefiPage.cs" />
+    <Compile Include="TestCases\ExpressOffers.cs" />
     <Compile Include="TestCases\p2Tests.cs" />
     <Compile Include="TestCases\m2Tests.cs" />
     <Compile Include="TestCases\Dev_mortgage2Tests.cs" />
