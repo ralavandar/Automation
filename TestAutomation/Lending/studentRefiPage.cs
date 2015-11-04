@@ -175,11 +175,9 @@ namespace TestAutomation.LendingTree.tla
                                       new FossaField(Wait, "Wait"));
                 stepNum = stepNum + 1;
 
-                // Borrower S.S.N
+                // Borrower SSN
                 Steps[stepNum] = Step(
-                                      new FossaField(Fill, "social-security-one", "BorrowerSsn1"),
-                                      new FossaField(Fill, "social-security-two", "BorrowerSsn2"),
-                                      new FossaField(Fill, "social-security-three", "BorrowerSsn3"),
+                                      new FossaField(Fill, "social-security-four", "BorrowerSsn3"),
                                       new FossaField(Wait, "Wait"));
                 stepNum = stepNum + 1;
 
