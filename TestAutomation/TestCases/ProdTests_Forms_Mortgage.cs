@@ -39,12 +39,12 @@ namespace TestAutomation.LendingTree
 
             // Fill out and submit a QF
             mortgage2.FillOutValidQF();
+            mortgage2.BypassCrossSells();
 
             // Check for the QForm in the DB
             Assert.IsTrue(VerifytQFormRecord(mortgage2.strQFormUID));
 
             // Verify redirect to My LendingTree
-            mortgage2.BypassCrossSells();
             mortgage2.VerifyRedirectToMyLtExpress(testData);
         }
 
@@ -55,12 +55,12 @@ namespace TestAutomation.LendingTree
 
             // Fill out and submit a QF
             mortgage2.FillOutValidQF();
+            mortgage2.BypassCrossSells();
 
             // Check for the QForm in the DB
             Assert.IsTrue(VerifytQFormRecord(mortgage2.strQFormUID));
 
             // Verify redirect to My LendingTree
-            mortgage2.BypassCrossSells();
             mortgage2.VerifyRedirectToMyLtExpress(testData);
         }
 

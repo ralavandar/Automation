@@ -250,6 +250,9 @@ namespace TestAutomation.LendingTree.tla
                         else // "N"
                         {
                             Steps[18] = Step(
+                                    new FossaField(Fill, "home-phone-area-code", "BorrowerHomePhone1"),
+                                    new FossaField(Fill, "home-phone-prefix", "BorrowerHomePhone2"),
+                                    new FossaField(Fill, "home-phone-line", "BorrowerHomePhone3"),
                                     new FossaField(Wait, "Wait"),
                                     new FossaField(ClickButton, "next"));
                         }
@@ -263,21 +266,33 @@ namespace TestAutomation.LendingTree.tla
                         else if (testData["TargusPassYesNo"] == "Y" && testData["CreditPullSuccessYesNo"] == "N")
                         {
                             Steps[18] = Step(
+                                    new FossaField(Fill, "social-security-one", "BorrowerSsn1"),
+                                    new FossaField(Fill, "social-security-two", "BorrowerSsn2"),
+                                    new FossaField(Fill, "social-security-three", "BorrowerSsn3"),
                                     new FossaField(Wait, "Wait"),
                                     new FossaField(ClickButton, "next"));
                         }
                         else if (testData["TargusPassYesNo"] == "N" && testData["CreditPullSuccessYesNo"] == "Y")
                         {
                             Steps[18] = Step(
+                                    new FossaField(Fill, "home-phone-area-code", "BorrowerHomePhone1"),
+                                    new FossaField(Fill, "home-phone-prefix", "BorrowerHomePhone2"),
+                                    new FossaField(Fill, "home-phone-line", "BorrowerHomePhone3"),
                                     new FossaField(Wait, "Wait"),
                                     new FossaField(ClickButton, "next"));
                         }
                         else // both "N"
                         {
                             Steps[18] = Step(
+                                    new FossaField(Fill, "home-phone-area-code", "BorrowerHomePhone1"),
+                                    new FossaField(Fill, "home-phone-prefix", "BorrowerHomePhone2"),
+                                    new FossaField(Fill, "home-phone-line", "BorrowerHomePhone3"),
                                     new FossaField(Wait, "Wait"),
                                     new FossaField(ClickButton, "next"));
                             Steps[19] = Step(
+                                    new FossaField(Fill, "social-security-one", "BorrowerSsn1"),
+                                    new FossaField(Fill, "social-security-two", "BorrowerSsn2"),
+                                    new FossaField(Fill, "social-security-three", "BorrowerSsn3"),
                                     new FossaField(Wait, "Wait"),
                                     new FossaField(ClickButton, "next"));
                         }

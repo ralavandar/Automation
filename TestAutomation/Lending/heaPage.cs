@@ -157,7 +157,7 @@ namespace TestAutomation.LendingTree.tla
                 // Step 12
                 Steps[12] = Step(new FossaField(Fill, "email", "EmailAddress"),
                                 new FossaField(Fill, "password", "Password"),
-                                new FossaField(Wait, "Wait"),
+                                new FossaField(Wait5Sec, "Wait"),
                                 new FossaField(ClickButton, "next"));
 
                 return Steps;
