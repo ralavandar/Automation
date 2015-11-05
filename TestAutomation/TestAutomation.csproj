@@ -86,6 +86,7 @@
     <Compile Include="Lending\mortgage2Page.cs" />
     <Compile Include="Lending\heaPage.cs" />
     <Compile Include="Lending\studentRefiPage.cs" />
+    <Compile Include="MyDevTests\TestCloud.cs" />
     <Compile Include="TestCases\ExpressOffers.cs" />
     <Compile Include="TestCases\p2Tests.cs" />
     <Compile Include="TestCases\m2Tests.cs" />
