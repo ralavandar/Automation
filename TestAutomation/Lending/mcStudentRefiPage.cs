@@ -36,7 +36,7 @@ namespace TestAutomation.LendingTree.mc
         {
             get
             {
-                Int32 numSteps = 9;
+                Int32 numSteps = 10;
 
                 //If Highest Degree is Masters or Doctorate then step added
                 if ((testData["BorrowerHighestDegree"].Equals("Masters", StringComparison.OrdinalIgnoreCase)
@@ -67,16 +67,20 @@ namespace TestAutomation.LendingTree.mc
                                           new FossaField(SelectByText, "graduate-degree", "BorrowerGraduateDegree"),
                                           new FossaField(Wait, "Wait"));
                     stepNum = stepNum + 1;
-
                 }
 
                 // Specify Last Institution Attended
                 Steps[stepNum] = Step(
                                       new FossaField(GetAngularQFormUID, "GUID"),
                                       new FossaField(Fill, "college-name", "LastInstitutionAttended"),
-                                      new FossaField(Wait, "Wait"),
-                    //new FossaField(SelectByText, By.XPath("//*[@class='dropdown-menu']//li"), "LastInstitutionAttended"),
+                                      new FossaField(Wait5Sec, "Wait"),
                                       new FossaField(ClickElement, By.XPath("//*[@class='dropdown-menu ng-isolate-scope']//li")),
+                                      new FossaField(Wait, "Wait"));
+                stepNum = stepNum + 1;
+
+                //Specify student loan amount
+                Steps[stepNum] = Step(
+                                      new FossaField(Fill, "requestedLoanAmount", "RequestedLoanAmount"),
                                       new FossaField(Wait, "Wait"));
                 stepNum = stepNum + 1;
 

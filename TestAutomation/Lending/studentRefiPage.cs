@@ -72,8 +72,14 @@ namespace TestAutomation.LendingTree.tla
                 Steps[stepNum] = Step(
                                       new FossaField(GetAngularQFormUID, "GUID"),
                                       new FossaField(Fill, "college-name", "LastInstitutionAttended"),
-                                      new FossaField(Wait, "Wait"),
+                                      new FossaField(Wait5Sec, "Wait"),
                                       new FossaField(ClickElement, By.CssSelector("[ng-click=\"selectMatch($index)\"]")),
+                                      new FossaField(Wait, "Wait"));
+                stepNum = stepNum + 1;
+
+                //Specify student loan amount
+                Steps[stepNum] = Step(
+                                      new FossaField(Fill, "requested-loan-amount-input", "RequestedLoanAmount"),
                                       new FossaField(Wait, "Wait"));
                 stepNum = stepNum + 1;
 
@@ -132,13 +138,9 @@ namespace TestAutomation.LendingTree.tla
 
                 //Specify Borrower Zip
                 Steps[stepNum] = Step(
-                                      new FossaField(Fill, "zip-code-input", "BorrowerZipCode"),
-                                      new FossaField(Wait, "Wait"));
-                stepNum = stepNum + 1;
-
-                //Specify Borrower Street Address
-                Steps[stepNum] = Step(
                                       new FossaField(Fill, "street1", "BorrowerStreetAddress"),
+                                      new FossaField(Wait, "Wait"),
+                                      new FossaField(Fill, "zip-code-input", "BorrowerZipCode"),
                                       new FossaField(Wait, "Wait"));
                 stepNum = stepNum + 1;
 
