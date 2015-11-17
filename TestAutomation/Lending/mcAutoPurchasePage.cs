@@ -167,9 +167,7 @@ namespace TestAutomation.LendingTree.mc
                 {
                     Steps[stepNum] = Step(
                                           new FossaField(SelectByText, "employment-status", "BorrowerEmploymentStatus"),
-                                          // Clicking on next as Auto Advance not working in this scenario
-                                          new FossaField(Wait, "Wait"),
-                                          new FossaField(ClickButton,"next"));
+                                          new FossaField(Wait, "Wait"));
                     stepNum = stepNum + 1;
                 }
 
