@@ -13,31 +13,32 @@ using NUnit.Framework;
 namespace TestAutomation.LendingTree.zSandbox
 {
     [TestFixture]
-    public class TestCloudCBT : SeleniumTestBase
+    public class TestCloudBS : SeleniumTestBase
     {
         private IWebDriver _Driver;
 
         [SetUp]
         public void SetupTest()
         {
-            Uri commandExecutorUri = new Uri("http://hub.crossbrowsertesting.com:80/wd/hub");
+            Uri commandExecutorUri = new Uri("http://hub.browserstack.com/wd/hub/");
 
-            DesiredCapabilities caps = new DesiredCapabilities();
+            DesiredCapabilities desiredCap = new DesiredCapabilities();
 
-            caps.SetCapability("name", "Selenium Test Example");
-            caps.SetCapability("build", "1.0");
-            caps.SetCapability("browser_api_name", "Chrome45x64");
-            caps.SetCapability("os_api_name", "Win10");
-            caps.SetCapability("screen_resolution", "1024x768");
-            caps.SetCapability("record_video", "true");
-            caps.SetCapability("record_network", "true");
-            caps.SetCapability("record_snapshot", "false");
+            /*desiredCap.SetCapability("browserName", "iPhone");
+            desiredCap.SetCapability("platform", "MAC");
+            desiredCap.SetCapability("device", "iPhone 6 Plus");*/
 
-            caps.SetCapability("username", "Lendingtree");
-            caps.SetCapability("password", "u3bfb1efb3b23305");
+            desiredCap.SetCapability("browser", "Chrome");
+            desiredCap.SetCapability("browser_version", "45.0");
+            desiredCap.SetCapability("os", "Windows");
+            desiredCap.SetCapability("os_version", "10");
+            desiredCap.SetCapability("resolution", "1024x768");
+
+            desiredCap.SetCapability("browserstack.user", "tamerdakhlallah1");
+            desiredCap.SetCapability("browserstack.key", "T6S2eGaXrEBx8fvLRQcB");
 
 
-            _Driver = new RemoteWebDriver(commandExecutorUri, caps);
+            _Driver = new RemoteWebDriver(commandExecutorUri, desiredCap);
 
             _Driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(300));
         }
@@ -48,7 +49,6 @@ namespace TestAutomation.LendingTree.zSandbox
             // Navigate to the form
             _Driver.Navigate().GoToUrl("https://www.google.com");
 
-            _Driver.Navigate().GoToUrl("http://www.google.com");
             StringAssert.Contains("Google", _Driver.Title);
             IWebElement query = _Driver.FindElement(By.Name("q"));
             query.SendKeys("Sauce Labs");
