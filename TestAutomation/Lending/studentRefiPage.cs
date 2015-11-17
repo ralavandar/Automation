@@ -44,6 +44,10 @@ namespace TestAutomation.LendingTree.tla
                             || testData["BorrowerEmploymentStatus"].Equals("Part Time", StringComparison.OrdinalIgnoreCase)))
                     numSteps = numSteps + 1;
 
+                // If targus fails, then show/handle Oops step (phone # confirmation step) - coming soon per LCO-1761
+                //if (testData["TargusPassYesNo"] == "N")
+                //    numSteps = numSteps + 1;
+
                 // If creditpull fails, then show/handle Oops step (confirmation step)
                 if (testData["CreditPullSuccessYesNo"] == "N")
                     numSteps = numSteps + 1;
@@ -182,6 +186,18 @@ namespace TestAutomation.LendingTree.tla
                                       new FossaField(Fill, "social-security-four", "BorrowerSsn3"),
                                       new FossaField(Wait, "Wait"));
                 stepNum = stepNum + 1;
+
+                // Phone number Oops step (only if targus fails) - coming soon per LCO-1761
+                //if (testData["TargusPassYesNo"] == "N")
+                //{
+                //    Steps[stepNum] = Step(
+                //                    new FossaField(Fill, "home-phone-area-code", "BorrowerHomePhone1"),
+                //                    new FossaField(Fill, "home-phone-prefix", "BorrowerHomePhone2"),
+                //                    new FossaField(Fill, "home-phone-line", "BorrowerHomePhone3"),
+                //                    new FossaField(Wait, "Wait"),
+                //                    new FossaField(ClickButton, "next"));
+                //    stepNum = stepNum + 1;
+                //}
 
                 // confirm the Borrower information (only if credit pull fails)
                 if (testData["CreditPullSuccessYesNo"] == "N")
