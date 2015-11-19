@@ -89,6 +89,7 @@
     <Compile Include="MyDevTests\TestCloudSL.cs" />
     <Compile Include="MyDevTests\TestCloudBS.cs" />
     <Compile Include="MyDevTests\TestCloudCBT.cs" />
+    <Compile Include="MyDevTests\TestHelper.cs" />
     <Compile Include="TestCases\ExpressOffers.cs" />
     <Compile Include="TestCases\p2Tests.cs" />
     <Compile Include="TestCases\m2Tests.cs" />
