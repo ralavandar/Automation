@@ -45,8 +45,8 @@ namespace TestAutomation.LendingTree.tla
                     numSteps = numSteps + 1;
 
                 // If targus fails, then show/handle Oops step (phone # confirmation step) - coming soon per LCO-1761
-                //if (testData["TargusPassYesNo"] == "N")
-                //    numSteps = numSteps + 1;
+                if (testData["TargusPassYesNo"] == "N")
+                    numSteps = numSteps + 1;
 
                 // If creditpull fails, then show/handle Oops step (confirmation step)
                 if (testData["CreditPullSuccessYesNo"] == "N")
@@ -188,25 +188,24 @@ namespace TestAutomation.LendingTree.tla
                 stepNum = stepNum + 1;
 
                 // Phone number Oops step (only if targus fails) - coming soon per LCO-1761
-                //if (testData["TargusPassYesNo"] == "N")
-                //{
-                //    Steps[stepNum] = Step(
-                //                    new FossaField(Fill, "home-phone-area-code", "BorrowerHomePhone1"),
-                //                    new FossaField(Fill, "home-phone-prefix", "BorrowerHomePhone2"),
-                //                    new FossaField(Fill, "home-phone-line", "BorrowerHomePhone3"),
-                //                    new FossaField(Wait, "Wait"),
-                //                    new FossaField(ClickButton, "next"));
-                //    stepNum = stepNum + 1;
-                //}
+                if (testData["TargusPassYesNo"] == "N")
+                {
+                    Steps[stepNum] = Step(
+                                      new FossaField(Fill, "home-phone-area-code", "BorrowerHomePhone1"),
+                                      new FossaField(Fill, "home-phone-prefix", "BorrowerHomePhone2"),
+                                      new FossaField(Fill, "home-phone-line", "BorrowerHomePhone3"),
+                                      new FossaField(Fill, "street1", "BorrowerStreetAddress"),
+                                      new FossaField(Fill, "zip-code-input", "BorrowerZipCode"),
+                                      new FossaField(Fill, "first-name", "BorrowerFirstName"),
+                                      new FossaField(Fill, "last-name", "BorrowerLastName"),
+                                      new FossaField(Wait, "Wait"));
+                    stepNum = stepNum + 1;
+                }
 
-                // confirm the Borrower information (only if credit pull fails)
+                // Credit Pull Oops step (only if credit pull fails)
                 if (testData["CreditPullSuccessYesNo"] == "N")
                 {
                     Steps[stepNum] = Step(
-                                      new FossaField(Fill, "first-name", "BorrowerFirstName"),
-                                      new FossaField(Fill, "last-name", "BorrowerLastName"),
-                                      new FossaField(Fill, "street1", "BorrowerStreetAddress"),
-                                      new FossaField(Fill, "zip-code-input", "BorrowerZipCode"),
                                       new FossaField(Fill, "social-security-one", "BorrowerSsn1"),
                                       new FossaField(Fill, "social-security-two", "BorrowerSsn2"),
                                       new FossaField(Fill, "social-security-three", "BorrowerSsn3"),
