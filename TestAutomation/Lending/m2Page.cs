@@ -273,32 +273,6 @@ namespace TestAutomation.LendingTree.tlm
                                 new FossaField(Wait, "Wait"));
                     stepNum = stepNum + 1;
 
-                    // Home Services Opt-in
-                    // TODO: handle HomeServicesCategory drop-down and add data field to db!
-                    switch (testData["HomeServicesOptInYesNo"])
-                    {
-                        case "N":
-                            Steps[stepNum] = Step(
-                                    new FossaField(AutoAdvance(ClickElement), By.CssSelector("label[for=home-services-optin-no]")),
-                                    new FossaField(Wait, "Wait"));
-                            stepNum = stepNum + 1;
-                            break;
-                        default:
-                            Steps[stepNum] = Step(
-                                    new FossaField(AutoAdvance(ClickElement), By.CssSelector("label[for=home-services-optin-yes]")),
-                                    new FossaField(Wait, "Wait"));
-                            stepNum = stepNum + 1;
-                            Steps[stepNum] = Step(
-                                    new FossaField(SelectByValue, "home-services-category", "0"),
-                                    new FossaField(Wait, "Wait"));
-                            stepNum = stepNum + 1;
-                            Steps[stepNum] = Step(
-                                    new FossaField(AutoAdvance(ClickElement), By.CssSelector("label[for=home-services-schedule-flexible]")),
-                                    new FossaField(Wait, "Wait"));
-                            stepNum = stepNum + 1;
-                            break;
-                    }
-
                     // 2nd mortgage
                     switch (testData["SecondMortgageYesNo"].ToUpper())
                     {
@@ -328,6 +302,32 @@ namespace TestAutomation.LendingTree.tlm
                             new FossaField(Wait, "Wait"));
                             //new FossaField(ClickButton, "next"));
                     stepNum = stepNum + 1;
+
+                    // Home Services Opt-in
+                    // TODO: handle HomeServicesCategory drop-down and add data field to db!
+                    switch (testData["HomeServicesOptInYesNo"])
+                    {
+                        case "N":
+                            Steps[stepNum] = Step(
+                                    new FossaField(AutoAdvance(ClickElement), By.CssSelector("label[for=home-services-optin-no]")),
+                                    new FossaField(Wait, "Wait"));
+                            stepNum = stepNum + 1;
+                            break;
+                        default:
+                            Steps[stepNum] = Step(
+                                    new FossaField(AutoAdvance(ClickElement), By.CssSelector("label[for=home-services-optin-yes]")),
+                                    new FossaField(Wait, "Wait"));
+                            stepNum = stepNum + 1;
+                            Steps[stepNum] = Step(
+                                    new FossaField(SelectByValue, "home-services-category", "0"),
+                                    new FossaField(Wait, "Wait"));
+                            stepNum = stepNum + 1;
+                            Steps[stepNum] = Step(
+                                    new FossaField(AutoAdvance(ClickElement), By.CssSelector("label[for=home-services-schedule-flexible]")),
+                                    new FossaField(Wait, "Wait"));
+                            stepNum = stepNum + 1;
+                            break;
+                    }
                 }
 
                 // Credit profile
@@ -506,7 +506,11 @@ namespace TestAutomation.LendingTree.tlm
                         }
                         else // "N"
                         {
-                            Steps[stepNum] = Step(new FossaField(Wait, "Wait"));
+                            Steps[stepNum] = Step(
+                                new FossaField(Fill, "home-phone", "BorrowerHomePhone1"),
+                                new FossaField(Append, "home-phone", "BorrowerHomePhone2"),
+                                new FossaField(Append, "home-phone", "BorrowerHomePhone3"),
+                                new FossaField(Wait, "Wait"));
                             stepNum = stepNum + 1;
                         }
                         break;
@@ -518,19 +522,35 @@ namespace TestAutomation.LendingTree.tlm
                         }
                         else if (testData["TargusPassYesNo"] == "Y" && testData["CreditPullSuccessYesNo"] == "N")
                         {
-                            Steps[stepNum] = Step(new FossaField(Wait, "Wait"));
+                            Steps[stepNum] = Step(
+                                new FossaField(Fill, By.XPath("//input[@id='social-security'][2]"), "BorrowerSsn1"),
+                                new FossaField(Append, By.XPath("//input[@id='social-security'][2]"), "BorrowerSsn2"),
+                                new FossaField(Append, By.XPath("//input[@id='social-security'][2]"), "BorrowerSsn3"),
+                                new FossaField(Wait, "Wait"));
                             stepNum = stepNum + 1;
                         }
                         else if (testData["TargusPassYesNo"] == "N" && testData["CreditPullSuccessYesNo"] == "Y")
                         {
-                            Steps[stepNum] = Step(new FossaField(Wait, "Wait"));
+                            Steps[stepNum] = Step(
+                                new FossaField(Fill, "home-phone", "BorrowerHomePhone1"),
+                                new FossaField(Append, "home-phone", "BorrowerHomePhone2"),
+                                new FossaField(Append, "home-phone", "BorrowerHomePhone3"),
+                                new FossaField(Wait, "Wait"));
                             stepNum = stepNum + 1;
                         }
                         else // both "N"
                         {
-                            Steps[stepNum] = Step(new FossaField(Wait, "Wait"));
+                            Steps[stepNum] = Step(
+                                new FossaField(Fill, "home-phone", "BorrowerHomePhone1"),
+                                new FossaField(Append, "home-phone", "BorrowerHomePhone2"),
+                                new FossaField(Append, "home-phone", "BorrowerHomePhone3"),
+                                new FossaField(Wait, "Wait"));
                             stepNum = stepNum + 1;
-                            Steps[stepNum] = Step(new FossaField(Wait, "Wait"));
+                            Steps[stepNum] = Step(
+                                new FossaField(Fill, By.XPath("//input[@id='social-security'][2]"), "BorrowerSsn1"),
+                                new FossaField(Append, By.XPath("//input[@id='social-security'][2]"), "BorrowerSsn2"),
+                                new FossaField(Append, By.XPath("//input[@id='social-security'][2]"), "BorrowerSsn3"),
+                                new FossaField(Wait, "Wait"));
                             stepNum = stepNum + 1;
                         }
                         break;
