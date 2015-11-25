@@ -23,19 +23,19 @@ namespace TestAutomation.LendingTree.zSandbox
         [TestFixtureSetUp]
         public void SetupCombos()
         {
-            List<List<string>> desktopOSes = new List<List<string>>();
-            desktopOSes.Add(new List<string>() { "Windows", "XP" });
-            desktopOSes.Add(new List<string>() { "Windows", "7" });
-            desktopOSes.Add(new List<string>() { "Windows", "8" });
-            desktopOSes.Add(new List<string>() { "Windows", "8.1" });
-            desktopOSes.Add(new List<string>() { "Windows", "10" });
-            desktopOSes.Add(new List<string>() { "OS X", "10.11" });
+            List<List<string>> OSes = new List<List<string>>();
+            OSes.Add(new List<string>() { "Windows", "XP" });
+            OSes.Add(new List<string>() { "Windows", "7" });
+            OSes.Add(new List<string>() { "Windows", "8" });
+            OSes.Add(new List<string>() { "Windows", "8.1" });
+            OSes.Add(new List<string>() { "Windows", "10" });
+            OSes.Add(new List<string>() { "OS X", "10.11" });
 
-            List<List<string>> desktopBrowsers = new List<List<string>>();
-            desktopBrowsers.Add(new List<string> () { "Chrome", "" });
-            desktopBrowsers.Add(new List<string> () { "Chrome", "beta" });
-            desktopBrowsers.Add(new List<string> () { "Firefox", "" });
-            desktopBrowsers.Add(new List<string> () { "Firefox", "beta" });
+            List<List<string>> Browsers = new List<List<string>>();
+            Browsers.Add(new List<string> () { "Chrome", "" });
+            Browsers.Add(new List<string> () { "Chrome", "beta" });
+            Browsers.Add(new List<string> () { "Firefox", "" });
+            Browsers.Add(new List<string> () { "Firefox", "beta" });
             /*desktopBrowsers.Add(new List<string> () { "Internet Explorer", "11.0"});
             desktopBrowsers.Add(new List<string> () { "Internet Explorer", "10.0"});
             desktopBrowsers.Add(new List<string> () { "Internet Explorer", "9.0"});
@@ -43,7 +43,7 @@ namespace TestAutomation.LendingTree.zSandbox
             desktopBrowsers.Add(new List<string> () { "MicrosoftEdge", "20.10240" });
             desktopBrowsers.Add(new List<string> () { "Safari", "9.0" });*/
 
-            browserTestHelper = new BrowserTestHelper(desktopOSes, desktopBrowsers);
+            browserTestHelper = new BrowserTestHelper(OSes, Browsers);
         }
 
         [SetUp]
@@ -73,9 +73,14 @@ namespace TestAutomation.LendingTree.zSandbox
 
         private void SetBrowserCaps(DesiredCapabilities caps)
         {
-            caps.SetCapability("platform", browserTestHelper.GetOS()[0] + " " + browserTestHelper.GetOS()[1]);
+            /*caps.SetCapability("platform", browserTestHelper.GetOS()[0] + " " + browserTestHelper.GetOS()[1]);
             caps.SetCapability("browserName", browserTestHelper.GetBrowser()[0]);
-            caps.SetCapability("version", browserTestHelper.GetBrowser()[1]);
+            caps.SetCapability("version", browserTestHelper.GetBrowser()[1]);*/
+            caps.SetCapability("browserName", "iPhone");
+            caps.SetCapability("platform", "OS X 10.10");
+            caps.SetCapability("version", "9.1");
+            caps.SetCapability("deviceName", "iPhone 6 Plus");
+            caps.SetCapability("deviceOrientation", "portrait");
 
             browserTestHelper.GoToNextBrowser();
         }
@@ -110,7 +115,7 @@ namespace TestAutomation.LendingTree.zSandbox
             RunTest();
         }
 
-        [Test]
+        /*[Test]
         public void Test6()
         {
             RunTest();
@@ -140,7 +145,7 @@ namespace TestAutomation.LendingTree.zSandbox
             RunTest();
         }
 
-        /*[Test]
+        [Test]
         public void Test11()
         {
             RunTest();

@@ -14,7 +14,7 @@ using TestAutomation.MyDevTests;
 namespace TestAutomation.LendingTree.zSandbox
 {
     [TestFixture]
-    public class TestCloudBS : SeleniumTestBase
+    public class TestCloudGL : SeleniumTestBase
     {
         private IWebDriver driver;
 
@@ -29,19 +29,13 @@ namespace TestAutomation.LendingTree.zSandbox
             OSes.Add(new List<string>() { "Windows", "8" });
             OSes.Add(new List<string>() { "Windows", "8.1" });
             OSes.Add(new List<string>() { "Windows", "10" });
-            OSes.Add(new List<string>() { "OS X", "El Capitan" });
-
+            OSes.Add(new List<string>() { "OS X", "10.11" });
 
             List<List<string>> Browsers = new List<List<string>>();
-            Browsers.Add(new List<string>() { "Chrome", "45.0" });
-            Browsers.Add(new List<string>() { "Chrome", "46.0" });
-            Browsers.Add(new List<string>() { "Firefox", "42.0" });
-            /*desktopBrowsers.Add(new List<string> () { "Internet Explorer", "11.0"});
-            desktopBrowsers.Add(new List<string> () { "Internet Explorer", "10.0"});
-            desktopBrowsers.Add(new List<string> () { "Internet Explorer", "9.0"});
-            desktopBrowsers.Add(new List<string> () { "Internet Explorer", "8.0"});
-            desktopBrowsers.Add(new List<string> () { "MicrosoftEdge", "20.10240" });
-            desktopBrowsers.Add(new List<string> () { "Safari", "9.0" });*/
+            Browsers.Add(new List<string> () { "Chrome", "" });
+            Browsers.Add(new List<string> () { "Chrome", "beta" });
+            Browsers.Add(new List<string> () { "Firefox", "" });
+            Browsers.Add(new List<string> () { "Firefox", "beta" });
 
             browserTestHelper = new BrowserTestHelper(OSes, Browsers);
         }
@@ -49,15 +43,14 @@ namespace TestAutomation.LendingTree.zSandbox
         [SetUp]
         public void SetupDriver()
         {
-            DesiredCapabilities caps = new DesiredCapabilities();
+            DesiredCapabilities caps = DesiredCapabilities.Firefox();
 
             SetBrowserCaps(caps);
-
-            caps.SetCapability("browserstack.user", "tamerdakhlallah1");
-            caps.SetCapability("browserstack.key", "T6S2eGaXrEBx8fvLRQcB");
-            caps.SetCapability("name", TestContext.CurrentContext.Test.Name);
-            caps.SetCapability("public", "public");
-            driver = new RemoteWebDriver(new Uri("http://hub.browserstack.com/wd/hub/"), caps, TimeSpan.FromSeconds(840));
+            
+            caps.SetCapability("gridlasticUser", "DZGgqSSRWBv4uczsU4GuOj2exWzZILgb");
+            caps.SetCapability("gridlasticKey", "BNiRv1zitUcNXB6IwC2bLVf9HFZfh5hI");
+            caps.SetCapability("video", "True");
+            driver = new RemoteWebDriver(new Uri("http://testgridtamer.gridlastic.com:80/wd/hub/"), caps, TimeSpan.FromSeconds(840));
         }
 
         private void RunTest()
@@ -68,19 +61,15 @@ namespace TestAutomation.LendingTree.zSandbox
             query.SendKeys("Testing");
             query.Submit();
 
+            string sessionId = (string)((RemoteWebDriver)driver).Capabilities.GetCapability("webdriver.remote.sessionid");
+            Console.WriteLine("Video: https://s3.amazonaws.com/4ad4a405-ef2a-b3d3-a629-1ab0a2d338b1/eb9c1b2c-2dae-2ff4-b467-ae06efffd68c/play.html?" + sessionId);
             driver.Quit();
         }
 
         private void SetBrowserCaps(DesiredCapabilities caps)
         {
-            /*caps.SetCapability("os", browserTestHelper.GetOS()[0]);
-            caps.SetCapability("os_version", browserTestHelper.GetOS()[1]);
-            caps.SetCapability("browser", browserTestHelper.GetBrowser()[0]);
-            caps.SetCapability("browser_version", browserTestHelper.GetBrowser()[1]);*/
-
-            caps.SetCapability("browserName", "android");
-            caps.SetCapability("platform", "Android");
-            caps.SetCapability("device", "Google Nexus 7");
+            caps.SetCapability("platform", "VISTA");
+            caps.SetCapability("version", "41");
 
             browserTestHelper.GoToNextBrowser();
         }
@@ -91,7 +80,7 @@ namespace TestAutomation.LendingTree.zSandbox
             RunTest();
         }
 
-        [Test]
+        /*[Test]
         public void Test2()
         {
             RunTest();
@@ -103,7 +92,7 @@ namespace TestAutomation.LendingTree.zSandbox
             RunTest();
         }
 
-        /*[Test]
+        [Test]
         public void Test4()
         {
             RunTest();
