@@ -253,8 +253,9 @@ namespace TestAutomation.LendingTree.tla
                                     new FossaField(Fill, "home-phone-area-code", "BorrowerHomePhone1"),
                                     new FossaField(Fill, "home-phone-prefix", "BorrowerHomePhone2"),
                                     new FossaField(Fill, "home-phone-line", "BorrowerHomePhone3"),
-                                    new FossaField(Wait, "Wait"),
-                                    new FossaField(ClickButton, "next"));
+                                    new FossaField(Wait5Sec, "Wait5"),
+                                    new FossaField(ClickButton, "next"),
+                                    new FossaField(Wait5Sec, "Wait5"));
                         }
                         break;
 
@@ -269,8 +270,9 @@ namespace TestAutomation.LendingTree.tla
                                     new FossaField(Fill, "social-security-one", "BorrowerSsn1"),
                                     new FossaField(Fill, "social-security-two", "BorrowerSsn2"),
                                     new FossaField(Fill, "social-security-three", "BorrowerSsn3"),
-                                    new FossaField(Wait, "Wait"),
-                                    new FossaField(ClickButton, "next"));
+                                    new FossaField(Wait5Sec, "Wait5"),
+                                    new FossaField(ClickButton, "next"),
+                                    new FossaField(Wait5Sec, "Wait5"));
                         }
                         else if (testData["TargusPassYesNo"] == "N" && testData["CreditPullSuccessYesNo"] == "Y")
                         {
@@ -278,8 +280,9 @@ namespace TestAutomation.LendingTree.tla
                                     new FossaField(Fill, "home-phone-area-code", "BorrowerHomePhone1"),
                                     new FossaField(Fill, "home-phone-prefix", "BorrowerHomePhone2"),
                                     new FossaField(Fill, "home-phone-line", "BorrowerHomePhone3"),
-                                    new FossaField(Wait, "Wait"),
-                                    new FossaField(ClickButton, "next"));
+                                    new FossaField(Wait5Sec, "Wait5"),
+                                    new FossaField(ClickButton, "next"),
+                                    new FossaField(Wait5Sec, "Wait5"));
                         }
                         else // both "N"
                         {
@@ -287,14 +290,16 @@ namespace TestAutomation.LendingTree.tla
                                     new FossaField(Fill, "home-phone-area-code", "BorrowerHomePhone1"),
                                     new FossaField(Fill, "home-phone-prefix", "BorrowerHomePhone2"),
                                     new FossaField(Fill, "home-phone-line", "BorrowerHomePhone3"),
-                                    new FossaField(Wait, "Wait"),
-                                    new FossaField(ClickButton, "next"));
+                                    new FossaField(Wait5Sec, "Wait5"),
+                                    new FossaField(ClickButton, "next"),
+                                    new FossaField(Wait5Sec, "Wait5"));
                             Steps[19] = Step(
                                     new FossaField(Fill, "social-security-one", "BorrowerSsn1"),
                                     new FossaField(Fill, "social-security-two", "BorrowerSsn2"),
                                     new FossaField(Fill, "social-security-three", "BorrowerSsn3"),
-                                    new FossaField(Wait, "Wait"),
-                                    new FossaField(ClickButton, "next"));
+                                    new FossaField(Wait5Sec, "Wait5"),
+                                    new FossaField(ClickButton, "next"),
+                                    new FossaField(Wait5Sec, "Wait5"));
                         }
                         break;
                 }
