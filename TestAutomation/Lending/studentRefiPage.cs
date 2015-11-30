@@ -187,17 +187,17 @@ namespace TestAutomation.LendingTree.tla
                                       new FossaField(Wait, "Wait"));
                 stepNum = stepNum + 1;
 
-                // Phone number Oops step (only if targus fails) - coming soon per LCO-1761
+                // Phone number Oops step (only if targus fails)
                 if (testData["TargusPassYesNo"] == "N")
                 {
                     Steps[stepNum] = Step(
                                       new FossaField(Fill, "home-phone-area-code", "BorrowerHomePhone1"),
                                       new FossaField(Fill, "home-phone-prefix", "BorrowerHomePhone2"),
                                       new FossaField(Fill, "home-phone-line", "BorrowerHomePhone3"),
-                                      new FossaField(Fill, "street1", "BorrowerStreetAddress"),
-                                      new FossaField(Fill, "zip-code-input", "BorrowerZipCode"),
-                                      new FossaField(Fill, "first-name", "BorrowerFirstName"),
-                                      new FossaField(Fill, "last-name", "BorrowerLastName"),
+                                      //new FossaField(Fill, "street1", "BorrowerStreetAddress"),
+                                      //new FossaField(Fill, "zip-code-input", "BorrowerZipCode"),
+                                      //new FossaField(Fill, "first-name", "BorrowerFirstName"),
+                                      //new FossaField(Fill, "last-name", "BorrowerLastName"),
                                       new FossaField(Wait, "Wait"));
                     stepNum = stepNum + 1;
                 }
