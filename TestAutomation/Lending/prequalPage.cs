@@ -223,7 +223,8 @@ namespace TestAutomation.LendingTree.tla
                                  new FossaField(Fill, "last-name", "BorrowerLastName"));
                
                 Steps[16] = Step(new FossaField(Fill, "email", "EmailAddress"),
-                                 new FossaField(Fill, "password", "Password"));
+                                 new FossaField(Fill, "password", "Password"),
+                                 new FossaField(Wait, "Wait"));
 
                 Steps[17] = Step(new FossaField(Fill, "home-phone-area-code", "BorrowerHomePhone1"),
                                  new FossaField(Fill, "home-phone-prefix", "BorrowerHomePhone2"),
