@@ -33,10 +33,6 @@
     {
       "type": "assertCurrentUrl",
       "url": "https://www.staging.lendingtree.com/question/ask-details"
-    },
-    {
-      "type": "get",
-      "url": ""
     }
   ],
   "data": {
