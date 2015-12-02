@@ -6,6 +6,37 @@
     {
       "type": "get",
       "url": "https://www.staging.lendingtree.com/answers"
+    },
+    {
+      "type": "setElementText",
+      "locator": {
+        "type": "id",
+        "value": "Title"
+      },
+      "text": "this is a title"
+    },
+    {
+      "type": "setElementText",
+      "locator": {
+        "type": "id",
+        "value": "Detail"
+      },
+      "text": "this is a question"
+    },
+    {
+      "type": "clickElement",
+      "locator": {
+        "type": "css selector",
+        "value": ".form-submit button"
+      }
+    },
+    {
+      "type": "assertCurrentUrl",
+      "url": "https://www.staging.lendingtree.com/question/ask-details"
+    },
+    {
+      "type": "get",
+      "url": ""
     }
   ],
   "data": {
