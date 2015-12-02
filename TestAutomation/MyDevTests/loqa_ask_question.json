@@ -31,7 +31,7 @@
       }
     },
     {
-      "type": "assertCurrentUrl",
+      "type": "waitForCurrentUrl",
       "url": "https://www.staging.lendingtree.com/question/ask-details"
     }
   ],
