@@ -6,6 +6,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.IE;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Remote;
 
 namespace TestAutomation
 {
@@ -57,6 +58,11 @@ namespace TestAutomation
                     break;
                 case "CHROME":
                     objDriver = new ChromeDriver();
+                    break;
+                case "REMOTE":
+                    DesiredCapabilities caps = new DesiredCapabilities();
+                    caps.SetCapability("browserName", "firefox");
+                    objDriver = new RemoteWebDriver(new Uri("http://10.29.150.153:4444/wd/hub"), caps, TimeSpan.FromSeconds(840));
                     break;
                 default:    // Firefox
                     ffProfile = new FirefoxProfile();
@@ -168,6 +174,8 @@ namespace TestAutomation
             {
                 testData["BrowserType"] = Common.RandomSelectBrowser();
             }
+
+            //testData["BrowserType"] = "REMOTE";
 
             // The Auto QF has coborrower fields which can also be defaulted
             if (testData.ContainsKey("CoEmailAddress"))
