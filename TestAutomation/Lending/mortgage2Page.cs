@@ -316,7 +316,7 @@ namespace TestAutomation.LendingTree.tla
 
                 Steps[3] = Step(
                                 new FossaField(SelectByText, "property-state", "PropertyState"),
-                                new FossaField(Wait, "Wait"),
+                                new FossaField(Wait5Sec, "Wait"),
                                 new FossaField(SelectByText, "property-city", "PropertyCity"));
                 Steps[4] = Step(
                                 new FossaField(ClickRadioYesNo, "new-home-{0}", "FoundNewHomeYesNo"));
