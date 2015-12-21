@@ -153,8 +153,7 @@ namespace TestAutomation.LendingTree.ProdTests_Forms_Other
             mcStudentRefi = new mc.mcStudentRefiPage(driver, testData);
             mcStudentRefi.FillOutValidQF();
             Validation.IsTrue(VerifytQFormRecord(mcStudentRefi.strQFormUID));
-            mcStudentRefi.VerifyRedirectToMyLendingTree(testData);
-            //studentRefi.VerifyRedirectToMyLtExpress(testData);  CEXP-634 coming soon
+            studentRefi.VerifyRedirectToMyLtExpress(testData);
         }
 
         [Test]
@@ -163,16 +162,13 @@ namespace TestAutomation.LendingTree.ProdTests_Forms_Other
             mcStudentRefi = new mc.mcStudentRefiPage(driver, testData);
             mcStudentRefi.FillOutValidQF();
             Validation.IsTrue(VerifytQFormRecord(mcStudentRefi.strQFormUID));
-            mcStudentRefi.VerifyRedirectToMyLendingTree(testData);
-            //studentRefi.VerifyRedirectToMyLtExpress(testData); CEXP-634 coming soon
+            studentRefi.VerifyRedirectToMyLtExpress(testData);
         }
 
         private void FinishTest()
         {
             Validation.IsTrue(VerifytQFormRecord(studentRefi.strQFormUID));
-
-            studentRefi.VerifyRedirectToMyLendingTree(testData);
-            //studentRefi.VerifyRedirectToMyLtExpress(testData); CEXP-634 coming soon
+            studentRefi.VerifyRedirectToMyLtExpress(testData);
         }
     }
 }
