@@ -94,7 +94,7 @@ namespace TestAutomation.LendingTree.tlm
             Validation.IsTrue(VerifytQFormRecord(p2.strQFormUID));
 
             // Verify redirect to My LendingTree
-            p2.VerifyRedirectToMyLendingTree(testData);
+            p2.VerifyRedirectToMyLtExpress(testData);
         }
     }
 }

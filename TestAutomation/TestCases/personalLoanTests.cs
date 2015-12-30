@@ -34,7 +34,7 @@ namespace TestAutomation.LendingTree.tla
         private void FinishTest()
         {
             Validation.IsTrue(VerifytQFormRecord(personalLoan.strQFormUID));
-            personalLoan.VerifyRedirectToMyLendingTree(testData);
+            personalLoan.VerifyRedirectToMyLtExpress(testData);
         }
 
         [Test]
