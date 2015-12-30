@@ -73,6 +73,7 @@
     <Compile Include="Common\DataSheet.cs" />
     <Compile Include="Common\UrlCreator.cs" />
     <Compile Include="Lending\BackDoorFormSubmit.cs" />
+    <Compile Include="Lending\b2Page.cs" />
     <Compile Include="Lending\p2Page.cs" />
     <Compile Include="Lending\m2Page.cs" />
     <Compile Include="Lending\MCSignUp.cs" />
@@ -102,6 +103,7 @@
     <Compile Include="TestCases\mcRefiTests.cs" />
     <Compile Include="TestCases\MCSignupTests.cs" />
     <Compile Include="TestCases\mcStudentRefiTests.cs" />
+    <Compile Include="TestCases\businessLoanTests.cs" />
     <Compile Include="TestCases\reverse2Tests.cs" />
     <Compile Include="TestCases\mortgage2Tests.cs" />
     <Compile Include="TestCases\PartnerQFs.cs" />

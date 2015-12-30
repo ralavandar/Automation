@@ -160,9 +160,8 @@ namespace TestAutomation.LendingTree
 
         public abstract void ContinueToNextStep();
 
-        // TODO - this is specific to Forms - works for all Fossa forms
         /// <summary>
-        /// Verifies redirect to MyLendingTree DHC page
+        /// Verifies redirect to MyLendingTree express-offers page
         /// </summary>
         /// <param name="testData"></param>
         public void VerifyRedirectToMyLtExpress(Dictionary<string, string> testData)
@@ -213,6 +212,63 @@ namespace TestAutomation.LendingTree
             {
                 Common.ReportEvent(Common.FAIL, "The redirect to My LendingTree did not display within 30 seconds. "
                     + "Expecting an element with ClassName 'user-icon'.");
+                RecordScreenshot("MyLendingTreeException");
+                Assert.Fail();
+            }
+        }
+
+        /// <summary>
+        /// Verifies redirect to MyLendingTree express-offers page, unauthorized
+        /// </summary>
+        /// <param name="testData"></param>
+        public void VerifyRedirectToMyLtExpressUnauthorized(Dictionary<string, string> testData)
+        {
+            System.Threading.Thread.Sleep(5000);
+
+            // Check for redirect to mc.aspx / offers page
+            if (IsElementDisplayed(By.ClassName("offersDisplay"), 25)) 
+            {
+                // Specific checks on MyLendingTree
+                System.Threading.Thread.Sleep(1000);
+
+                try
+                {
+                    Assert.IsTrue(driver.Url.Contains("/express-offers"));
+
+                    Common.ReportEvent(Common.PASS, String.Format
+                        ("The TestString contains the expected value.  Expected: '/express-offers'.  TestString: \"{0}\".",
+                           driver.Url));
+                }
+                catch (AssertionException)
+                {
+                    Common.ReportEvent(Common.FAIL, String.Format
+                        ("The TestString does not contain the expected value.  Expected: '/express-offers'.  TestString: \"{0}\".",
+                            driver.Url));
+                }
+
+                try
+                {
+                    Assert.IsTrue(driver.Url.Contains("&guid=" + strQFormUID));
+
+                    Common.ReportEvent(Common.PASS, String.Format
+                        ("The TestString contains the expected value.  Expected: '&guid=<QFormUID>'.  TestString: \"{0}\".",
+                           driver.Url));
+                }
+                catch (AssertionException)
+                {
+                    Common.ReportEvent(Common.FAIL, String.Format
+                        ("The TestString does not contain the expected value.  Expected: '&guid=<QFormUID>'.  TestString: \"{0}\".",
+                            driver.Url));
+                }
+
+                // Validate page header/nav contains unauthorized text
+                Validation.StringContains("Not Authenticated",
+                    driver.FindElement(By.Id("site-navigation-row-express-offers")).FindElement(By.ClassName("message")).Text);
+            }
+            else
+            {
+                Common.ReportEvent(Common.FAIL, "The redirect to My LendingTree did not display within 30 seconds. "
+                    + "Expecting an element with ClassName 'offersDisplay'.");
                 RecordScreenshot("MyLendingTreeException");
                 Assert.Fail();
             }
