@@ -141,7 +141,7 @@ namespace TestAutomation.LendingTree.ProdTests_Forms_Other
             b2 = new tlm.b2Page(driver, testData);
             b2.FillOutValidQF();
             Validation.IsTrue(VerifytQFormRecord(b2.strQFormUID));
-            b2.VerifyRedirectToMyLendingTree(testData);
+            b2.VerifyRedirectToMyLtExpressUnauthorized(testData);
         }
 
         [Test]
@@ -150,7 +150,7 @@ namespace TestAutomation.LendingTree.ProdTests_Forms_Other
             b2 = new tlm.b2Page(driver, testData);
             b2.FillOutValidQF();
             Validation.IsTrue(VerifytQFormRecord(b2.strQFormUID));
-            b2.VerifyRedirectToMyLendingTree(testData);
+            b2.VerifyRedirectToMyLtExpressUnauthorized(testData);
         }
     }
 }
