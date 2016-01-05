@@ -123,8 +123,7 @@ namespace TestAutomation.LendingTree.ProdTests_Forms_Other
 
             p2.FillOutValidQF();
             Validation.IsTrue(VerifytQFormRecord(p2.strQFormUID));
-            p2.VerifyRedirectToMyLendingTree(testData);
-            //p2.VerifyRedirectToMyLtExpress(testData);
+            p2.VerifyRedirectToMyLtExpress(testData);
         }
 
         [Test]
@@ -142,8 +141,7 @@ namespace TestAutomation.LendingTree.ProdTests_Forms_Other
 
             p2.FillOutValidQF();
             Validation.IsTrue(VerifytQFormRecord(p2.strQFormUID));
-            p2.VerifyRedirectToMyLendingTree(testData);
-            //p2.VerifyRedirectToMyLtExpress(testData);
+            p2.VerifyRedirectToMyLtExpress(testData);
         }
 
         [Test]

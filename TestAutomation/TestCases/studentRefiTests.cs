@@ -153,7 +153,7 @@ namespace TestAutomation.LendingTree.ProdTests_Forms_Other
             mcStudentRefi = new mc.mcStudentRefiPage(driver, testData);
             mcStudentRefi.FillOutValidQF();
             Validation.IsTrue(VerifytQFormRecord(mcStudentRefi.strQFormUID));
-            studentRefi.VerifyRedirectToMyLtExpress(testData);
+            mcStudentRefi.VerifyRedirectToMyLtExpress(testData);
         }
 
         [Test]
@@ -162,7 +162,7 @@ namespace TestAutomation.LendingTree.ProdTests_Forms_Other
             mcStudentRefi = new mc.mcStudentRefiPage(driver, testData);
             mcStudentRefi.FillOutValidQF();
             Validation.IsTrue(VerifytQFormRecord(mcStudentRefi.strQFormUID));
-            studentRefi.VerifyRedirectToMyLtExpress(testData);
+            mcStudentRefi.VerifyRedirectToMyLtExpress(testData);
         }
 
         private void FinishTest()
