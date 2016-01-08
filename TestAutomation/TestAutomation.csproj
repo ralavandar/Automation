@@ -83,6 +83,7 @@
     <Compile Include="Lending\mcPurchasePage.cs" />
     <Compile Include="Lending\mcRefiPage.cs" />
     <Compile Include="Lending\mcStudentRefiPage.cs" />
+    <Compile Include="Lending\blPage.cs" />
     <Compile Include="Lending\reverse2Page.cs" />
     <Compile Include="Lending\mortgage2Page.cs" />
     <Compile Include="Lending\heaPage.cs" />

@@ -5,11 +5,11 @@ using System.Text;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 
-namespace TestAutomation.LendingTree.tlm
+namespace TestAutomation.LendingTree.tla
 {
-    class b2Page : FossaPageBase
+    class blPage : FossaPageBase
     {
-        public b2Page(IWebDriver driver, Dictionary<string, string> testData)
+        public blPage(IWebDriver driver, Dictionary<string, string> testData)
             : base(driver, testData) 
         { 
             
@@ -23,13 +23,13 @@ namespace TestAutomation.LendingTree.tlm
         public override void StartForm()
         {
             ReportAutoAdvance();
-
-            NavigateToFossaForm(testData["TestEnvironment"], "tlm.aspx", testData["Template"], testData["Variation"], testData["QueryString"]);
+            
+            NavigateToFossaForm(testData["TestEnvironment"], "tla.aspx", testData["Template"], testData["Variation"], testData["QueryString"]);
         }
 
         public IFormField[][] ValidQFStepsWithCrossSell
         {
-            get 
+            get
             {
                 int numSteps = 13;
                 IFormField[][] steps = ValidQFSteps;
@@ -65,84 +65,36 @@ namespace TestAutomation.LendingTree.tlm
                 IFormField[][] Steps = new IFormField[numSteps][];
 
                 // Business Type
-                string selector = "";
-                switch (testData["BusinessType"].ToUpper())
-                {
-                    case "SOLEPROPRIETORSHIP":
-                        selector = "label[for=business-type-sole]";
-                        break;
-                    case "PARTNERSHIP":
-                        selector = "label[for=business-type-partnership]";
-                        break;
-                    case "CORPORATION":
-                        selector = "label[for=business-type-corp]";
-                        break;
-                    case "SCORPORATION":
-                        selector = "label[for=business-type-scorp]";
-                        break;
-                    case "LLC":
-                        selector = "label[for=business-type-llc]";
-                        break;
-                }
                 Steps[1] = Step(
-                                new FossaField(AutoAdvance(ClickElement), By.CssSelector(selector)),
+                                new FossaField(SelectByValue, "business-type", "BusinessType"),
                                 new FossaField(Wait, "Wait"));
-
                 // Loan amount requested
                 Steps[2] = Step(
-                                new FossaField(Fill, By.Id("amount-requested"), "LoanAmountRequested"),
-                                new FossaField(GetAngularQFormUID, "B2"),
+                                //new FossaField(SelectByText, "ig-requested-loan-amount", "LoanAmountRequested"),
+                                new FossaField(SelectByText, By.Name("requested-loan-amount"), "LoanAmountRequested"),
+                                new FossaField(GetAngularQFormUID, "BL"),
                                 new FossaField(Wait, "Wait"));
                 // Business Inception Date
                 Steps[3] = Step(
-                                new FossaField(NoAutoAdvance(SelectByValue), "inception-month", "InceptionMonth"),
+                                new FossaField(NoAutoAdvance(SelectByText), "inception-month", "InceptionMonth"),
                                 new FossaField(SelectByText, "inception-year", "InceptionYear"),
                                 new FossaField(Wait, "Wait"));
                 // Annual Revenue
-                Steps[4] = Step(new FossaField(Fill, "annual-revenue", "AnnualRevenue"),
+                Steps[4] = Step(
+                                new FossaField(Fill, "annual-revenue", "AnnualRevenue"),
                                 new FossaField(Wait, "Wait"));
                 // is B2B
-                switch (testData["B2BYesNo"])
-                {
-                    case "N":
-                        Steps[5] = Step(
-                            new FossaField(AutoAdvance(ClickElement), By.CssSelector("label[for=business-b2b-no]")),
-                            new FossaField(Wait, "Wait"));
-                        break;
-                    case "Y":
-                        Steps[5] = Step(
-                            new FossaField(AutoAdvance(ClickElement), By.CssSelector("label[for=business-b2b-yes]")),
-                            new FossaField(Wait, "Wait"));
-                        break;
-                }
+                Steps[5] = Step(
+                                new FossaField(ClickRadioYesNo, "business-b2b-{0}", "B2BYesNo"),
+                                new FossaField(Wait, "Wait"));
                 // Bankruptcy
-                switch (testData["BankruptcyYesNo"])
-                {
-                    case "N":
-                        Steps[6] = Step(
-                            new FossaField(AutoAdvance(ClickElement), By.CssSelector("label[for=declared-bankruptcy-no]")),
-                            new FossaField(Wait, "Wait"));
-                        break;
-                    case "Y":
-                        Steps[6] = Step(
-                            new FossaField(AutoAdvance(ClickElement), By.CssSelector("label[for=declared-bankruptcy-yes]")),
-                            new FossaField(Wait, "Wait"));
-                        break;
-                }
+                Steps[6] = Step(
+                                new FossaField(ClickRadioYesNo, "declared-bankruptcy-{0}", "BankruptcyYesNo"),
+                                new FossaField(Wait, "Wait"));
                 // Profitable
-                switch (testData["ProfitableYesNo"])
-                {
-                    case "N":
-                        Steps[7] = Step(
-                            new FossaField(AutoAdvance(ClickElement), By.CssSelector("label[for=business-profitable-no]")),
-                            new FossaField(Wait, "Wait"));
-                        break;
-                    case "Y":
-                        Steps[7] = Step(
-                            new FossaField(AutoAdvance(ClickElement), By.CssSelector("label[for=business-profitable-yes]")),
-                            new FossaField(Wait, "Wait"));
-                        break;
-                }
+                Steps[7] = Step(
+                                new FossaField(ClickRadioYesNo, "business-profitable-{0}", "ProfitableYesNo"),
+                                new FossaField(Wait, "Wait"));
                 // Business name and ZIP
                 Steps[8] = Step(new FossaField(Fill, "business-name", "BusinessName"),
                                 new FossaField(Fill, "business-zip-code-input", "BusinessZipCode"),
@@ -152,35 +104,40 @@ namespace TestAutomation.LendingTree.tlm
                                 new FossaField(Fill, "first-name", "BorrowerFirstName"),
                                 new FossaField(Fill, "last-name", "BorrowerLastName"),
                                 new FossaField(Wait, "Wait"));
-                // Credit profile
+                // Credit rating
                 switch (testData["CreditProfile"].ToUpper())
                 {
                     case "EXCELLENT":
                         Steps[10] = Step(
-                                new FossaField(AutoAdvance(ClickElement), By.CssSelector("label[for=owners-credit-history-excellent]")),
+                                new FossaField(ClickRadioWithValueID, "stated-credit-history-excellent"),
                                 new FossaField(Wait5Sec, "Wait"));
                         break;
                     case "GOOD":
                         Steps[10] = Step(
-                                new FossaField(AutoAdvance(ClickElement), By.CssSelector("label[for=owners-credit-history-good]")),
+                                new FossaField(ClickRadioWithValueID, "stated-credit-history-good"),
                                 new FossaField(Wait5Sec, "Wait"));
                         break;
                     case "FAIR":
                         Steps[10] = Step(
-                                new FossaField(AutoAdvance(ClickElement), By.CssSelector("label[for=owners-credit-history-fair]")),
+                                new FossaField(ClickRadioWithValueID, "stated-credit-history-fair"),
                                 new FossaField(Wait5Sec, "Wait"));
                         break;
                     case "POOR":
                         Steps[10] = Step(
-                                new FossaField(AutoAdvance(ClickElement), By.CssSelector("label[for=owners-credit-history-poor]")),
+                                new FossaField(ClickRadioWithValueID, "stated-credit-history-poor"),
                                 new FossaField(Wait5Sec, "Wait"));
+                        break;
+                    default:
+                        // Report invalid test data
+                        Common.ReportEvent(Common.ERROR, "The value provided for 'CreditProfile' is not valid. " +
+                            "Please check the test case data and try again.");
                         break;
                 }
                 // Phone and Email
                 Steps[11] = Step(
-                                new FossaField(Fill, "home-phone", "BorrowerHomePhone1"),
-                                new FossaField(Append, "home-phone", "BorrowerHomePhone2"),
-                                new FossaField(Append, "home-phone", "BorrowerHomePhone3"),
+                                new FossaField(Fill, "home-phone-area-code", "BorrowerHomePhone1"),
+                                new FossaField(Fill, "home-phone-prefix", "BorrowerHomePhone2"),
+                                new FossaField(Fill, "home-phone-line", "BorrowerHomePhone3"),
                                 new FossaField(DeselectAfter(Fill), "email", "EmailAddress"),
                                 new FossaField(Wait5Sec, "Wait"));
 
@@ -202,7 +159,7 @@ namespace TestAutomation.LendingTree.tlm
 
             if (IsElementDisplayed(By.Id("next")))
             {
-                Common.ReportEvent("INFO", "Clicking 'next' button");
+                Common.ReportEvent("INFO", "Clicking the 'next' button");
                 var objElement = GetElement("next");
                 objElement.Click();
             }

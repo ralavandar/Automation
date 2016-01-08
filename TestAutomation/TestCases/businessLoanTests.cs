@@ -109,6 +109,100 @@ namespace TestAutomation.LendingTree.tlm
 }
 
 
+namespace TestAutomation.LendingTree.tla
+{
+    [TestFixture]
+    public class blTests : SeleniumTestBase
+    {
+        public IWebDriver driver;
+        private const String strTableName = "tTestData_BusinessLoan";
+        private blPage bl;
+
+        [SetUp]
+        public void SetupTest()
+        {
+            Common.InitializeTestResults();
+            GetTestData(strTableName, TestContext.CurrentContext.Test.Name);
+            InitializeTestData();
+            driver = StartBrowser(testData["BrowserType"]);
+            bl = new blPage(driver, testData);
+        }
+
+        [TearDown]
+        public void TeardownTest()
+        {
+            driver.Quit();
+            Common.ReportFinalResults();
+        }
+
+        private void FinishTest()
+        {
+            Validation.IsTrue(VerifytQFormRecord(bl.strQFormUID));
+            bl.VerifyRedirectToMyLtExpressUnauthorized(testData);
+        }
+
+        [Test]
+        public void bl_01_ExcellentCorp()
+        {
+            bl.FillOutValidQF();
+            FinishTest();
+        }
+
+        [Test]
+        public void bl_02_PoorStartupLlc()
+        {
+            bl.FillOutValidQF();
+            FinishTest();
+        }
+
+        [Test]
+        public void bl_03_InvalidPhoneTest()
+        {
+            IFormField[][] steps = bl.ValidQFSteps;
+
+            bl.StartForm();
+            bl.PerformSteps(steps, 1, 10);
+
+            bl.PrepareStep(11, true);
+            bl.FillOutStep(steps[11]);
+            bl.ConcludeStep();
+
+            // Verify error message on Phone field
+            System.Threading.Thread.Sleep(2000);
+            Assert.IsTrue(bl.DoesPageContainText("Please enter a valid phone number."));
+
+            // Populate the Dictionary with valid phone and re-fill step 16
+            testData["BorrowerHomePhone1"] = "407";
+            testData["BorrowerHomePhone2"] = "939";
+            testData["BorrowerHomePhone3"] = "3463";
+            bl.FillOutStep(steps[11]);
+            bl.ConcludeStep();
+
+            FinishTest();
+        }
+
+        [Test]
+        public void bl_04_PersonalCrossSell()
+        {
+            IFormField[][] steps = bl.ValidQFStepsWithCrossSell;
+
+            bl.StartForm();
+            bl.PerformSteps(steps, 1, 4);
+
+            // Verify landed on cross-sell step (5) 
+            bl.PrepareStep(5, true);
+            Assert.IsTrue(bl.DoesPageContainText("Hmmm… based on the info you've given, you may have better success at getting funded for your business in other ways."));
+            bl.FillOutStep(steps[5]);
+            bl.ConcludeStep();
+
+            // Continue with steps 6 to end
+            bl.PerformSteps(steps, 6, Convert.ToUInt32(steps.Length - 1));
+            FinishTest();
+        }
+    }
+}
+
+
 namespace TestAutomation.LendingTree.ProdTests_Forms_Other
 {
     [TestFixture]
@@ -116,7 +210,7 @@ namespace TestAutomation.LendingTree.ProdTests_Forms_Other
     {
         public IWebDriver driver;
         private const String strTableName = "tTestData_BusinessLoan";
-        //private tla.blPage businessLoan;
+        private tla.blPage bl;
         private tlm.b2Page b2;
 
         [SetUp]
@@ -151,6 +245,24 @@ namespace TestAutomation.LendingTree.ProdTests_Forms_Other
             b2.FillOutValidQF();
             Validation.IsTrue(VerifytQFormRecord(b2.strQFormUID));
             b2.VerifyRedirectToMyLtExpressUnauthorized(testData);
+        }
+
+        [Test]
+        public void Prod_bl_01()
+        {
+            bl = new tla.blPage(driver, testData);
+            bl.FillOutValidQF();
+            Validation.IsTrue(VerifytQFormRecord(bl.strQFormUID));
+            bl.VerifyRedirectToMyLtExpressUnauthorized(testData);
+        }
+
+        [Test]
+        public void Prod_bl_02()
+        {
+            bl = new tla.blPage(driver, testData);
+            bl.FillOutValidQF();
+            Validation.IsTrue(VerifytQFormRecord(bl.strQFormUID));
+            bl.VerifyRedirectToMyLtExpressUnauthorized(testData);
         }
     }
 }
