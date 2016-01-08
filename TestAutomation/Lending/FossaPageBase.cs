@@ -262,7 +262,7 @@ namespace TestAutomation.LendingTree
                 }
 
                 // Validate page header/nav contains unauthorized text
-                Validation.StringContains("Not Authenticated",
+                Validation.StringContains("You are not signed in but your personal info is secure",
                     driver.FindElement(By.Id("site-navigation-row-express-offers")).FindElement(By.ClassName("message")).Text);
             }
             else
@@ -339,17 +339,7 @@ namespace TestAutomation.LendingTree
             }
             else
             {
-                // For whatever reason, the Click() method does not work on our radio buttons in IEDriver - works fine in Firefox and ChromeDriver.
-                // The workaround is to click on the radio button's parent object when using IEDriver :(
-                if (driver.GetType().ToString().EndsWith("InternetExplorerDriver"))
-                {
-                    element.FindElement(By.XPath("..")).Click();
-                }
-                else
-                {
-                    element.Click();
-                }
-
+                element.Click();
                 didLastFieldTriggerAdvance = true;
             }
         }
