@@ -61,8 +61,18 @@ namespace TestAutomation
                     break;
                 case "REMOTE":
                     DesiredCapabilities caps = new DesiredCapabilities();
-                    caps.SetCapability("browserName", "firefox");
-                    objDriver = new RemoteWebDriver(new Uri("http://10.29.150.153:4444/wd/hub"), caps, TimeSpan.FromSeconds(840));
+                    //caps.SetCapability("browserName", "firefox");
+                    caps.SetCapability("browser", "IE");
+                    caps.SetCapability("browser_version", "11.0");
+                    caps.SetCapability("os", "Windows");
+                    caps.SetCapability("os_version", "7");
+                    caps.SetCapability("resolution", "1024x768");
+                    caps.SetCapability("browserstack.user", "mikeschupp1");
+                    caps.SetCapability("browserstack.key", "ydejoaozpt7zhzCz6yM9");
+                    caps.SetCapability("public", "public");
+
+                    objDriver = new RemoteWebDriver(new Uri("http://hub.browserstack.com/wd/hub/"), caps, TimeSpan.FromSeconds(840));
+                    //objDriver = new RemoteWebDriver(new Uri("http://10.29.150.153:4444/wd/hub"), caps, TimeSpan.FromSeconds(840));
                     break;
                 default:    // Firefox
                     ffProfile = new FirefoxProfile();
@@ -174,7 +184,6 @@ namespace TestAutomation
             {
                 testData["BrowserType"] = Common.RandomSelectBrowser();
             }
-
             //testData["BrowserType"] = "REMOTE";
 
             // The Auto QF has coborrower fields which can also be defaulted
