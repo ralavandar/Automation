@@ -31,7 +31,7 @@ namespace TestAutomation.LendingTree.tlm
         {
             get 
             {
-                int numSteps = 13;
+                int numSteps = 12;
                 IFormField[][] steps = ValidQFSteps;
 
                 IFormField[][] stepsWithXsell = new IFormField[numSteps][];
@@ -61,7 +61,7 @@ namespace TestAutomation.LendingTree.tlm
         {
             get 
             {
-                int numSteps = 12;
+                int numSteps = 11;
                 IFormField[][] Steps = new IFormField[numSteps][];
 
                 // Business Type
@@ -101,30 +101,16 @@ namespace TestAutomation.LendingTree.tlm
                 // Annual Revenue
                 Steps[4] = Step(new FossaField(Fill, "annual-revenue", "AnnualRevenue"),
                                 new FossaField(Wait, "Wait"));
-                // is B2B
-                switch (testData["B2BYesNo"])
-                {
-                    case "N":
-                        Steps[5] = Step(
-                            new FossaField(AutoAdvance(ClickElement), By.CssSelector("label[for=business-b2b-no]")),
-                            new FossaField(Wait, "Wait"));
-                        break;
-                    case "Y":
-                        Steps[5] = Step(
-                            new FossaField(AutoAdvance(ClickElement), By.CssSelector("label[for=business-b2b-yes]")),
-                            new FossaField(Wait, "Wait"));
-                        break;
-                }
                 // Bankruptcy
                 switch (testData["BankruptcyYesNo"])
                 {
                     case "N":
-                        Steps[6] = Step(
+                        Steps[5] = Step(
                             new FossaField(AutoAdvance(ClickElement), By.CssSelector("label[for=declared-bankruptcy-no]")),
                             new FossaField(Wait, "Wait"));
                         break;
                     case "Y":
-                        Steps[6] = Step(
+                        Steps[5] = Step(
                             new FossaField(AutoAdvance(ClickElement), By.CssSelector("label[for=declared-bankruptcy-yes]")),
                             new FossaField(Wait, "Wait"));
                         break;
@@ -133,22 +119,22 @@ namespace TestAutomation.LendingTree.tlm
                 switch (testData["ProfitableYesNo"])
                 {
                     case "N":
-                        Steps[7] = Step(
+                        Steps[6] = Step(
                             new FossaField(AutoAdvance(ClickElement), By.CssSelector("label[for=business-profitable-no]")),
                             new FossaField(Wait, "Wait"));
                         break;
                     case "Y":
-                        Steps[7] = Step(
+                        Steps[6] = Step(
                             new FossaField(AutoAdvance(ClickElement), By.CssSelector("label[for=business-profitable-yes]")),
                             new FossaField(Wait, "Wait"));
                         break;
                 }
                 // Business name and ZIP
-                Steps[8] = Step(new FossaField(Fill, "business-name", "BusinessName"),
+                Steps[7] = Step(new FossaField(Fill, "business-name", "BusinessName"),
                                 new FossaField(Fill, "business-zip-code-input", "BusinessZipCode"),
                                 new FossaField(Wait, "Wait"));
                 // Name
-                Steps[9] = Step(
+                Steps[8] = Step(
                                 new FossaField(Fill, "first-name", "BorrowerFirstName"),
                                 new FossaField(Fill, "last-name", "BorrowerLastName"),
                                 new FossaField(Wait, "Wait"));
@@ -156,28 +142,28 @@ namespace TestAutomation.LendingTree.tlm
                 switch (testData["CreditProfile"].ToUpper())
                 {
                     case "EXCELLENT":
-                        Steps[10] = Step(
+                        Steps[9] = Step(
                                 new FossaField(AutoAdvance(ClickElement), By.CssSelector("label[for=owners-credit-history-excellent]")),
                                 new FossaField(Wait5Sec, "Wait"));
                         break;
                     case "GOOD":
-                        Steps[10] = Step(
+                        Steps[9] = Step(
                                 new FossaField(AutoAdvance(ClickElement), By.CssSelector("label[for=owners-credit-history-good]")),
                                 new FossaField(Wait5Sec, "Wait"));
                         break;
                     case "FAIR":
-                        Steps[10] = Step(
+                        Steps[9] = Step(
                                 new FossaField(AutoAdvance(ClickElement), By.CssSelector("label[for=owners-credit-history-fair]")),
                                 new FossaField(Wait5Sec, "Wait"));
                         break;
                     case "POOR":
-                        Steps[10] = Step(
+                        Steps[9] = Step(
                                 new FossaField(AutoAdvance(ClickElement), By.CssSelector("label[for=owners-credit-history-poor]")),
                                 new FossaField(Wait5Sec, "Wait"));
                         break;
                 }
                 // Phone and Email
-                Steps[11] = Step(
+                Steps[10] = Step(
                                 new FossaField(Fill, "home-phone", "BorrowerHomePhone1"),
                                 new FossaField(Append, "home-phone", "BorrowerHomePhone2"),
                                 new FossaField(Append, "home-phone", "BorrowerHomePhone3"),

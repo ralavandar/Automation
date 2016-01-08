@@ -31,7 +31,7 @@ namespace TestAutomation.LendingTree.tla
         {
             get
             {
-                int numSteps = 13;
+                int numSteps = 12;
                 IFormField[][] steps = ValidQFSteps;
 
                 IFormField[][] stepsWithXsell = new IFormField[numSteps][];
@@ -61,7 +61,7 @@ namespace TestAutomation.LendingTree.tla
         {
             get 
             {
-                int numSteps = 12;
+                int numSteps = 11;
                 IFormField[][] Steps = new IFormField[numSteps][];
 
                 // Business Type
@@ -83,24 +83,20 @@ namespace TestAutomation.LendingTree.tla
                 Steps[4] = Step(
                                 new FossaField(Fill, "annual-revenue", "AnnualRevenue"),
                                 new FossaField(Wait, "Wait"));
-                // is B2B
-                Steps[5] = Step(
-                                new FossaField(ClickRadioYesNo, "business-b2b-{0}", "B2BYesNo"),
-                                new FossaField(Wait, "Wait"));
                 // Bankruptcy
-                Steps[6] = Step(
+                Steps[5] = Step(
                                 new FossaField(ClickRadioYesNo, "declared-bankruptcy-{0}", "BankruptcyYesNo"),
                                 new FossaField(Wait, "Wait"));
                 // Profitable
-                Steps[7] = Step(
+                Steps[6] = Step(
                                 new FossaField(ClickRadioYesNo, "business-profitable-{0}", "ProfitableYesNo"),
                                 new FossaField(Wait, "Wait"));
                 // Business name and ZIP
-                Steps[8] = Step(new FossaField(Fill, "business-name", "BusinessName"),
+                Steps[7] = Step(new FossaField(Fill, "business-name", "BusinessName"),
                                 new FossaField(Fill, "business-zip-code-input", "BusinessZipCode"),
                                 new FossaField(Wait, "Wait"));
                 // Name
-                Steps[9] = Step(
+                Steps[8] = Step(
                                 new FossaField(Fill, "first-name", "BorrowerFirstName"),
                                 new FossaField(Fill, "last-name", "BorrowerLastName"),
                                 new FossaField(Wait, "Wait"));
@@ -108,22 +104,22 @@ namespace TestAutomation.LendingTree.tla
                 switch (testData["CreditProfile"].ToUpper())
                 {
                     case "EXCELLENT":
-                        Steps[10] = Step(
+                        Steps[9] = Step(
                                 new FossaField(ClickRadioWithValueID, "stated-credit-history-excellent"),
                                 new FossaField(Wait5Sec, "Wait"));
                         break;
                     case "GOOD":
-                        Steps[10] = Step(
+                        Steps[9] = Step(
                                 new FossaField(ClickRadioWithValueID, "stated-credit-history-good"),
                                 new FossaField(Wait5Sec, "Wait"));
                         break;
                     case "FAIR":
-                        Steps[10] = Step(
+                        Steps[9] = Step(
                                 new FossaField(ClickRadioWithValueID, "stated-credit-history-fair"),
                                 new FossaField(Wait5Sec, "Wait"));
                         break;
                     case "POOR":
-                        Steps[10] = Step(
+                        Steps[9] = Step(
                                 new FossaField(ClickRadioWithValueID, "stated-credit-history-poor"),
                                 new FossaField(Wait5Sec, "Wait"));
                         break;
@@ -134,7 +130,7 @@ namespace TestAutomation.LendingTree.tla
                         break;
                 }
                 // Phone and Email
-                Steps[11] = Step(
+                Steps[10] = Step(
                                 new FossaField(Fill, "home-phone-area-code", "BorrowerHomePhone1"),
                                 new FossaField(Fill, "home-phone-prefix", "BorrowerHomePhone2"),
                                 new FossaField(Fill, "home-phone-line", "BorrowerHomePhone3"),

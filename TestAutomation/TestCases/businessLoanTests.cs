@@ -67,21 +67,21 @@ namespace TestAutomation.LendingTree.tlm
             IFormField[][] steps = b2.ValidQFSteps;
 
             b2.StartForm();
-            b2.PerformSteps(steps, 1, 10);
+            b2.PerformSteps(steps, 1, 9);
 
-            b2.PrepareStep(11, true);
-            b2.FillOutStep(steps[11]);
+            b2.PrepareStep(10, true);
+            b2.FillOutStep(steps[10]);
             b2.ConcludeStep();
 
             // Verify error message on Phone field
             System.Threading.Thread.Sleep(2000);
             Assert.IsTrue(b2.DoesPageContainText("Please enter a valid phone number."));
 
-            // Populate the Dictionary with valid phone and re-fill step 16
+            // Populate the Dictionary with valid phone and re-fill step 10
             testData["BorrowerHomePhone1"] = "407";
             testData["BorrowerHomePhone2"] = "939";
             testData["BorrowerHomePhone3"] = "3463";
-            b2.FillOutStep(steps[11]);
+            b2.FillOutStep(steps[10]);
             b2.ConcludeStep();
 
             FinishTest();
@@ -161,21 +161,21 @@ namespace TestAutomation.LendingTree.tla
             IFormField[][] steps = bl.ValidQFSteps;
 
             bl.StartForm();
-            bl.PerformSteps(steps, 1, 10);
+            bl.PerformSteps(steps, 1, 9);
 
-            bl.PrepareStep(11, true);
-            bl.FillOutStep(steps[11]);
+            bl.PrepareStep(10, true);
+            bl.FillOutStep(steps[10]);
             bl.ConcludeStep();
 
             // Verify error message on Phone field
             System.Threading.Thread.Sleep(2000);
             Assert.IsTrue(bl.DoesPageContainText("Please enter a valid phone number."));
 
-            // Populate the Dictionary with valid phone and re-fill step 16
+            // Populate the Dictionary with valid phone and re-fill step 10
             testData["BorrowerHomePhone1"] = "407";
             testData["BorrowerHomePhone2"] = "939";
             testData["BorrowerHomePhone3"] = "3463";
-            bl.FillOutStep(steps[11]);
+            bl.FillOutStep(steps[10]);
             bl.ConcludeStep();
 
             FinishTest();
