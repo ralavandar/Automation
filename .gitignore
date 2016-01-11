@@ -4,3 +4,4 @@ TestAutomation/.vs/**
 *.gif
 *.suo
 
+TestAutomation/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache

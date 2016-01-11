@@ -15,7 +15,7 @@ namespace TestAutomation.LendingTree.zSandbox
     {
         public IWebDriver driver;
 
-        private morttreePage morttree;
+        private zzArchive.morttreePage morttree;
 
         private static readonly List<String> variations = new List<String> { "mort-tree", "gs-mort-tree", "mortgage", "gs-mortgage", "lt-m" };
 
@@ -63,7 +63,7 @@ namespace TestAutomation.LendingTree.zSandbox
         {
             Common.InitializeTestResults();
             driver = StartBrowser(Common.RandomSelectBrowser());
-            morttree = new morttreePage(driver, null);
+            morttree = new zzArchive.morttreePage(driver, null);
         }
 
         [Test, TestCaseSource(typeof(ParamDataFactory), "TestCases")]

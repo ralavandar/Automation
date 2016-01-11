@@ -121,7 +121,7 @@
     <Compile Include="Lending\FossaField.cs" />
     <Compile Include="Lending\FossaPageBase.cs" />
     <Compile Include="zzArchive\gsguyPage.cs" />
-    <Compile Include="Lending\morttreePage.cs" />
+    <Compile Include="zzArchive\morttreePage.cs" />
     <Compile Include="MyDevTests\LoanExplorerTests.cs" />
     <Compile Include="TestCases\CJWidgetTests.cs" />
     <Compile Include="TestCases\prequalTests.cs" />
@@ -129,12 +129,12 @@
     <Compile Include="zzArchive\gsguyTests.cs" />
     <Compile Include="TestCases\LoanEvaluationTests.cs" />
     <Compile Include="TestCases\prepopTests.cs" />
-    <Compile Include="TestCases\morttreeTests.cs" />
+    <Compile Include="zzArchive\morttreeTests.cs" />
     <Compile Include="zzArchive\ccreturnPage.cs" />
     <Compile Include="zzArchive\ccreturnTests.cs" />
     <Compile Include="zzArchive\gsmortgageTests.cs" />
     <Compile Include="zzArchive\gsmortgageVariationTests.cs" />
-    <Compile Include="Lending\autoPage.cs" />
+    <Compile Include="zzArchive\autoPage.cs" />
     <Compile Include="Lending\ltHomepage.cs" />
     <Compile Include="TestCases\homepageTests.cs" />
     <Compile Include="TestCases\ProdTests_Forms_Auto.cs" />
@@ -143,7 +143,7 @@
     <Compile Include="zzArchive\ltreturnPage.cs" />
     <Compile Include="TestCases\ProdTests_Forms_Mortgage.cs" />
     <Compile Include="MyDevTests\CanopyTests.cs" />
-    <Compile Include="TestCases\autoTests.cs" />
+    <Compile Include="zzArchive\autoTests.cs" />
     <Compile Include="zzArchive\mortgageVariationTests.cs" />
     <Compile Include="zzArchive\mortgageTests.cs" />
     <Compile Include="zzArchive\homeequityTests.cs" />
