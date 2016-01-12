@@ -21,6 +21,7 @@ namespace TestAutomation
         public Dictionary<String, String> testData;
         // passed to Common.ReportFinalResultsAuditLog called by individual test teardowns
         public string varQFormUIDTest;
+        DesiredCapabilities caps = new DesiredCapabilities();
 
         public IWebDriver StartBrowser(String strBrowser)
         {
@@ -50,9 +51,6 @@ namespace TestAutomation
                     break;
                 case "IEXPLORE":
                 case "IE":
-                    //DesiredCapabilities caps = DesiredCapabilities.internetExplorer(); 
-                    //caps.setCapability(CapabilityType.ForSeleniumServer.ENSURING_CLEAN_SESSION, true); 
-                    //WebDriver driver = new InternetExplorerDriver(caps);
                     objDriver = new InternetExplorerDriver();
                     objDriver.Manage().Cookies.DeleteAllCookies();
                     break;
@@ -60,8 +58,9 @@ namespace TestAutomation
                     objDriver = new ChromeDriver();
                     break;
                 case "REMOTE":
-                    DesiredCapabilities caps = new DesiredCapabilities();
-                    //caps.SetCapability("browserName", "firefox");
+                    objDriver = new RemoteWebDriver(new Uri("http://10.29.150.153:4444/wd/hub"), caps, TimeSpan.FromSeconds(840));
+                    break;
+                case "BROWSERSTACK":
                     caps.SetCapability("browser", "IE");
                     caps.SetCapability("browser_version", "11.0");
                     caps.SetCapability("os", "Windows");
@@ -70,9 +69,15 @@ namespace TestAutomation
                     caps.SetCapability("browserstack.user", "mikeschupp1");
                     caps.SetCapability("browserstack.key", "ydejoaozpt7zhzCz6yM9");
                     caps.SetCapability("public", "public");
-
                     objDriver = new RemoteWebDriver(new Uri("http://hub.browserstack.com/wd/hub/"), caps, TimeSpan.FromSeconds(840));
-                    //objDriver = new RemoteWebDriver(new Uri("http://10.29.150.153:4444/wd/hub"), caps, TimeSpan.FromSeconds(840));
+                    break;
+                case "SAUCELABS":
+                    caps.SetCapability("browserName", "Internet Explorer");
+                    caps.SetCapability("platform", "Windows 7");
+                    caps.SetCapability("version", "11.0");
+                    caps.SetCapability("username", "mpschupp");
+                    caps.SetCapability("accessKey", "ca34f7d2-89d2-46be-bc4b-8aad12f2fedb");
+                    objDriver = new RemoteWebDriver(new Uri("http://ondemand.saucelabs.com:80/wd/hub"), caps, TimeSpan.FromSeconds(600));
                     break;
                 default:    // Firefox
                     ffProfile = new FirefoxProfile();
