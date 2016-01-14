@@ -10,8 +10,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>TestAutomation</RootNamespace>
     <AssemblyName>TestAutomation</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -35,10 +36,11 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\..\Program Files (x86)\NUnit-2.6.4\bin\nunit.framework.dll</HintPath>
     </Reference>
-    <Reference Include="pnunit.framework">
+    <Reference Include="pnunit.framework, Version=1.0.5463.34981, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\..\Program Files (x86)\NUnit-2.6.4\bin\pnunit.framework.dll</HintPath>
     </Reference>
-    <Reference Include="Selenium.WebDriverBackedSelenium, Version=2.28.0.0, Culture=neutral, PublicKeyToken=1c2bd1631853048f, processorArchitecture=MSIL">
+    <Reference Include="Selenium.WebDriverBackedSelenium, Version=2.47.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\Selenium.WebDriverBackedSelenium.dll</HintPath>
     </Reference>
@@ -47,7 +49,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
-    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+    <Reference Include="System.Web.Helpers">
       <HintPath>..\lib\System.Web.Helpers.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq" />
@@ -55,21 +57,20 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="ThoughtWorks.Selenium.Core, Version=2.28.0.0, Culture=neutral, PublicKeyToken=1c2bd1631853048f, processorArchitecture=MSIL">
+    <Reference Include="ThoughtWorks.Selenium.Core, Version=2.47.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\ThoughtWorks.Selenium.Core.dll</HintPath>
     </Reference>
-    <Reference Include="WebDriver, Version=2.28.0.0, Culture=neutral, PublicKeyToken=1c2bd1631853048f, processorArchitecture=MSIL">
+    <Reference Include="WebDriver, Version=2.47.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\WebDriver.dll</HintPath>
     </Reference>
-    <Reference Include="WebDriver.Support, Version=2.28.0.0, Culture=neutral, PublicKeyToken=1c2bd1631853048f, processorArchitecture=MSIL">
+    <Reference Include="WebDriver.Support, Version=2.47.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\WebDriver.Support.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Common\TestAutomationStoredProcedures.cs" />
     <Compile Include="Common\IFormField.cs" />
     <Compile Include="Common\Validation.cs" />
     <Compile Include="Common\Common.cs" />
@@ -128,7 +129,6 @@
     <Compile Include="TestCases\personalLoanTests.cs" />
     <Compile Include="zzArchive\gsguyTests.cs" />
     <Compile Include="TestCases\LoanEvaluationTests.cs" />
-    <Compile Include="TestCases\prepopTests.cs" />
     <Compile Include="zzArchive\morttreeTests.cs" />
     <Compile Include="zzArchive\ccreturnPage.cs" />
     <Compile Include="zzArchive\ccreturnTests.cs" />

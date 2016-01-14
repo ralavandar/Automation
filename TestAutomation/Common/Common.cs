@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Data;
 using System.Data.SqlClient;
-using TestAutomationSP;
 
 namespace TestAutomation
 {
@@ -60,40 +59,6 @@ namespace TestAutomation
 
                     break;
             }
-        }
-             public static void ReportEventAudit(String strEvent, String strMsg, string varQFormUIDTest)
-        {
-            String strPattern = @"M/d/yyyy hh:mm:ss tt";
-            Console.WriteLine(String.Format("{0} : {1} : {2}", DateTime.Now.ToString(strPattern), strEvent, strMsg));
-
-            // Increment the counts of PASS, FAIL, ERROR and WARNING
-          
-            switch (strEvent)
-            {
-                   
-                case PASS:
-                    testResults[PASS] ++;
-
-                    InsertTestResultToLog.addTestResult(1, "method ReportEventAudit test", "DEV", varQFormUIDTest, "resultdetail@asdf.com", "Test1234", "VALIDATION", "INFO", PASS, String.Format("{0} : {1} : {2}", DateTime.Now.ToString(strPattern), strEvent, strMsg));
-                
-                    break;
-                case FAIL:
-                    testResults[FAIL] ++;
-                    InsertTestResultToLog.addTestResult(1, "varTestCaseName", "DEV", varQFormUIDTest, "resultdetail@asdf.com", "Test1234", "VALIDATION", "INFO", FAIL, String.Format("{0} : {1} : {2}", DateTime.Now.ToString(strPattern), strEvent, strMsg));
-                
-                    break;
-                case ERROR:
-                    testResults[ERROR] ++;
-                    InsertTestResultToLog.addTestResult(1, "varTestCaseName", "DEV", varQFormUIDTest, "resultdetail@asdf.com", "Test1234", "VALIDATION", "INFO", ERROR, String.Format("{0} : {1} : {2}", DateTime.Now.ToString(strPattern), strEvent, strMsg));
-                
-                    break;
-                case WARNING:
-                    testResults[WARNING] ++;
-                    InsertTestResultToLog.addTestResult(1, "varTestCaseName", "DEV", varQFormUIDTest, "resultdetail@asdf.com", "Test1234", "VALIDATION", "INFO", WARNING, String.Format("{0} : {1} : {2}", DateTime.Now.ToString(strPattern), strEvent, strMsg));
-                
-                    break;
-            }
-
         }
       
         public static void ReportFinalResults()
@@ -319,138 +284,6 @@ namespace TestAutomation
             }
 
             return connectionString;
-        }
-
-        public static void ReportFinalResultsAuditLog(int varTestCaseIdTest, string varTestCaseNameTest, string varTestEnvironmentTest, string varQFormUIDTest, string varEmailAddressTest, string varPasswordTest)
-        {
-
-            // This will replace ReportFinalResults once other tests are ready to pass parameters to the audit log method.
-            // Evaluate the counts of individual PASS, FAIL, ERROR and WARNING events - and determine a final PASS/FAIL
-            // for the entire test case.
-            // RULES:
-            // If there are any FAILs, then the overall test is a fail
-            // If there are any ERRORs, then the overall test is a fail
-            // If there are any WARNINGs, but no FAILs or ERRORs, then the overall test is a PASS
-
-
-            System.Threading.Thread.Sleep(10000);
-
-
-            if ((testResults[FAIL] > 0) || (testResults[ERROR] > 0))
-            {
-                // Report the overall test case status as FAIL
-                ReportEvent(FAIL, String.Format("The test case FAILED.  Please investigate the cause.  PASS count = {0}.  "
-                    + "FAIL count = {1}.  ERROR count = {2}.  WARNING count = {3}.", testResults[PASS],
-                    testResults[FAIL], testResults[ERROR], testResults[WARNING]));
-                // TODO: Try forcing an Assert expception, so the test case status in NUnit will turn red
-                NUnit.Framework.Assert.Fail("The test case Failed!  Please check the log for details.");
-
-                int varTestCaseId = varTestCaseIdTest; // add similar process that is currently getting testcase name for Selenium, 
-                string varTestCaseName = varTestCaseNameTest;
-                //"Actual test result FAIL";
-                // We need to get this from String "array" found in DataSheet.cs
-                string varTestEnvironment = varTestEnvironmentTest; // add similar process that is currently getting testcase name for Selenium, 
-                //string @LastQformUid = strQform; // trying to get this from the js variable
-                string varLastQformUid = varQFormUIDTest; // varQFormUIDTest; //could get this form the JS, or from where ever the last check is done that looks in I believe tQform 
-                string varEmailAddress = varEmailAddressTest; // We need to get this from String "array" found in DataSheet.cs
-                string varPassword = varPasswordTest; // We need to get this from String "array" found in DataSheet.cs
-                string varCategory = "RESULT"; // look at testresults This could be defaulted to see message detail untill we get these seperated.
-                string varSeverity = "INFO"; // look at testresults This could be defaulted to see message detail untill we get these seperated. 
-                string varResult = "FAIL"; // look at testresults This could be defaulted to see message detail untill we get these seperated.
-                string varMessageDetail = String.Format("The test case FAILED.  Please investigate the cause.  PASS count = {0}.  "
-                        + "FAIL count = {1}.  ERROR count = {2}.  WARNING count = {3}.", testResults[PASS],
-                        testResults[FAIL], testResults[ERROR], testResults[WARNING]);
-                              
-                InsertTestResultToLog.addTestResult(varTestCaseId, varTestCaseName, varTestEnvironment, varLastQformUid, varEmailAddress, varPassword, varCategory, varSeverity, varResult, varMessageDetail);
-                varQFormUIDTest = null;
-            }
-            else if (testResults[WARNING] > 0)
-            {
-                // Report the test case as a PASS with warnings
-                ReportEvent(WARNING, String.Format("The test case PASSED, but with warnings.  Please investigate the "
-                    + "warnings.  PASS count = {0}.  FAIL count = {1}.  ERROR count = {2}.  WARNING count = {3}.",
-                    testResults[PASS], testResults[FAIL], testResults[ERROR], testResults[WARNING]));
-                int varTestCaseId = varTestCaseIdTest; // add similar process that is currently getting testcase name for Selenium, 
-                string varTestCaseName = varTestCaseNameTest;
-                //"Actual test result FAIL";
-                // We need to get this from String "array" found in DataSheet.cs
-                string varTestEnvironment = varTestEnvironmentTest; // add similar process that is currently getting testcase name for Selenium, 
-                //string @LastQformUid = strQform; // trying to get this from the js variable
-                string varLastQformUid = varQFormUIDTest; // varQFormUIDTest; //could get this form the JS, or from where ever the last check is done that looks in I believe tQform 
-                string varEmailAddress = varEmailAddressTest; // We need to get this from String "array" found in DataSheet.cs
-                string varPassword = varPasswordTest; // We need to get this from String "array" found in DataSheet.cs
-                string varCategory = "RESULT"; // look at testresults This could be defaulted to see message detail untill we get these seperated.
-                string varSeverity = "INFO"; // look at testresults This could be defaulted to see message detail untill we get these seperated. 
-                string varResult = "PASS"; // look at testresults This could be defaulted to see message detail untill we get these seperated.
-                string varMessageDetail = String.Format("The test case PASSED, but with warnings.  Please investigate the "
-                    + "warnings.  PASS count = {0}.  FAIL count = {1}.  ERROR count = {2}.  WARNING count = {3}.",
-                    testResults[PASS], testResults[FAIL], testResults[ERROR], testResults[WARNING]);
-                              
-                InsertTestResultToLog.addTestResult(varTestCaseId, varTestCaseName, varTestEnvironment, varLastQformUid, varEmailAddress, varPassword, varCategory, varSeverity, varResult, varMessageDetail);
-                varQFormUIDTest = null;
-
-            }
-            else if ((testResults[PASS].Equals(0)) && (testResults[FAIL].Equals(0)) && (testResults[ERROR].Equals(0)))
-            {
-                // Report the test case as an ERROR
-                ReportEvent(ERROR, String.Format("The test case results are inconclusive.  There were no PASS, FAIL, "
-                    + "or ERROR events logged.  Please check the NUnit Console/Logs for exceptions. "
-                    + "PASS count = {0}.  FAIL count = {1}.  ERROR count = {2}.  WARNING count = {3}.",
-                    testResults[PASS], testResults[FAIL], testResults[ERROR], testResults[WARNING]));
-
-                int varTestCaseId = varTestCaseIdTest; // add similar process that is currently getting testcase name for Selenium, 
-                string varTestCaseName = varTestCaseNameTest;
-                //"Actual test result FAIL";
-                // We need to get this from String "array" found in DataSheet.cs
-                string varTestEnvironment = varTestEnvironmentTest; // add similar process that is currently getting testcase name for Selenium, 
-                //string @LastQformUid = strQform; // trying to get this from the js variable
-                string varLastQformUid = varQFormUIDTest; // varQFormUIDTest; //could get this form the JS, or from where ever the last check is done that looks in I believe tQform 
-                string varEmailAddress = varEmailAddressTest; // We need to get this from String "array" found in DataSheet.cs
-                string varPassword = varPasswordTest; // We need to get this from String "array" found in DataSheet.cs
-                string varCategory = "RESULT"; // look at testresults This could be defaulted to see message detail untill we get these seperated.
-                string varSeverity = "INFO"; // look at testresults This could be defaulted to see message detail untill we get these seperated. 
-                string varResult = "FAIL"; // This will be changed from fail to incolclusive, this change is fails that are being reported as "INCONCLUSIVE"; // look at testresults This could be defaulted to see message detail untill we get these seperated.
-
-                string varMessageDetail = String.Format("The test case FAILED.  Please investigate the cause.  PASS count = {0}.  "
-                    + "FAIL count = {1}.  ERROR count = {2}.  WARNING count = {3}.", testResults[PASS],
-                    testResults[FAIL], testResults[ERROR], testResults[WARNING]);
-                //string varMessageDetail = String.Format("The test case results are inconclusive.  There were no PASS, FAIL, "
-                //    + "or ERROR events logged.  Please check the NUnit Console/Logs for exceptions. "
-                //    + "PASS count = {0}.  FAIL count = {1}.  ERROR count = {2}.  WARNING count = {3}.",
-                //    testResults[PASS], testResults[FAIL], testResults[ERROR], testResults[WARNING]);
-                // Changing this to FAIL until we can see why there are almost no FAILS being recorded. THis will return FAIL for any test that does not PASS.
-               
-                InsertTestResultToLog.addTestResult(varTestCaseId, varTestCaseName, varTestEnvironment, varLastQformUid, varEmailAddress, varPassword, varCategory, varSeverity, varResult, varMessageDetail);
-                varQFormUIDTest = null;
-            }
-            else
-            {
-                // Report the test case as a PASS with no warnings
-                ReportEvent(PASS, String.Format("The test case PASSED with no warnings!  "
-                    + "PASS count = {0}.  FAIL count = {1}.  ERROR count = {2}.  WARNING count = {3}.",
-                    testResults[PASS], testResults[FAIL], testResults[ERROR], testResults[WARNING]));
-
-                int varTestCaseId = varTestCaseIdTest; // add similar process that is currently getting testcase name for Selenium, 
-                string varTestCaseName = varTestCaseNameTest;
-                //"Actual test result FAIL";
-                // We need to get this from String "array" found in DataSheet.cs
-                string varTestEnvironment = varTestEnvironmentTest; // add similar process that is currently getting testcase name for Selenium, 
-                //string @LastQformUid = strQform; // trying to get this from the js variable
-                string varLastQformUid = varQFormUIDTest; // varQFormUIDTest; //could get this form the JS, or from where ever the last check is done that looks in I believe tQform 
-                string varEmailAddress = varEmailAddressTest; // We need to get this from String "array" found in DataSheet.cs
-                string varPassword = varPasswordTest; // We need to get this from String "array" found in DataSheet.cs
-                string varCategory = "RESULT"; // look at testresults This could be defaulted to see message detail untill we get these seperated.
-                string varSeverity = "INFO"; // look at testresults This could be defaulted to see message detail untill we get these seperated. 
-                string varResult = "PASS"; // look at testresults This could be defaulted to see message detail untill we get these seperated.
-                string varMessageDetail = String.Format("The test case PASSED with no warnings!  "
-                    + "PASS count = {0}.  FAIL count = {1}.  ERROR count = {2}.  WARNING count = {3}.",
-                    testResults[PASS], testResults[FAIL], testResults[ERROR], testResults[WARNING]);
-                             
-                InsertTestResultToLog.addTestResult(varTestCaseId, varTestCaseName, varTestEnvironment, varLastQformUid, varEmailAddress, varPassword, varCategory, varSeverity, varResult, varMessageDetail);
-                varQFormUIDTest = null;
-                
-            }
-                   
         }
     }
 }

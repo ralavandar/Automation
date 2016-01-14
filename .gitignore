@@ -5,3 +5,4 @@ TestAutomation/.vs/**
 *.suo
 
 TestAutomation/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+*.user
