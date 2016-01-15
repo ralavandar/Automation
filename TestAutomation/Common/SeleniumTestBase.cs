@@ -72,11 +72,26 @@ namespace TestAutomation
                     objDriver = new RemoteWebDriver(new Uri("http://hub.browserstack.com/wd/hub/"), caps, TimeSpan.FromSeconds(840));
                     break;
                 case "SAUCELABS":
+                    // IE 11
                     caps.SetCapability("browserName", "Internet Explorer");
                     caps.SetCapability("platform", "Windows 7");
                     caps.SetCapability("version", "11.0");
+                    // iPhone
+                    //caps.SetCapability("browserName", "iPhone");
+                    //caps.SetCapability("platform", "OS X 10.10");
+                    //caps.SetCapability("version", "9.2");
+                    //caps.SetCapability("deviceName", "iPhone 6");
+                    //caps.SetCapability("deviceOrientation", "portrait");
+                    // Android
+                    //caps.SetCapability("browserName", "Android");
+                    //caps.SetCapability("platform", "Linux");
+                    //caps.SetCapability("version", "4.4");
+                    //caps.SetCapability("deviceName", "Samsung Galaxy S4 Emulator");
+                    //caps.SetCapability("deviceOrientation", "portrait");
+
                     caps.SetCapability("username", "mpschupp");
                     caps.SetCapability("accessKey", "ca34f7d2-89d2-46be-bc4b-8aad12f2fedb");
+                    caps.SetCapability("name", NUnit.Framework.TestContext.CurrentContext.Test.Name);
                     objDriver = new RemoteWebDriver(new Uri("http://ondemand.saucelabs.com:80/wd/hub"), caps, TimeSpan.FromSeconds(600));
                     break;
                 default:    // Firefox

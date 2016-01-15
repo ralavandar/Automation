@@ -28,8 +28,28 @@ namespace TestAutomation.LendingTree
         [TearDown]
         public void TeardownTest()
         {
-            driver.Quit();
-            Common.ReportFinalResults();
+            //driver.Quit();
+            //Common.ReportFinalResults();
+
+            //Experimenting with a new TearDown for Sauce Labs integration
+            string result = Common.CalculateFinalTestResult();
+
+            try
+            {
+                // This is experimental to see if I can report a result back to our Sauce Labs dashboard
+                bool passed = (result == Common.PASS);
+                if (testData["BrowserType"] == "SAUCELABS")
+                {
+                    ((IJavaScriptExecutor)driver).ExecuteScript("sauce:job-result=" + (passed ? "passed" : "failed"));
+                }
+            }
+            finally
+            {
+                driver.Quit();
+                // If the test did not PASS, then force an Assert exception, so the test case status in NUnit GUI will turn red
+                if (result != Common.PASS)
+                    NUnit.Framework.Assert.Fail();
+            }
         }
 
         [Test]

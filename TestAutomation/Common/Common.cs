@@ -76,7 +76,7 @@ namespace TestAutomation
                 ReportEvent(FAIL, String.Format("The test case FAILED.  Please investigate the cause.  PASS count = {0}.  "
                     + "FAIL count = {1}.  ERROR count = {2}.  WARNING count = {3}.", testResults[PASS],
                     testResults[FAIL], testResults[ERROR], testResults[WARNING]));
-                // TODO: Try forcing an Assert expception, so the test case status in NUnit will turn red
+                // Force an Assert exception so the test case status in NUnit will turn red
                 NUnit.Framework.Assert.Fail("The test case Failed!  Please check the log for details.");
             }
             else if (testResults[WARNING] > 0)
@@ -103,6 +103,53 @@ namespace TestAutomation
             }
         }
 
+        /// <summary>
+        /// Evaluate the counts of individual PASS, FAIL, ERROR and WARNING events - and determine a final PASS/FAIL
+        /// for the entire test case.
+        /// This may eventually replace the above method ReportFinalResults()
+        /// </summary>
+        /// <returns>result - PASS, FAIL, or ERROR</returns>
+        public static string CalculateFinalTestResult()
+        {
+            // RULES:
+            // If there are any FAILs, then the overall test is a fail
+            // If there are any ERRORs, then the overall test is a fail
+            // If there are any WARNINGs, but no FAILs or ERRORs, then the overall test is a PASS
+
+            if ((testResults[FAIL] > 0) || (testResults[ERROR] > 0))
+            {
+                // Report the overall test case status as FAIL
+                ReportEvent(FAIL, String.Format("The test case FAILED.  Please investigate the cause.  PASS count = {0}.  "
+                    + "FAIL count = {1}.  ERROR count = {2}.  WARNING count = {3}.", testResults[PASS],
+                    testResults[FAIL], testResults[ERROR], testResults[WARNING]));
+                return FAIL;
+            }
+            else if (testResults[WARNING] > 0)
+            {
+                // Report the test case as a PASS with warnings
+                ReportEvent(WARNING, String.Format("The test case PASSED, but with warnings.  Please investigate the "
+                    + "warnings.  PASS count = {0}.  FAIL count = {1}.  ERROR count = {2}.  WARNING count = {3}.",
+                    testResults[PASS], testResults[FAIL], testResults[ERROR], testResults[WARNING]));
+                return PASS;
+            }
+            else if ((testResults[PASS].Equals(0)) && (testResults[FAIL].Equals(0)) && (testResults[ERROR].Equals(0)))
+            {
+                // Report the test case as an ERROR
+                ReportEvent(ERROR, String.Format("The test case results are inconclusive.  There were no PASS, FAIL, "
+                    + "or ERROR events logged.  Please check the NUnit Console/Logs for exceptions. "
+                    + "PASS count = {0}.  FAIL count = {1}.  ERROR count = {2}.  WARNING count = {3}.",
+                    testResults[PASS], testResults[FAIL], testResults[ERROR], testResults[WARNING]));
+                return ERROR;
+            }
+            else
+            {
+                // Report the test case as a PASS with no warnings
+                ReportEvent(PASS, String.Format("The test case PASSED with no warnings!  "
+                    + "PASS count = {0}.  FAIL count = {1}.  ERROR count = {2}.  WARNING count = {3}.",
+                    testResults[PASS], testResults[FAIL], testResults[ERROR], testResults[WARNING]));
+                return PASS;
+            }
+        }
 
         public static Int32 RandomNumber(Int32 min, Int32 max)
         {

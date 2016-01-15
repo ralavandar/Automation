@@ -27,8 +27,24 @@ namespace TestAutomation.LendingTree.tlm
         [TearDown]
         public void TeardownTest()
         {
-           driver.Quit();
-           Common.ReportFinalResults();
+            string result = Common.CalculateFinalTestResult();
+
+            try
+            {
+                // This is experimental to see if I can report a result back to our Sauce Labs dashboard
+                bool passed = (result == Common.PASS);
+                if (testData["BrowserType"] == "SAUCELABS")
+                {
+                    ((IJavaScriptExecutor)driver).ExecuteScript("sauce:job-result=" + (passed ? "passed" : "failed"));
+                }
+            }
+            finally
+            {
+                driver.Quit();
+                // If the test did not PASS, then force an Assert exception, so the test case status in NUnit GUI will turn red
+                if (result != Common.PASS)
+                    NUnit.Framework.Assert.Fail();       
+            }
         }
 
         private void FinishTest()
@@ -75,7 +91,7 @@ namespace TestAutomation.LendingTree.tlm
 
             // Verify error message on Phone field
             System.Threading.Thread.Sleep(2000);
-            Assert.IsTrue(b2.DoesPageContainText("Please enter a valid phone number."));
+            Validation.IsTrue(b2.DoesPageContainText("Please enter a valid phone number."));
 
             // Populate the Dictionary with valid phone and re-fill step 10
             testData["BorrowerHomePhone1"] = "407";
@@ -97,7 +113,7 @@ namespace TestAutomation.LendingTree.tlm
 
             // Verify landed on cross-sell step (5) 
             b2.PrepareStep(5, true);
-            Assert.IsTrue(b2.DoesPageContainText("Hmmm… based on the info you've given, you may have better success at getting funded for your business in other ways."));
+            Validation.IsTrue(b2.DoesPageContainText("Hmmm… based on the info you've given, you may have better success at getting funded for your business in other ways."));
             b2.FillOutStep(steps[5]);
             b2.ConcludeStep();
 
