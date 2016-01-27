@@ -50,12 +50,12 @@ namespace TestAutomation.LendingTree.tlm
                 // Add steps for purchase current realtor and realtor consult
                 if (testData["LoanType"].ToUpper() == "PURCHASE")
                 {
-                    if (testData["CurrentREAgentYesNo"].ToUpper() == "Y")
-                        // Current RE Agent
-                        numSteps++;
-                    else
-                        // Current RE Agent and Realtor Consult
+                    if ((testData["FoundNewHomeYesNo"].ToUpper() == "N") && (testData["CurrentREAgentYesNo"].ToUpper() == "N"))
+                        // 'Current RE Agent' and 'Realtor Consult steps'
                         numSteps = numSteps + 2;
+                    else
+                        // Just 'Current RE Agent' step
+                        numSteps++;
                 }
 
                 // Add two steps for home services opt-in questions if applicable
@@ -160,12 +160,16 @@ namespace TestAutomation.LendingTree.tlm
                 if (testData["LoanType"].ToUpper() == "PURCHASE")
                 {
                     Steps[stepNum] = Step(
+                                new FossaField(Wait, "Wait"),
+                                new FossaField(GetAngularQFormUID, "m2"),
+                                new FossaField(Wait, "Wait"),
                                 new FossaField(Fill, By.Id("property-geo-search"), "PropertyCity"),
                                 new FossaField(Append, By.Id("property-geo-search"), "PropertyState"),
                                 new FossaField(Wait, "Wait"),
                                 new FossaField(ClickElement, By.ClassName("dropdown-menu")),
                                 new FossaField(Wait, "Wait"),
-                                new FossaField(GetAngularQFormUID, "m2"));
+                                new FossaField(ClickElement, By.ClassName("form-header")),
+                                new FossaField(Wait, "Wait"));
                     stepNum = stepNum + 1;
                     // Found home
                     switch (testData["FoundNewHomeYesNo"])
@@ -198,19 +202,19 @@ namespace TestAutomation.LendingTree.tlm
                     }
                     stepNum = stepNum + 1;
 
-                    // Real estate agent consult (only if CurrentREAgentYesNo = No) 
-                    if (testData["CurrentREAgentYesNo"].ToUpper() == "N")
+                    // Real estate agent consult (only if CurrentREAgentYesNo = No and FoundNewHome = NO) 
+                    if ((testData["FoundNewHomeYesNo"].ToUpper() == "N") && (testData["CurrentREAgentYesNo"].ToUpper() == "N"))
                     {
                         switch (testData["RealtorConsultYesNo"])
                         {
-                            case "N":
-                                Steps[stepNum] = Step(
-                                    new FossaField(AutoAdvance(ClickElement), By.CssSelector("label[for=realtor-optin-no]")),
-                                    new FossaField(Wait, "Wait"));
-                                break;
                             case "Y":
                                 Steps[stepNum] = Step(
                                     new FossaField(AutoAdvance(ClickElement), By.CssSelector("label[for=realtor-optin-yes]")),
+                                    new FossaField(Wait, "Wait"));
+                                break;
+                            default:
+                                Steps[stepNum] = Step(
+                                    new FossaField(AutoAdvance(ClickElement), By.CssSelector("label[for=realtor-optin-no]")),
                                     new FossaField(Wait, "Wait"));
                                 break;
                         }

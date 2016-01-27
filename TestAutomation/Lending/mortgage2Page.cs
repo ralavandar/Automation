@@ -201,6 +201,8 @@ namespace TestAutomation.LendingTree.tla
 
                 Steps[14] = Step(
                                 new FossaField(Fill, "street1", "BorrowerStreetAddress"),
+                                new FossaField(Wait, "Wait"),
+                                new FossaField(GetAngularQFormUID, "mortgage2"),
                                 new FossaField(Fill, "zip-code-input", "BorrowerZipCode"),
                                 new FossaField(Wait, "Wait"),
                                 new FossaField(ClickButton, "next"));
@@ -320,11 +322,22 @@ namespace TestAutomation.LendingTree.tla
                                 new FossaField(SelectByText, "property-city", "PropertyCity"));
                 Steps[4] = Step(
                                 new FossaField(ClickRadioYesNo, "new-home-{0}", "FoundNewHomeYesNo"));
-                Steps[5] = Step(
+
+                // For step 5, only show inline-realtor-optin if FoundNewHomeYesNo = No AND CurrentREAgentYesNo = No
+                if ((testData["FoundNewHomeYesNo"].ToUpper() == "N") && (testData["CurrentREAgentYesNo"].ToUpper() == "N"))
+                {
+                    Steps[5] = Step(
                                 new FossaField(ClickRadioYesNo, "current-realestate-agent-{0}", "CurrentREAgentYesNo"),
                                 new FossaField(Wait, "Wait"),
-                                new FossaField(GetAngularQFormUID, "mortgage2"),
                                 new FossaField(ClickRadioYesNo, "inline-realtor-optin-{0}", "RealtorConsultYesNo"));
+                }
+                else
+                {
+                    Steps[5] = Step(
+                                new FossaField(ClickRadioYesNo, "current-realestate-agent-{0}", "CurrentREAgentYesNo"),
+                                new FossaField(Wait, "Wait"));
+                }
+
                 Steps[6] = Step(
                                 new FossaField(SelectByText, "purchase-price", "PurchasePrice"));
                 Steps[7] = Step(
@@ -342,7 +355,6 @@ namespace TestAutomation.LendingTree.tla
                 Steps[3] = Step(
                                 new FossaField(Fill, "property-zip-code-input", "PropertyZipCode"),
                                 new FossaField(Wait, "Wait"),
-                                new FossaField(GetAngularQFormUID, "mortgage2"),
                                 new FossaField(ClickButton, "next"));
                 Steps[4] = Step(
                                 new FossaField(SelectByText, "estproperty-value", "RefiPropertyValue"));
