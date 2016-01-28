@@ -231,6 +231,7 @@ namespace TestAutomation.LendingTree
                 // Specific checks on MyLendingTree
                 System.Threading.Thread.Sleep(1000);
 
+                // Verify URL contains express-offers
                 try
                 {
                     Assert.IsTrue(driver.Url.Contains("/express-offers"));
@@ -246,6 +247,7 @@ namespace TestAutomation.LendingTree
                             driver.Url));
                 }
 
+                // Verify URL contains expected GUID
                 try
                 {
                     Assert.IsTrue(driver.Url.Contains("&guid=" + strQFormUID));
@@ -261,9 +263,18 @@ namespace TestAutomation.LendingTree
                             driver.Url));
                 }
 
-                // Validate page header/nav contains unauthorized text
-                Validation.StringContains("You are not signed in but your personal info is secure",
-                    driver.FindElement(By.Id("site-navigation-row-express-offers")).FindElement(By.ClassName("message")).Text);
+                // Verify page header/nav contains unauthorized text
+                try
+                {
+                    WaitForElementDisplayed(By.Id("site-navigation-wrapper-express-offers"), 15);
+                    Validation.StringContains("You are not signed in but your personal info is secure",
+                        driver.FindElement(By.Id("site-navigation-wrapper-express-offers")).FindElement(By.ClassName("message")).Text);       
+                }
+                catch (AssertionException)
+                {
+                    Common.ReportEvent(Common.FAIL,
+                        "The TestString does not contain the expected value, or the element was not found/visible.  Expected: 'You are not signed in but your personal info is secure'.");
+                }
             }
             else
             {
