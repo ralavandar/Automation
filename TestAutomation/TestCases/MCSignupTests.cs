@@ -53,7 +53,7 @@ namespace TestAutomation.LendingTree.FreeCreditUsers
             string cssS = "h3[ng-show='outOfWallet.questions.length > 1']";
             try
             {
-                mcSignUp.WaitForElement(By.CssSelector(cssS), 30);
+                mcSignUp.WaitForElement(By.CssSelector(cssS), 60);
             }
             catch
             {
@@ -98,28 +98,49 @@ namespace TestAutomation.LendingTree.FreeCreditUsers
 
             }
 
-            //Email Address & Password Step
+            //Email Verification step
+            stepFound = mcSignUp.CheckMCSignUpStep("step/14");
+            bool waiting = true;
+
+            while (waiting == true)
+            {
+                int counter = 1;
+                //System.Threading.Thread.Sleep(1000);
+                if (stepFound == true)
+                {
+                    waiting = false;
+                }
+                if (counter > 30 && waiting == true)
+                {
+                    Common.ReportEvent(Common.WARNING, String.Format("Searching for Step 14, waited for 30 seconds, no step 2 found, exiting wait loop"));
+                    waiting = false;
+                }
+                else if (counter < 30 && waiting == true)
+                {
+                    Common.ReportEvent(Common.INFO, String.Format("Searching for Step 14, waiting 1 second"));
+                    System.Threading.Thread.Sleep(1000);
+                    stepFound = mcSignUp.CheckMCSignUpStep("step/14");
+                    Common.ReportEvent(Common.INFO, String.Format("stepFound = {0}", stepFound));
+                    Common.ReportEvent(Common.INFO, String.Format("waiting = {0}", waiting));
+                    waiting = true;
+                    counter = counter + 1;
+                }
+            }
+            cssS = "h3[class='verify-email-header']";
             try
             {
-                mcSignUp.WaitForElement(By.Id("emailLogin"), 30);
+                mcSignUp.WaitForElement(By.CssSelector(cssS), 60);
+                
             }
             catch
             {
-                Common.ReportEvent(Common.FAIL, String.Format("FAILED to displayed Desired Element: emailLogin"));
+                Common.ReportEvent(Common.FAIL, String.Format("FAILED to displayed Desired Element: {0}", cssS));
                 string strFilename = "ElementNotFound";
                 mcSignUp.RecordScreenshot(strFilename);
                 Assert.Fail();
             }
-
-            stepFound = mcSignUp.VerifyMCSignUpStep("step/13");
-            if (stepFound == true)
-            {
-                mcSignUp.PopulateEmailAddress(testData["EmailAddress"]);
-                System.Threading.Thread.Sleep(2000);
-                mcSignUp.PopulatePassword(testData["Password"]);
-                mcSignUp.ClickButton();
-                
-            }
+            //Accept Email Verification URL   
+            mcSignUp.AcceptEmailValidation(testData["Password"]);
 
             //Validate successful Sign Up
             mcSignUp.VerifyFreeCreditSignUpSuccess(testData);
@@ -219,27 +240,49 @@ namespace TestAutomation.LendingTree.FreeCreditUsers
                 stepFound = false;
             }
 
-            //Email Address & Password Step
+            //Email Verification step
+            stepFound = mcSignUp.CheckMCSignUpStep("step/14");
+            bool waiting = true;
+
+            while (waiting == true)
+            {
+                int counter = 1;
+                //System.Threading.Thread.Sleep(1000);
+                if (stepFound == true)
+                {
+                    waiting = false;
+                }
+                if (counter > 30 && waiting == true)
+                {
+                    Common.ReportEvent(Common.WARNING, String.Format("Searching for Step 14, waited for 30 seconds, no step 2 found, exiting wait loop"));
+                    waiting = false;
+                }
+                else if (counter < 30 && waiting == true)
+                {
+                    Common.ReportEvent(Common.INFO, String.Format("Searching for Step 14, waiting 1 second"));
+                    System.Threading.Thread.Sleep(1000);
+                    stepFound = mcSignUp.CheckMCSignUpStep("step/14");
+                    Common.ReportEvent(Common.INFO, String.Format("stepFound = {0}", stepFound));
+                    Common.ReportEvent(Common.INFO, String.Format("waiting = {0}", waiting));
+                    waiting = true;
+                    counter = counter + 1;
+                }
+            }
+            cssS = "h3[class='verify-email-header']";
             try
             {
-                mcSignUp.WaitForElement(By.Id("emailLogin"), 30);
+                mcSignUp.WaitForElement(By.CssSelector(cssS), 60);
+
             }
             catch
             {
-                Common.ReportEvent(Common.FAIL, String.Format("FAILED to displayed Desired Element: emailLogin"));
+                Common.ReportEvent(Common.FAIL, String.Format("FAILED to displayed Desired Element: {0}", cssS));
                 string strFilename = "ElementNotFound";
                 mcSignUp.RecordScreenshot(strFilename);
                 Assert.Fail();
             }
-            stepFound = mcSignUp.VerifyMCSignUpStep("step/13");
-            if (stepFound == true)
-            {
-                mcSignUp.PopulateEmailAddress(testData["EmailAddress"]);
-                mcSignUp.PopulatePassword(testData["Password"]);
-                System.Threading.Thread.Sleep(2000);
-                mcSignUp.ClickButton();
-                
-            }
+            //Accept Email Verification URL   
+            mcSignUp.AcceptEmailValidation(testData["Password"]);
 
             //Validate successful Sign Up
             mcSignUp.VerifyFreeCreditSignUpSuccess(testData);
@@ -377,7 +420,7 @@ namespace TestAutomation.LendingTree.FreeCreditUsers
             }
 
             //Account Locked result
-            stepFound = mcSignUp.VerifyMCSignUpStep("step/14/");
+            stepFound = mcSignUp.VerifyMCSignUpStep("step/15/");
             if (stepFound == true)
             {
                 mcSignUp.VerifyOOWPrestep("locked");
@@ -411,7 +454,7 @@ namespace TestAutomation.LendingTree.FreeCreditUsers
                 Assert.Fail();
             }
 
-            bool stepFound = mcSignUp.VerifyMCSignUpStep("step/14/");
+            bool stepFound = mcSignUp.VerifyMCSignUpStep("step/15/");
             if (stepFound == true)
             {
                 mcSignUp.VerifyOOWPrestep(testData["FCSignUpResult"]);
@@ -497,18 +540,51 @@ namespace TestAutomation.LendingTree.FreeCreditUsers
 
             }
 
-            //Email Address & Password Step
-            mcSignUp.WaitForElement(By.Id("emailLogin"), 30);
-            stepFound = mcSignUp.VerifyMCSignUpStep("step/13");
-            if (stepFound == true)
-            {
-                mcSignUp.PopulateEmailAddress(testData["EmailAddress"]);
-                mcSignUp.PopulatePassword(testData["Password"]);
-                System.Threading.Thread.Sleep(3000);
-                mcSignUp.ClickButton();
-            }
+            //Email Verification step
+            stepFound = mcSignUp.CheckMCSignUpStep("step/14");
+            bool waiting = true;
 
-            //Validate successful Sign Up            
+            while (waiting == true)
+            {
+                int counter = 1;
+                //System.Threading.Thread.Sleep(1000);
+                if (stepFound == true)
+                {
+                    waiting = false;
+                }
+                if (counter > 30 && waiting == true)
+                {
+                    Common.ReportEvent(Common.WARNING, String.Format("Searching for Step 14, waited for 30 seconds, no step 2 found, exiting wait loop"));
+                    waiting = false;
+                }
+                else if (counter < 30 && waiting == true)
+                {
+                    Common.ReportEvent(Common.INFO, String.Format("Searching for Step 14, waiting 1 second"));
+                    System.Threading.Thread.Sleep(1000);
+                    stepFound = mcSignUp.CheckMCSignUpStep("step/14");
+                    Common.ReportEvent(Common.INFO, String.Format("stepFound = {0}", stepFound));
+                    Common.ReportEvent(Common.INFO, String.Format("waiting = {0}", waiting));
+                    waiting = true;
+                    counter = counter + 1;
+                }
+            }
+            cssS = "h3[class='verify-email-header']";
+            try
+            {
+                mcSignUp.WaitForElement(By.CssSelector(cssS), 60);
+
+            }
+            catch
+            {
+                Common.ReportEvent(Common.FAIL, String.Format("FAILED to displayed Desired Element: {0}", cssS));
+                string strFilename = "ElementNotFound";
+                mcSignUp.RecordScreenshot(strFilename);
+                Assert.Fail();
+            }
+            //Accept Email Verification URL   
+            mcSignUp.AcceptEmailValidation(testData["Password"]);
+
+            //Validate successful Sign Up
             mcSignUp.VerifyFreeCreditSignUpSuccess(testData);
         }
     }

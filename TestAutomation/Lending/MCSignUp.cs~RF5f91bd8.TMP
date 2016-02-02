@@ -264,27 +264,7 @@ namespace TestAutomation.LendingTree
 
         }
 
-        public bool CheckMCSignUpStep(string step)
-        {
 
-            //Verify the correct step has been presented for the MyLT sign up outside flow form.            
-            string strURL = mcSignUpDriver.Url;
-            bool StepFound;
-            StepFound = strURL.Contains(step);
-
-            if (StepFound == true)
-            {
-                Common.ReportEvent(Common.PASS, String.Format("Successfully displayed Step: {0}", step));
-                return StepFound;
-            }
-            else
-            {
-                Common.ReportEvent(Common.INFO, String.Format("WAITING to display Step: {0}", step));
-                return StepFound;
-            }
-
-
-        }
 
         public void PopulateFirstName(string firstName)
         {
@@ -318,9 +298,9 @@ namespace TestAutomation.LendingTree
         public void PopulateDateofBirth(string dobMonth, string dobDay, string dobYear)
         {
             //used to populate date of birth on the MyLT outside sign up flow
-            SelectElement Month = new SelectElement(mcSignUpDriver.FindElement(By.Id("dobMonthSignUp")));
-            SelectElement Day = new SelectElement(mcSignUpDriver.FindElement(By.Id("dobDaySignUp")));
-            SelectElement Year = new SelectElement(mcSignUpDriver.FindElement(By.Id("dobYearSignUp")));
+            SelectElement Month = new SelectElement(mcSignUpDriver.FindElement(By.Id("dobMonth")));
+            SelectElement Day = new SelectElement(mcSignUpDriver.FindElement(By.Id("dobDay")));
+            SelectElement Year = new SelectElement(mcSignUpDriver.FindElement(By.Id("dobYear")));
 
             Month.SelectByText(dobMonth);
             Day.SelectByText(dobDay);
@@ -568,15 +548,15 @@ namespace TestAutomation.LendingTree
             //Verify Destination URL
             string strURL = mcSignUpDriver.Url;
             bool success;
-            success = strURL.Contains("actions");
+            success = strURL.Contains("credit-report");
             if (success == true)
             {
-                Common.ReportEvent(Common.PASS, String.Format("Test Case Name: {0} -- SUCCESSFULLY logged into myLT for {1} {2}",
+                Common.ReportEvent(Common.PASS, String.Format("Test Case Name: {0} -- SUCCESSFULLY displayed credit report for {1} {2}",
                     testData["TestCaseName"], testData["ConsumerFirstName"], testData["ConsumerLastName"]));
             }
             else
             {
-                Common.ReportEvent(Common.FAIL, String.Format("Test Case Name: {0} -- FAILED TO logged into myLT for for {1} {2}",
+                Common.ReportEvent(Common.FAIL, String.Format("Test Case Name: {0} -- FAILED TO display credit report for {1} {2}",
                     testData["TestCaseName"], testData["ConsumerFirstName"], testData["ConsumerLastName"]));
                 string strFilename = "VerifyFreeCreditSignUpSuccess_URLnotFound";
                 RecordScreenshot(strFilename);
@@ -629,44 +609,14 @@ namespace TestAutomation.LendingTree
                 PopulateEmailAddress(testData["EmailAddress"]);
                 System.Threading.Thread.Sleep(2000);
                 PopulatePassword(testData["Password"]);
-                System.Threading.Thread.Sleep(3000);
-                //ClickButton();
-                WaitForElement(By.CssSelector("button.main_button.submit"), 15);
-                IWebElement CreateAccount = mcSignUpDriver.FindElement(By.CssSelector("button.main_button.submit"));
-                CreateAccount.Click();
-                Common.ReportEvent(Common.INFO, String.Format("Clicked Create Account Button"));
+                ClickButton();
+                System.Threading.Thread.Sleep(2000);
                 stepFound = false;
             }
 
 
             //Sign Up Step 2
-            bool waiting = true;
-
-            while (waiting == true)
-            {
-                int counter = 1;
-                //System.Threading.Thread.Sleep(1000);
-                if (stepFound==true)
-                {
-                    waiting = false;
-                }
-                if (counter > 30 && waiting==true)
-                {
-                    Common.ReportEvent(Common.WARNING, String.Format("Searching for Step 2, waited for 30 seconds, no step 2 found, exiting wait loop"));
-                    waiting = false;
-                }
-                else if (counter < 30 && waiting==true)
-                {
-                    Common.ReportEvent(Common.INFO, String.Format("Searching for Step 2, waiting 1 second"));
-                    System.Threading.Thread.Sleep(1000);
-                    stepFound = CheckMCSignUpStep("step/2/");
-                    Common.ReportEvent(Common.INFO, String.Format("stepFound = {0}",stepFound));
-                    Common.ReportEvent(Common.INFO, String.Format("waiting = {0}", waiting));
-                    waiting = true;
-                    counter = counter + 1;
-                }
-            }
-            
+            stepFound = VerifyMCSignUpStep("step/2/");
             if (stepFound == true)
             {
                 PopulateZipCode(testData["ConsumerZipCode"]);
@@ -852,42 +802,6 @@ namespace TestAutomation.LendingTree
 
         }
 
-        public void AcceptEmailValidation(string email)
-        {
-            string strURL = "http://mailinator.com/inbox.jsp?to=" + email;
-            Common.ReportEvent(Common.INFO, String.Format("Mailinator URL for this test is {0}", strURL));
-            mcSignUpDriver.Navigate().GoToUrl(strURL);
-            string cssS = "div[class='subject ng-binding']";
-            ReadOnlyCollection<IWebElement> emailSubjects = mcSignUpDriver.FindElements(By.CssSelector(cssS));
-            int subjectCount = emailSubjects.Count();
-            Common.ReportEvent(Common.INFO, String.Format("Email Subject Count  {0}", subjectCount));
-            for (int i = 0; i < subjectCount;i++)
-            {
-                string subject = emailSubjects.ElementAt(i).Text;
-                Common.ReportEvent(Common.INFO, String.Format("Email Subject Index {0}, Email Subject Value {1}", i, subject));
-                if (subject == "LendingTree Account Validation")
-                {
-                    Common.ReportEvent(Common.INFO, String.Format("Desired Email Subject Found"));
-                    emailSubjects.ElementAt(i).Click();
-                }
-            }
-            System.Threading.Thread.Sleep(2000);
-            IWebElement frame = mcSignUpDriver.FindElement(By.Name("rendermail"));
-            mcSignUpDriver.SwitchTo().Frame(frame);
-            IWebElement mcURL = mcSignUpDriver.FindElement(By.PartialLinkText("verifyaccountaddress"));
-            strURL = mcURL.Text;
-            mcSignUpDriver.Navigate().GoToUrl(strURL);
-            IWebElement signInButton = mcSignUpDriver.FindElement(By.CssSelector("button.main-button.sign-in-button"));
-            IWebElement userName = mcSignUpDriver.FindElement(By.Id("UserName"));
-            IWebElement pass = mcSignUpDriver.FindElement(By.Id("Password"));
-            string password = email;
-            email = email + "@mailinator.com";
-            userName.SendKeys(email);
-            pass.SendKeys(password);
-            signInButton.Click();
-            
-
-        }
         public void UpdateLockedDateOfBirth(string month, string day, string year)
         {
             //Function to update the LOCKED scenarios with a known locked birth date.
