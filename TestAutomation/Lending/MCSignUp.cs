@@ -100,7 +100,26 @@ namespace TestAutomation.LendingTree
                 mcSignUpDriver.Navigate().GoToUrl(strUrl);
             }
             System.Threading.Thread.Sleep(2000);
+            string cssS = "div[class='loader spinner-wrapper']";
+            IWebElement loader = mcSignUpDriver.FindElement(By.CssSelector(cssS));
 
+            int counter = 1;
+            while (counter < 60)
+            {
+                string style = loader.GetAttribute("style");
+                Common.ReportEvent(Common.INFO, String.Format("Loader Style: {0}", style));
+                if (style.Contains("visible"))
+                {
+                    System.Threading.Thread.Sleep(1000);
+                    Common.ReportEvent(Common.INFO, String.Format("Loader Still Visible", style));
+                    counter = counter + 1;
+                }
+                else
+                {
+                    Common.ReportEvent(Common.INFO, String.Format("Loader Gone", style));
+                    counter = 100;
+                }
+            }
         }
 
         public void     MCOfferPageNavigation(Dictionary<string, string> testData)
@@ -757,7 +776,7 @@ namespace TestAutomation.LendingTree
             acceptChx.Click();
             System.Threading.Thread.Sleep(2000);
             continueButton.Click();
-            System.Threading.Thread.Sleep(2000);
+            System.Threading.Thread.Sleep(5000);
 
             //Add Additional PII Elements
             IWebElement street = mcSignUpDriver.FindElement(By.Name("addressStreet"));
@@ -771,7 +790,6 @@ namespace TestAutomation.LendingTree
             //Clear PII Elements
             fname.Clear();
             lname.Clear();
-            street.Clear();
             zcode.Clear();
 
 
@@ -780,6 +798,7 @@ namespace TestAutomation.LendingTree
             lname.SendKeys(testData["ConsumerLastName"]);
             zcode.SendKeys(testData["ConsumerZipCode"]);
             System.Threading.Thread.Sleep(5000);
+            street.Clear();
             street.SendKeys(testData["ConsumerStreetAddress"]);
             city.Clear();
             city.SendKeys(testData["ConsumerCity"]);
@@ -802,6 +821,7 @@ namespace TestAutomation.LendingTree
             int n = 1;
             do
             {
+                user = mcSignUpDriver.FindElement(By.ClassName("user-icon"));
                 if (user.Text.Contains(fullName))
                 {
                     Common.ReportEvent(Common.PASS, String.Format("Test Case Name: {0} -- MyLendingTree Nav successfully contains expected Consumer Name: {1} {2}.  Loop Count = {3}",
@@ -810,8 +830,7 @@ namespace TestAutomation.LendingTree
                 }
                 else
                 {
-                    Common.ReportEvent(Common.INFO, String.Format("User-Icon found on page, Waiting for Consumer Name to populate.  Loop Count={0}", n));
-                    user = mcSignUpDriver.FindElement(By.ClassName("user-icon"));
+                    Common.ReportEvent(Common.INFO, String.Format("User-Icon found on page, Waiting for Consumer Name to populate.  Loop Count={0}", n));                    
                     System.Threading.Thread.Sleep(1000);
                     n = n + 1;
                 }
@@ -828,7 +847,7 @@ namespace TestAutomation.LendingTree
 
             //Verify Credit Score on Report displayed.
             //string cssS = "a[nav-trigger class=ng-binding]";
-            IWebElement creditScore = mcSignUpDriver.FindElement(By.ClassName("weather-report"));  //This is the Credit score link the the menu header
+            IWebElement creditScore = mcSignUpDriver.FindElement(By.ClassName("credit-link"));  //This is the Credit score link the the menu header
             if (creditScore.Text.Contains(testData["ExpectedCreditScore"]))
             {
                 Common.ReportEvent(Common.PASS, String.Format("Test Case Name: {0} -- SUCCESSFULLY displayed credit score for {1} {2} with expected credit score value of {3}.  CSS Text ={4}",
@@ -1036,7 +1055,7 @@ namespace TestAutomation.LendingTree
             string strSQL = "USE LENDX";
             //strSQL = strSQL + " GO";
             strSQL = strSQL + " SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED";
-            strSQL = strSQL + " select distinct top 20 CN.Consumerid,C.emailaddress, ac.TreeAuthUserUID, Count(Q.QFormid) from tContact C";
+            strSQL = strSQL + " select distinct top 40 CN.Consumerid,C.emailaddress, ac.TreeAuthUserUID, Count(Q.QFormid) from tContact C";
             strSQL = strSQL + " join tborrowercontact BC on BC.Contactid = C.contactid";
             strSQL = strSQL + " join tQform Q on Q.qformid = BC.qformid";
             strSQL = strSQL + " join tconsumer Cn on Cn.currentcontactid=C.contactid";
