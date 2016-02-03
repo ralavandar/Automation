@@ -266,9 +266,9 @@ namespace TestAutomation.LendingTree
                 // Verify page header/nav contains unauthorized text
                 try
                 {
-                    WaitForElementDisplayed(By.Id("site-navigation-wrapper-express-offers"), 15);
+                    WaitForElementDisplayed(By.ClassName("message"), 15);
                     Validation.StringContains("You are not signed in but your personal info is secure",
-                        driver.FindElement(By.Id("site-navigation-wrapper-express-offers")).FindElement(By.ClassName("message")).Text);       
+                        driver.FindElement(By.ClassName("message")).Text);       
                 }
                 catch (AssertionException)
                 {
