@@ -561,7 +561,10 @@ namespace TestAutomation.LendingTree.tlm
                 }
 
                 // 'What's Next' step (the last step in the form)
-                Steps[stepNum] = Step(new FossaField(Wait, "Wait"));
+                Steps[stepNum] = Step(
+                                new FossaField(Wait5Sec, "Wait"),
+                                new FossaField(ClickElement, By.ClassName("form-header")),
+                                new FossaField(AutoAdvance(ClickElement), By.Id("next")));
                 return Steps;
             }
         }
