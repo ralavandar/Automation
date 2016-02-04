@@ -587,7 +587,7 @@ namespace TestAutomation.LendingTree
             //Verify Destination URL
             string strURL = mcSignUpDriver.Url;
             bool success;
-            success = strURL.Contains("actions");
+            success = strURL.Contains("credit-report");
             if (success == true)
             {
                 Common.ReportEvent(Common.PASS, String.Format("Test Case Name: {0} -- SUCCESSFULLY logged into myLT for {1} {2}",
