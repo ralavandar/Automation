@@ -267,7 +267,7 @@ namespace TestAutomation.LendingTree.FreeCreditUsers
             }
             
             //Verify CreditCard Page is displayed
-            cssS = "h1[id='vertical-overview-header']";
+            cssS = "div[id='vertical-overview-header']";
             try
             {
                 mcSignUp.WaitForElement(By.CssSelector(cssS), 30);
@@ -280,7 +280,7 @@ namespace TestAutomation.LendingTree.FreeCreditUsers
                 Assert.Fail();
             }
             IWebElement h1= driver.FindElement(By.CssSelector(cssS));
-            if (h1.Text.Contains("Credit Cards"))
+            if (h1.Text.Contains("Credit Card"))
             {
                 Common.ReportEvent(Common.PASS, String.Format("{0} successfully passed", testData["TestCaseName"]));
             }
