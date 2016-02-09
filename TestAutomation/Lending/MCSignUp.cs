@@ -876,6 +876,7 @@ namespace TestAutomation.LendingTree
             string strURL = "http://mailinator.com/inbox.jsp?to=" + email;
             Common.ReportEvent(Common.INFO, String.Format("Mailinator URL for this test is {0}", strURL));
             mcSignUpDriver.Navigate().GoToUrl(strURL);
+            System.Threading.Thread.Sleep(2000);
             string cssS = "div[class='subject ng-binding']";
             ReadOnlyCollection<IWebElement> emailSubjects = mcSignUpDriver.FindElements(By.CssSelector(cssS));
             int subjectCount = emailSubjects.Count();
@@ -884,7 +885,7 @@ namespace TestAutomation.LendingTree
             {
                 string subject = emailSubjects.ElementAt(i).Text;
                 Common.ReportEvent(Common.INFO, String.Format("Email Subject Index {0}, Email Subject Value {1}", i, subject));
-                if (subject == "LendingTree Account Validation")
+                if (subject == "LendingTree Account Verification")
                 {
                     Common.ReportEvent(Common.INFO, String.Format("Desired Email Subject Found"));
                     emailSubjects.ElementAt(i).Click();
