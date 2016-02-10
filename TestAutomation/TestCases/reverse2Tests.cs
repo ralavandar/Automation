@@ -40,7 +40,7 @@ namespace TestAutomation.LendingTree.tla
             Validation.IsTrue(VerifytQFormRecord(reverse2.strQFormUID));
 
             // Verify redirect to My LendingTree
-            reverse2.VerifyRedirectToMyLendingTree(testData);
+            reverse2.VerifyRedirectToMyLtExpress(testData);
         }
 
         [Test]
@@ -210,7 +210,7 @@ namespace TestAutomation.LendingTree.ProdTests_Forms_Other
         {
             Validation.IsTrue(VerifytQFormRecord(reverse2.strQFormUID));
 
-            reverse2.VerifyRedirectToMyLendingTree(testData);
+            reverse2.VerifyRedirectToMyLtExpress(testData);
         }
     }
 }
