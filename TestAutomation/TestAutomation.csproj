@@ -160,6 +160,7 @@
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Lending\formDataAsJson\refinance.json" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

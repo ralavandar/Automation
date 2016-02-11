@@ -10,11 +10,14 @@ namespace TestAutomation.LendingTree.ExpressOffers
      [TestFixture]
     class ExpressOffers: SeleniumTestBase
     {
+        [SetUp]
 
-       [Test]
-       public void PurchaseQFCreate()
+        [TearDown]
+
+        [Test]
+        public void Express_PurchaseLocaLender()
         {
-            BackDoorFormSubmit newQF =new BackDoorFormSubmit();
+            BackDoorFormSubmit newQF = new BackDoorFormSubmit();
             newQF.FormSubmit();
 
         }
