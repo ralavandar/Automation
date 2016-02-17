@@ -50,7 +50,7 @@
             "state": "NC",
             "stateName": "North Carolina"
         },
-        "dob": "05/09/1984",
+        "dob": "03/09/1987",
         "city": "Pineville",
         "cityTypeAhead": {
             "name": "Pineville",
@@ -58,7 +58,7 @@
         },
         "email": "msqa102815.216@lendingtree.com",
         "password": "dru1dess",
-        "ssn": "980-10-2801",
+        "ssn": "980-02-1701",
         "bank": [
             "0"
         ],
@@ -75,7 +75,6 @@
         "property-type": "SINGLEFAMDET",
         "property-use": "OWNEROCCUPIED",
         "current-realestate-agent": "N",
-        "estproperty-value": 200000,
         "purchase-price": 225000,
         "est-mortgage-balance": 160000,
         "down-payment-amt": 0.2,

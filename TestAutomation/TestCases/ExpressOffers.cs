@@ -8,17 +8,30 @@ using TestAutomation.Lending;
 namespace TestAutomation.LendingTree.ExpressOffers
 {
      [TestFixture]
-    class ExpressOffers: SeleniumTestBase
+    class ExpressOffers_Mortgage: SeleniumTestBase
     {
+        
+        private const String strTableName = "tTestData_FormPostMortgage";
+
         [SetUp]
-
-        [TearDown]
-
-        [Test]
-        public void Express_PurchaseLocaLender()
+        public void SetupTest()
         {
-            BackDoorFormSubmit newQF = new BackDoorFormSubmit();
-            newQF.FormSubmit();
+            Common.InitializeTestResults();
+            GetTestData(strTableName, TestContext.CurrentContext.Test.Name);
+            InitializeTestData();
+        }
+        [TearDown]
+        public void TeardownTest()
+        {
+            //driver.Quit();
+            Common.ReportFinalResults();
+        }
+        [Test]
+        public void Express_PurchaseLocalLender()
+        {
+            //Create new QF
+            Common.ReportEvent(Common.INFO, String.Format("Creating New FormSubmit QF {0}", Guid.NewGuid()));
+            BackDoorFormSubmit.FormSubmit(testData);
 
         }
     }
