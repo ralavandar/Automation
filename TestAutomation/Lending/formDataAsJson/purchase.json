@@ -31,37 +31,16 @@
         "cchannel": "seo",
         "tid": "m2",
         "vid": "0-0-4-1-1-0-0-0-1-0-0-0-0-0-0-0-2-0-0-0-0-0-0-0-0-0-0-1-1-0",
-        "trackingStepGroups": "ig-ssn",
         "monthlyPayment": null,
-        "totalMortgageBalance": 160000,
-        "ltv": 0.8,
-        "refiLtvWithoutCashOut": 0.8,
-        "secondMortgageBalanceAvailable": true,
-        "downPaymentAmtDollars": 45000,
         "homeloan-product-type": "PURCHASE",
         "optimized-path": 1,
-        "LastUpdatedField": "monthlyPayment",
         "external-leadid-token": "1DE28F4C-565C-46B0-A6CA-E250E9659A0F",
-        "allLoanTypes": "HOME",
         "token": "97AB32FB756A49B8D6471440042EABB656C5E666229BBBAA347F8BE30529EE10",
-        "propertyCityStateTypeAhead": {
-            "city": "Charlotte",
-            "displayText": "Charlotte, NC",
-            "state": "NC",
-            "stateName": "North Carolina"
-        },
         "dob": "03/09/1987",
         "city": "Pineville",
-        "cityTypeAhead": {
-            "name": "Pineville",
-            "value": "Pineville"
-        },
         "email": "msqa102815.216@lendingtree.com",
         "password": "dru1dess",
         "ssn": "980-02-1701",
-        "bank": [
-            "0"
-        ],
         "banks": "0",
         "targuscheck": {
             "QFormUID": "{0}",

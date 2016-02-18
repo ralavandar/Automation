@@ -31,8 +31,8 @@ namespace TestAutomation.LendingTree.ExpressOffers
         {
             //Create new QF
             Common.ReportEvent(Common.INFO, String.Format("Creating New FormSubmit QF {0}", Guid.NewGuid()));
-            BackDoorFormSubmit.FormSubmit(testData);
-
+            testData = BackDoorFormSubmit.FormSubmit(testData);
+            Validation.IsTrue(VerifytQFormRecord(testData["guid"]));
         }
     }
 }
