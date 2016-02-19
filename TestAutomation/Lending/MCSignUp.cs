@@ -290,7 +290,7 @@ namespace TestAutomation.LendingTree
             string strURL = mcSignUpDriver.Url;
             bool StepFound;
             StepFound = strURL.Contains(step);
-
+            
             if (StepFound == true)
             {
                 Common.ReportEvent(Common.PASS, String.Format("Successfully displayed Step: {0}", step));

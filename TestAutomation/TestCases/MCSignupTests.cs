@@ -101,10 +101,10 @@ namespace TestAutomation.LendingTree.FreeCreditUsers
             //Email Verification step
             stepFound = mcSignUp.CheckMCSignUpStep("step/14");
             bool waiting = true;
-
+            int counter = 1;
             while (waiting == true)
             {
-                int counter = 1;
+                
                 //System.Threading.Thread.Sleep(1000);
                 if (stepFound == true)
                 {
