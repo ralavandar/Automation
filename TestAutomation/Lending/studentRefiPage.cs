@@ -144,6 +144,7 @@ namespace TestAutomation.LendingTree.tla
                 Steps[stepNum] = Step(
                                       new FossaField(Fill, "street1", "BorrowerStreetAddress"),
                                       new FossaField(Wait, "Wait"),
+                                      new FossaField(ClickElement, By.ClassName("form-header")),
                                       new FossaField(Fill, "zip-code-input", "BorrowerZipCode"),
                                       new FossaField(Wait, "Wait"));
                 stepNum = stepNum + 1;

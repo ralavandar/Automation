@@ -176,9 +176,7 @@ namespace TestAutomation
         public static String RandomSelectBrowser()
         {
             // This is actually a 'weighted' random selection.  50% IE, 25% firefox, 25% chrome
-            // Update: 5/21/2012 - taking Chrome out of the mix since it exhibits random failures on the test servers :(
-            // Update: 7/10/2012 - putting Chrome back in the mix.  Updated WebDriver and ChromeDriver, and appears to be stable :)
-            // Update: 8/14/2012 - taking Chrome back out of the mix since it exhibits random failures on the test servers :(
+            // Update: 3/16/2016 - Seeing a ton of webdriver timeouts with firefox, so taking it out of the mix
             Random random = new Random();
             Int32 intRandomNum = random.Next(1, 100);
 
@@ -186,11 +184,11 @@ namespace TestAutomation
             {
                 return "IE";
             }
-            else if (intRandomNum <= 100)    // 51-75 = FIREFOX
+            else if (intRandomNum <= 100)    // 51-75 = Chrome
             {
-                return "FIREFOX";
+                return "CHROME";
             }
-            else return "CHROME";           // 76-100 = CHROME
+            else return "FIREFOX";           // 76-100 = Firefox
         }
 
 

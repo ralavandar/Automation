@@ -71,6 +71,38 @@ namespace TestAutomation
                     caps.SetCapability("public", "public");
                     objDriver = new RemoteWebDriver(new Uri("http://hub.browserstack.com/wd/hub/"), caps, TimeSpan.FromSeconds(840));
                     break;
+                case "CBT":             // CrossBrowserTesting.com
+                    // IE 11, Win 10
+                    caps.SetCapability("name", "Selenium Test Example");
+                    caps.SetCapability("build", "1.0");
+                    caps.SetCapability("browser_api_name", "Chrome45x64");
+                    caps.SetCapability("os_api_name", "Win10");
+                    caps.SetCapability("screen_resolution", "1024x768");
+                    //caps.SetCapability("browser_api_name", "IE11");
+                    //caps.SetCapability("os_api_name", "Win10");
+                    //caps.SetCapability("screen_resolution", "1024x768");
+                    // iPhone 6
+                    //caps.SetCapability("browser_api_name", "MblSafari8.0");
+                    //caps.SetCapability("os_api_name", "iPhone6-iOS8sim");
+                    //caps.SetCapability("screen_resolution", "750x1334");
+                    // Galaxy S5
+                    //caps.SetCapability("browser_api_name", "MblChrome35");
+                    //caps.SetCapability("os_api_name", "GalaxyS5-And44");
+                    //caps.SetCapability("screen_resolution", "1080x1920");
+                    //
+                    caps.SetCapability("record_video", "true");
+                    caps.SetCapability("record_network", "true");
+                    caps.SetCapability("record_snapshot", "false");
+                    caps.SetCapability("username", "Lendingtree");
+                    caps.SetCapability("password", "u3bfb1efb3b23305");
+                    //caps.SetCapability("name", NUnit.Framework.TestContext.CurrentContext.Test.Name);
+                    //caps.SetCapability("build", "1.0");
+                    objDriver = new RemoteWebDriver(new Uri("http://hub.crossbrowsertesting.com:80/wd/hub"), caps);
+                    objDriver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(300));
+
+                    // _Driver = new RemoteWebDriver(commandExecutorUri, caps);
+                    // _Driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(300));
+                    break;
                 case "SAUCELABS":
                     // IE 11
                     caps.SetCapability("browserName", "Internet Explorer");
@@ -88,7 +120,7 @@ namespace TestAutomation
                     //caps.SetCapability("version", "4.4");
                     //caps.SetCapability("deviceName", "Samsung Galaxy S4 Emulator");
                     //caps.SetCapability("deviceOrientation", "portrait");
-
+                    //
                     caps.SetCapability("username", "mpschupp");
                     caps.SetCapability("accessKey", "ca34f7d2-89d2-46be-bc4b-8aad12f2fedb");
                     caps.SetCapability("name", NUnit.Framework.TestContext.CurrentContext.Test.Name);
