@@ -32,8 +32,10 @@ namespace TestAutomation.LendingTree.tla
             get
             {
                 int numSteps = 12;
-                IFormField[][] steps = ValidQFSteps;
+                if (testData["TargusPassYesNo"] == "N")
+                    numSteps++;
 
+                IFormField[][] steps = ValidQFSteps;
                 IFormField[][] stepsWithXsell = new IFormField[numSteps][];
 
                 // copy over Steps 1-4
@@ -62,6 +64,9 @@ namespace TestAutomation.LendingTree.tla
             get 
             {
                 int numSteps = 11;
+                if (testData["TargusPassYesNo"] == "N")
+                    numSteps++;
+
                 IFormField[][] Steps = new IFormField[numSteps][];
 
                 // Business Type
@@ -136,6 +141,16 @@ namespace TestAutomation.LendingTree.tla
                                 new FossaField(Fill, "home-phone-line", "BorrowerHomePhone3"),
                                 new FossaField(DeselectAfter(Fill), "email", "EmailAddress"),
                                 new FossaField(Wait5Sec, "Wait"));
+
+                // Handle Oops step (displays if targus call fails to validate user data)
+                if (testData["TargusPassYesNo"] == "N")
+                {
+                    Steps[11] = Step(
+                                new FossaField(Fill, "home-phone-area-code", "BorrowerHomePhone1"),
+                                new FossaField(Fill, "home-phone-prefix", "BorrowerHomePhone2"),
+                                new FossaField(DeselectAfter(Fill), "home-phone-line", "BorrowerHomePhone3"),
+                                new FossaField(Wait, "Wait"));
+                }
 
                 return Steps;
             }
