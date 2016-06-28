@@ -267,13 +267,13 @@ namespace TestAutomation.LendingTree
                 try
                 {
                     WaitForElementDisplayed(By.ClassName("message"), 15);
-                    Validation.StringContains("You are not signed in but your personal info is secure",
+                    Validation.StringContains("Sorry, we're having trouble accessing some of your account information",
                         driver.FindElement(By.ClassName("message")).Text);       
                 }
                 catch (AssertionException)
                 {
                     Common.ReportEvent(Common.FAIL,
-                        "The TestString does not contain the expected value, or the element was not found/visible.  Expected: 'You are not signed in but your personal info is secure'.");
+                        "The TestString does not contain the expected value, or the element was not found/visible.  Expected: 'Sorry, we're having trouble accessing some of your account information'.");
                 }
             }
             else
