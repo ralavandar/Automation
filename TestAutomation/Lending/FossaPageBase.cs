@@ -169,7 +169,7 @@ namespace TestAutomation.LendingTree
             System.Threading.Thread.Sleep(5000);
 
             // Check for redirect to mc.aspx / offers page
-            if (IsElementDisplayed(By.ClassName("user-icon"), 25))    // element inside nav bar at very top of MyLendingTree page
+            if (IsElementDisplayed(By.ClassName("offersDisplay"), 25)) 
             {
                 // Specific checks on MyLendingTree
                 System.Threading.Thread.Sleep(1000);

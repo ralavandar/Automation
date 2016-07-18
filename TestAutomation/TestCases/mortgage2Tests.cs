@@ -85,8 +85,6 @@ namespace TestAutomation.LendingTree.tla
 
             // SSN step
             mortgage2.PerformStep(17, steps[17]);
-            // Targus oops step
-            mortgage2.PerformStep(18, steps[18]);
 
             FinishTest();
         }

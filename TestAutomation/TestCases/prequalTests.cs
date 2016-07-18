@@ -94,7 +94,7 @@ namespace TestAutomation.LendingTree.tla
             prequal.ConcludeStep();
 
             // Targus oops step
-            prequal.PerformStep(18, steps[18]);
+            //prequal.PerformStep(18, steps[18]);
 
             FinishTest();
         }
