@@ -263,12 +263,12 @@ namespace TestAutomation.LendingTree
                             driver.Url));
                 }
 
-                // Verify page header/nav contains unauthorized text
+                // Verify text in business loans offer section
                 try
                 {
-                    WaitForElementDisplayed(By.ClassName("message"), 15);
-                    Validation.StringContains("Sorry, we're having trouble accessing some of your account information",
-                        driver.FindElement(By.ClassName("message")).Text);       
+                    WaitForElementDisplayed(By.Id("businessLoanOfferList"), 15);
+                    Validation.StringContains("Your Business Financing Options",
+                        driver.FindElement(By.Id("businessLoanOfferList")).Text.Substring(0,31));       
                 }
                 catch (AssertionException)
                 {
