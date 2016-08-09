@@ -5,7 +5,7 @@ using System.Text;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 
-namespace TestAutomation.LendingTree.tla
+namespace TestAutomation.LendingTree.zzArchive
 {
     class studentRefiPage : FossaPageBase
     {

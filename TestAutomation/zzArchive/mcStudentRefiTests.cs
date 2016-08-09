@@ -9,7 +9,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using NUnit.Framework;
 
-namespace TestAutomation.LendingTree.mc
+namespace TestAutomation.LendingTree.zzArchive
 {
     [TestFixture]
     public class mcStudentRefiTest : SeleniumTestBase

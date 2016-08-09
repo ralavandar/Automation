@@ -8,7 +8,7 @@ using System.Text;
 using OpenQA.Selenium;
 using NUnit.Framework;
 
-namespace TestAutomation.LendingTree.tla
+namespace TestAutomation.LendingTree.zzArchive
 {
     [TestFixture]
     public class studentRefiTests : SeleniumTestBase
