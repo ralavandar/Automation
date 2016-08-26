@@ -107,6 +107,7 @@ namespace TestAutomation.LendingTree.ProdTests_Forms_Other
         private const String strTableName = "tTestData_HomeEquity";
         private tlm.h2Page h2;
         private tla.heaPage hea;
+        private mc.mcHomeEquityPage mcHomeEquity;
 
         [SetUp]
         public void SetupTest()
@@ -164,6 +165,30 @@ namespace TestAutomation.LendingTree.ProdTests_Forms_Other
             hea.FillOutValidQF();
             Validation.IsTrue(VerifytQFormRecord(hea.strQFormUID));
             hea.VerifyRedirectToMyLtExpress(testData);
+        }
+
+        [Test]
+        public void Prod_mcHomeEquity_01()
+        {
+            // Fill out and submit a QF
+            mcHomeEquity = new mc.mcHomeEquityPage(driver, testData);
+            mcHomeEquity.FillOutValidQF();
+            // Check for the QForm in the DB
+            Validation.IsTrue(VerifytQFormRecord(mcHomeEquity.strQFormUID));
+            // Verify redirect to My LendingTree
+            mcHomeEquity.VerifyRedirectToMyLtExpress(testData);
+        }
+
+        [Test]
+        public void Prod_mcHomeEquity_02()
+        {
+            // Fill out and submit a QF
+            mcHomeEquity = new mc.mcHomeEquityPage(driver, testData);
+            mcHomeEquity.FillOutValidQF();
+            // Check for the QForm in the DB
+            Validation.IsTrue(VerifytQFormRecord(mcHomeEquity.strQFormUID));
+            // Verify redirect to My LendingTree
+            mcHomeEquity.VerifyRedirectToMyLtExpress(testData);
         }
 
         private void ConvertDOBMonth()
