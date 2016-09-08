@@ -76,6 +76,7 @@
     <Compile Include="Common\Common.cs" />
     <Compile Include="Common\DataSheet.cs" />
     <Compile Include="Common\UrlCreator.cs" />
+    <Compile Include="Lending\a2Page.cs" />
     <Compile Include="Lending\BackDoorFormSubmit.cs" />
     <Compile Include="Lending\b2Page.cs" />
     <Compile Include="Lending\h2Page.cs" />
@@ -99,6 +100,7 @@
     <Compile Include="MyDevTests\TestCloudBS.cs" />
     <Compile Include="MyDevTests\TestCloudCBT.cs" />
     <Compile Include="MyDevTests\TestHelper.cs" />
+    <Compile Include="TestCases\a2Tests.cs" />
     <Compile Include="TestCases\ExpressOffers.cs" />
     <Compile Include="TestCases\h2Tests.cs" />
     <Compile Include="TestCases\mcHomeEquityTests.cs" />
