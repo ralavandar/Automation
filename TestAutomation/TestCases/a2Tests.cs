@@ -71,22 +71,6 @@ namespace TestAutomation.LendingTree.tlm
             FinishTest();
         }
 
-        [Test]
-        public void Prod_a2_NewCarPurchase()
-        {
-            // Fill out and submit a QF
-            a2.FillOutValidQF();
-            FinishTest();
-        }
-
-        [Test]
-        public void Prod_a2_Refinance()
-        {
-            // Fill out and submit a QF
-            a2.FillOutValidQF();
-            FinishTest();
-        }
-
         private void FinishTest()
         {
             // Check for the QForm in the DB
