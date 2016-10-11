@@ -590,6 +590,9 @@ namespace TestAutomation
                 case "PROD":
                     strBaseUrl = "https://offers.lendingtree.com";
                     break;
+                case "PREPROD":
+                    strBaseUrl = "https://offers.preprod.lendingtree.com";
+                    break;
                 case "QA":
                 case "STAGING":
                 case "STAGE":
