@@ -8,14 +8,14 @@ using System.Text;
 using OpenQA.Selenium;
 using NUnit.Framework;
 
-namespace TestAutomation.LendingTree.tla
+namespace TestAutomation.LendingTree.tlm
 {
     [TestFixture]
-    public class reverse2Tests : SeleniumTestBase
+    public class r2Tests : SeleniumTestBase
     {
         public IWebDriver driver;
         private const String strTableName = "tTestData_Mortgage";
-        private reverse2Page reverse2;
+        private r2Page r2;
 
         [SetUp]
         public void SetupTest()
@@ -24,7 +24,82 @@ namespace TestAutomation.LendingTree.tla
             GetTestData(strTableName, TestContext.CurrentContext.Test.Name);
             InitializeTestData();
             driver = StartBrowser(testData["BrowserType"]);
-            reverse2 = new reverse2Page(driver, testData);
+            r2 = new r2Page(driver, testData);           
+        }
+
+        [Test]
+        public void r2_01_ValidAndEligible()
+        {
+            // Fill out and submit a QF
+            r2.FillOutValidQF();
+            FinishTest();
+        }
+
+        [Test]
+        public void r2_02_InvalidTooYoung()
+        {
+            // Fill out and submit a QF
+            r2.FillOutValidQF();
+            VerifyInvalid();
+            VerifyReasons("all individuals listed on the title must be at least 62 years old");
+        }
+
+        [Test]
+        public void r2_03_InvalidNotPrimary()
+        {
+            // Fill out and submit a QF
+            r2.FillOutValidQF();
+            VerifyInvalid();
+            VerifyReasons("a home must be a borrower's primary residence");
+        }
+
+        [Test]
+        public void r2_04_InvalidBalanceTooHigh()
+        {
+            // Fill out and submit a QF
+            r2.FillOutValidQF();
+            VerifyInvalid();
+            VerifyReasons("a borrower must have no or low mortgage balance");
+        }
+
+        [Test]
+        public void r2_05_LoanTooHigh()
+        {
+            // Fill out and submit a QF
+            r2.FillOutValidQF();
+            VerifyInvalid();
+            VerifyReasons("the maximum current mortgage balance cannot exceed $375,500");
+        }
+
+        [Test]
+        public void r2_06_InvalidEverythingWrong()
+        {
+            // Fill out and submit a QF
+            r2.FillOutValidQF();
+            VerifyInvalid();
+            VerifyReasons("all individuals listed on the title must be at least 62 years old",
+                    "a home must be a borrower's primary residence",
+                    "a borrower must have no or low mortgage balance",
+                    "the maximum current mortgage balance cannot exceed $375,500");
+        }
+
+        [Test]
+        public void r2_07_InvalidNotPrimaryBalanceTooHighLoanTooHigh()
+        {
+            // Fill out and submit a QF
+            r2.FillOutValidQF();
+            VerifyInvalid();
+            VerifyReasons("a home must be a borrower's primary residence",
+                    "a borrower must have no or low mortgage balance",
+                    "the maximum current mortgage balance cannot exceed $375,500");
+        }
+
+        [Test]
+        public void r2_08_TestMarketplace()
+        {
+            // Fill out and submit a QF
+            r2.FillOutValidQF();
+            FinishTest();
         }
 
         [TearDown]
@@ -37,93 +112,14 @@ namespace TestAutomation.LendingTree.tla
         private void FinishTest()
         {
             // Check for the QForm in the DB
-            Validation.IsTrue(VerifytQFormRecord(reverse2.strQFormUID));
-
+            Validation.IsTrue(VerifytQFormRecord(r2.strQFormUID));
             // Verify redirect to My LendingTree
-            reverse2.VerifyRedirectToMyLtExpress(testData);
-        }
-
-        [Test]
-        public void reverse2_01_ValidAndEligible()
-        {
-            // Fill out and submit a QF
-            reverse2.FillOutValidQF();
-
-            FinishTest();
-        }
-
-        [Test]
-        public void reverse2_02_InvalidTooYoung()
-        {
-            reverse2.FillOutValidQF();
-
-            VerifyInvalid();
-            VerifyReasons("all individuals listed on the title must be at least 62 years old");
-        }
-
-        [Test]
-        public void reverse2_03_InvalidNotPrimary()
-        {
-            reverse2.FillOutValidQF();
-
-            VerifyInvalid();
-            VerifyReasons("a home must be a borrower's primary residence");
-        }
-
-        [Test]
-        public void reverse2_04_InvalidBalanceTooHigh()
-        {
-            reverse2.FillOutValidQF();
-
-            VerifyInvalid();
-            VerifyReasons("a borrower must have no or low mortgage balance");
-        }
-
-        [Test]
-        public void reverse2_05_LoanTooHigh()
-        {
-            reverse2.FillOutValidQF();
-
-            VerifyInvalid();
-            VerifyReasons("the maximum current mortgage balance cannot exceed $375,500");
-        }
-
-        [Test]
-        public void reverse2_06_InvalidEverythingWrong()
-        {
-            reverse2.FillOutValidQF();
-
-            VerifyInvalid();
-            VerifyReasons("all individuals listed on the title must be at least 62 years old",
-                    "a home must be a borrower's primary residence",
-                    "a borrower must have no or low mortgage balance",
-                    "the maximum current mortgage balance cannot exceed $375,500");
-        }
-
-        [Test]
-        public void reverse2_07_InvalidNotPrimaryBalanceTooHighLoanTooHigh()
-        {
-            reverse2.FillOutValidQF();
-
-            VerifyInvalid();
-            VerifyReasons("a home must be a borrower's primary residence",
-                    "a borrower must have no or low mortgage balance",
-                    "the maximum current mortgage balance cannot exceed $375,500");
-        }
-
-        [Test]
-        public void reverse2_08_TestMarketplace()
-        {
-            // Fill out and submit a QF
-            reverse2.FillOutValidQF();
-
-            FinishTest();
+            r2.VerifyRedirectToMyLtExpress(testData);
         }
 
         private void VerifyInvalid()
         {
-            reverse2.CheckForProcessing();
-            if (reverse2.IsElementDisplayed(By.Id("xsell"), 30))
+            if (r2.IsElementDisplayed(By.Id("xsell"), 30))
             {
                 var xselltext = driver.FindElement(By.Id("xsell")).FindElement(By.TagName("p")).Text;
                 Validation.StringContains("Unfortunately, you don't meet the eligibility requirements for a reverse mortgage. To qualify for a reverse mortgage,", xselltext);
@@ -164,5 +160,68 @@ namespace TestAutomation.LendingTree.tla
 }
 
 
+namespace TestAutomation.LendingTree.ProdTests_Forms_Other
+{
 
+    [TestFixture]
+    public class reverseMortgageTests : SeleniumTestBase
+    {
+        public IWebDriver driver;
+        private const String strTableName = "tTestData_Mortgage";
+        private tlm.r2Page r2;
+        private tla.reverse2Page reverse2;
+
+        [SetUp]
+        public void SetupTest()
+        {
+            Common.InitializeTestResults();
+            GetTestData(strTableName, TestContext.CurrentContext.Test.Name);
+            InitializeTestData();
+            driver = StartBrowser(testData["BrowserType"]);
+        }
+
+        [TearDown]
+        public void TeardownTest()
+        {
+            driver.Quit();
+            Common.ReportFinalResults();
+        }
+
+        [Test]
+        public void Prod_r2_01()
+        {
+            r2 = new tlm.r2Page(driver, testData);
+            r2.FillOutValidQF();
+            Validation.IsTrue(VerifytQFormRecord(r2.strQFormUID));
+            r2.VerifyRedirectToMyLtExpress(testData);
+        }
+
+        [Test]
+        public void Prod_r2_02()
+        {
+            r2 = new tlm.r2Page(driver, testData);
+            r2.FillOutValidQF();
+            Validation.IsTrue(VerifytQFormRecord(r2.strQFormUID));
+            r2.VerifyRedirectToMyLtExpress(testData);
+        }
+
+        [Test]
+        public void Prod_reverse2_01()
+        {
+            reverse2 = new tla.reverse2Page(driver, testData);
+            reverse2.FillOutValidQF();
+            Validation.IsTrue(VerifytQFormRecord(reverse2.strQFormUID));
+            reverse2.VerifyRedirectToMyLtExpress(testData);
+        }
+
+        [Test]
+        public void Prod_reverse2_02()
+        {
+            reverse2 = new tla.reverse2Page(driver, testData);
+            reverse2.FillOutValidQF();
+            Validation.IsTrue(VerifytQFormRecord(reverse2.strQFormUID));
+            reverse2.VerifyRedirectToMyLtExpress(testData);
+        }
+    }
+}
 

@@ -82,6 +82,7 @@
     <Compile Include="Lending\boat2Page.cs" />
     <Compile Include="Lending\h2Page.cs" />
     <Compile Include="Lending\mcHomeEquityPage.cs" />
+    <Compile Include="Lending\moto2page.cs" />
     <Compile Include="Lending\p2Page.cs" />
     <Compile Include="Lending\m2Page.cs" />
     <Compile Include="Lending\MCSignUp.cs" />
@@ -90,6 +91,11 @@
     <Compile Include="Lending\mcPersonalLoanPage.cs" />
     <Compile Include="Lending\mcPurchasePage.cs" />
     <Compile Include="Lending\mcRefiPage.cs" />
+    <Compile Include="Lending\power2Page.cs" />
+    <Compile Include="Lending\r2Page.cs" />
+    <Compile Include="TestCases\moto2Tests.cs" />
+    <Compile Include="TestCases\power2Tests.cs" />
+    <Compile Include="TestCases\r2Tests.cs" />
     <Compile Include="TestCases\rv2Tests.cs" />
     <None Include="zzArchive\mcStudentRefiPage.cs" />
     <Compile Include="Lending\blPage.cs" />

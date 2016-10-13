@@ -66,13 +66,7 @@ namespace TestAutomation.LendingTree
         public void Prod_a2_NewCarPurchase()
         {
             tlm.a2Page a2 = new tlm.a2Page(driver, testData);
-            // Initialize test data -> If DOBMonth is numeric, need to convert it to the month name (string) for m2 form
-            int number;
-            bool isNumeric = int.TryParse(testData["DateOfBirthMonth"], out number);
-            if (isNumeric && number < 13)
-            {
-                testData["DateOfBirthMonth"] = System.Globalization.DateTimeFormatInfo.CurrentInfo.GetMonthName(Convert.ToInt32(testData["DateOfBirthMonth"]));
-            }
+            ConvertDOBMonth();
 
             // Fill out and submit a QF
             a2.FillOutValidQF();
@@ -88,13 +82,7 @@ namespace TestAutomation.LendingTree
         public void Prod_a2_Refinance()
         {
             tlm.a2Page a2 = new tlm.a2Page(driver, testData);
-            // Initialize test data -> If DOBMonth is numeric, need to convert it to the month name (string) for m2 form
-            int number;
-            bool isNumeric = int.TryParse(testData["DateOfBirthMonth"], out number);
-            if (isNumeric && number < 13)
-            {
-                testData["DateOfBirthMonth"] = System.Globalization.DateTimeFormatInfo.CurrentInfo.GetMonthName(Convert.ToInt32(testData["DateOfBirthMonth"]));
-            }
+            ConvertDOBMonth();
 
             // Fill out and submit a QF
             a2.FillOutValidQF();
@@ -110,13 +98,7 @@ namespace TestAutomation.LendingTree
         public void Prod_rv2_NewPurchase()
         {
             tlm.rv2Page rv2 = new tlm.rv2Page(driver, testData);
-            // Initialize test data -> If DOBMonth is numeric, need to convert it to the month name (string) for m2 form
-            int number;
-            bool isNumeric = int.TryParse(testData["DateOfBirthMonth"], out number);
-            if (isNumeric && number < 13)
-            {
-                testData["DateOfBirthMonth"] = System.Globalization.DateTimeFormatInfo.CurrentInfo.GetMonthName(Convert.ToInt32(testData["DateOfBirthMonth"]));
-            }
+            ConvertDOBMonth();
 
             //Fill out and submit a QF
             rv2.FillOutValidQF();
@@ -132,13 +114,7 @@ namespace TestAutomation.LendingTree
         public void Prod_rv2_Refinance()
         {
             tlm.rv2Page rv2 = new tlm.rv2Page(driver, testData);
-            // Initialize test data -> If DOBMonth is numeric, need to convert it to the month name (string) for m2 form
-            int number;
-            bool isNumeric = int.TryParse(testData["DateOfBirthMonth"], out number);
-            if (isNumeric && number < 13)
-            {
-                testData["DateOfBirthMonth"] = System.Globalization.DateTimeFormatInfo.CurrentInfo.GetMonthName(Convert.ToInt32(testData["DateOfBirthMonth"]));
-            }
+            ConvertDOBMonth();
 
             //Fill out and submit a QF
             rv2.FillOutValidQF();
@@ -154,13 +130,7 @@ namespace TestAutomation.LendingTree
         public void Prod_boat2_NewPurchase()
         {
             tlm.boat2Page boat2 = new tlm.boat2Page(driver, testData);
-            // Initialize test data -> If DOBMonth is numeric, need to convert it to the month name (string) for m2 form
-            int number;
-            bool isNumeric = int.TryParse(testData["DateOfBirthMonth"], out number);
-            if (isNumeric && number < 13)
-            {
-                testData["DateOfBirthMonth"] = System.Globalization.DateTimeFormatInfo.CurrentInfo.GetMonthName(Convert.ToInt32(testData["DateOfBirthMonth"]));
-            }
+            ConvertDOBMonth();
 
             // Fill out and submit a QF
             boat2.FillOutValidQF();
@@ -176,13 +146,7 @@ namespace TestAutomation.LendingTree
         public void Prod_boat2_Refinance()
         {
             tlm.boat2Page boat2 = new tlm.boat2Page(driver, testData);
-            // Initialize test data -> If DOBMonth is numeric, need to convert it to the month name (string) for m2 form
-            int number;
-            bool isNumeric = int.TryParse(testData["DateOfBirthMonth"], out number);
-            if (isNumeric && number < 13)
-            {
-                testData["DateOfBirthMonth"] = System.Globalization.DateTimeFormatInfo.CurrentInfo.GetMonthName(Convert.ToInt32(testData["DateOfBirthMonth"]));
-            }
+            ConvertDOBMonth();
 
             // Fill out and submit a QF
             boat2.FillOutValidQF();
@@ -193,5 +157,81 @@ namespace TestAutomation.LendingTree
             // Verify redirect to My LendingTree
             boat2.VerifyRedirectToMyLtExpress(testData);
         }
+
+        [Test]
+        public void Prod_moto2_NewPurchase()
+        {
+            tlm.moto2Page moto2 = new tlm.moto2Page(driver, testData);
+            ConvertDOBMonth();
+
+            // Fill out and submit a QF
+            moto2.FillOutValidQF();
+
+            // Check for the QForm in the DB
+            Assert.IsTrue(VerifytQFormRecord(moto2.strQFormUID));
+
+            // Verify redirect to My LendingTree
+            moto2.VerifyRedirectToMyLtExpress(testData);
+        }
+
+        [Test]
+        public void Prod_moto2_Refinance()
+        {
+            tlm.moto2Page moto2 = new tlm.moto2Page(driver, testData);
+            ConvertDOBMonth();
+
+            // Fill out and submit a QF
+            moto2.FillOutValidQF();
+
+            // Check for the QForm in the DB
+            Assert.IsTrue(VerifytQFormRecord(moto2.strQFormUID));
+
+            // Verify redirect to My LendingTree
+            moto2.VerifyRedirectToMyLtExpress(testData);
+        }
+
+        [Test]
+        public void Prod_power2_NewPurchase()
+        {
+            tlm.power2Page power2 = new tlm.power2Page(driver, testData);
+            ConvertDOBMonth();
+
+            // Fill out and submit a QF
+            power2.FillOutValidQF();
+
+            // Check for the QForm in the DB
+            Assert.IsTrue(VerifytQFormRecord(power2.strQFormUID));
+
+            // Verify redirect to My LendingTree
+            power2.VerifyRedirectToMyLtExpress(testData);
+        }
+
+        [Test]
+        public void Prod_power2_UsedPurchase()
+        {
+            tlm.power2Page power2 = new tlm.power2Page(driver, testData);
+            ConvertDOBMonth();
+
+            // Fill out and submit a QF
+            power2.FillOutValidQF();
+
+            // Check for the QForm in the DB
+            Assert.IsTrue(VerifytQFormRecord(power2.strQFormUID));
+
+            // Verify redirect to My LendingTree
+            power2.VerifyRedirectToMyLtExpress(testData);
+        }
+
+        private void ConvertDOBMonth()
+        {
+            // Initialize test data -> If DOBMonth is numeric, need to convert it to the month name (string) for h2 form
+            int number;
+            bool isNumeric = int.TryParse(testData["DateOfBirthMonth"], out number);
+            if (isNumeric && number < 13)
+            {
+                testData["DateOfBirthMonth"] = System.Globalization.DateTimeFormatInfo.CurrentInfo.GetMonthName(Convert.ToInt32(testData["DateOfBirthMonth"]));
+            }
+        }
+
     }
 }
