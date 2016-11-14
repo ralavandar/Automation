@@ -31,9 +31,9 @@ namespace TestAutomation.LendingTree.tlm
         {
             get 
             {
-                // The minimum number of steps for a purchase scenario is 20, Refi is 21
+                // The minimum number of steps for a purchase scenario is 19, Refi is 20
                 // Initialize the array to one larger than we need, since we don't use index 0.
-                Int32 numSteps = 20;
+                Int32 numSteps = 19;
                 if (testData["LoanType"].ToUpper() == "REFINANCE")
                 {
                     numSteps++;
@@ -231,32 +231,6 @@ namespace TestAutomation.LendingTree.tlm
                                 new FossaField(SelectSliderValueByText, testData["PurchaseDownPayment"]),
                                 new FossaField(Wait, "Wait"));
                     stepNum = stepNum + 1;
-
-                    // Home Services Opt-in
-                    // TODO: handle HomeServicesCategory drop-down and add data field to db!
-                    switch (testData["HomeServicesOptInYesNo"])
-                    {
-                        case "N":
-                            Steps[stepNum] = Step(
-                                    new FossaField(AutoAdvance(ClickElement), By.CssSelector("label[for=home-services-optin-no]")),
-                                    new FossaField(Wait, "Wait"));
-                            stepNum = stepNum + 1;
-                            break;
-                        default:
-                            Steps[stepNum] = Step(
-                                    new FossaField(AutoAdvance(ClickElement), By.CssSelector("label[for=home-services-optin-yes]")),
-                                    new FossaField(Wait, "Wait"));
-                            stepNum = stepNum + 1;
-                            Steps[stepNum] = Step(
-                                    new FossaField(SelectByValue, "home-services-category", "0"),
-                                    new FossaField(Wait, "Wait"));
-                            stepNum = stepNum + 1;
-                            Steps[stepNum] = Step(
-                                    new FossaField(AutoAdvance(ClickElement), By.CssSelector("label[for=home-services-schedule-flexible]")),
-                                    new FossaField(Wait, "Wait"));
-                            stepNum = stepNum + 1;
-                            break;
-                    }
                 }
 
                 if (testData["LoanType"].ToUpper() == "REFINANCE")
@@ -306,32 +280,6 @@ namespace TestAutomation.LendingTree.tlm
                             new FossaField(Wait, "Wait"));
                             //new FossaField(ClickButton, "next"));
                     stepNum = stepNum + 1;
-
-                    // Home Services Opt-in
-                    // TODO: handle HomeServicesCategory drop-down and add data field to db!
-                    switch (testData["HomeServicesOptInYesNo"])
-                    {
-                        case "N":
-                            Steps[stepNum] = Step(
-                                    new FossaField(AutoAdvance(ClickElement), By.CssSelector("label[for=home-services-optin-no]")),
-                                    new FossaField(Wait, "Wait"));
-                            stepNum = stepNum + 1;
-                            break;
-                        default:
-                            Steps[stepNum] = Step(
-                                    new FossaField(AutoAdvance(ClickElement), By.CssSelector("label[for=home-services-optin-yes]")),
-                                    new FossaField(Wait, "Wait"));
-                            stepNum = stepNum + 1;
-                            Steps[stepNum] = Step(
-                                    new FossaField(SelectByValue, "home-services-category", "0"),
-                                    new FossaField(Wait, "Wait"));
-                            stepNum = stepNum + 1;
-                            Steps[stepNum] = Step(
-                                    new FossaField(AutoAdvance(ClickElement), By.CssSelector("label[for=home-services-schedule-flexible]")),
-                                    new FossaField(Wait, "Wait"));
-                            stepNum = stepNum + 1;
-                            break;
-                    }
                 }
 
                 // Credit profile
